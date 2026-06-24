@@ -186,9 +186,11 @@ function buildCase() {
         <span class="pin"></span>
         <span class="bug">${tagStr(s.tag)}</span>
         <span class="card">
-          <span class="g"><i>${ord.la}</i></span>
-          <span class="d">Hab. ${s.habJa}</span>
-          <span class="d s"><i>${s.status.la}</i>${dag(s.status)}</span>
+          <span class="lbl loc">
+            <span class="g"><i>${ord.la}</i></span>
+            <span class="d">Hab. ${s.habJa}</span>
+          </span>
+          <span class="lbl det"><i>${s.status.la}</i>${dag(s.status)}</span>
         </span>
       </figure>`).join("\n");
     return `    <section class="drawer">
@@ -216,30 +218,35 @@ ${bugs}
   .head p { font-size:.8rem; color:#b6a589; letter-spacing:.06em; line-height:1.8; margin:.3rem 0; }
   .head a { color:#d9b48a; }
 
-  /* 木箱＋フォーム台紙＋ガラスケース */
-  .case { position:relative; max-width:980px; margin:0 auto; overflow:hidden;
+  /* 木箱の額縁: 角を留め継ぎ(45°)にした木枠＋木目 */
+  .case { position:relative; max-width:980px; margin:0 auto; padding:24px;
+    border-radius:6px;
+    background:
+      repeating-linear-gradient(91deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px, rgba(0,0,0,.06) 3px 6px),
+      conic-gradient(from 45deg at 50% 50%,
+        #46301f 0 90deg, #321f0e 90deg 180deg, #6f4d31 180deg 270deg, #7d5839 270deg 360deg);
+    box-shadow:0 36px 90px -34px rgba(0,0,0,.85),
+      inset 0 0 0 1px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12); }
+
+  /* ガラスの内側: フォーム台紙（古いピン穴入り） */
+  .glass { position:relative; overflow:hidden; border-radius:2px;
+    padding:26px 24px 34px;
     background:
       radial-gradient(circle at 30% 40%, rgba(35,20,8,.16) 0 1.3px, transparent 1.8px) 11px 9px/79px 91px,
       radial-gradient(circle at 70% 60%, rgba(35,20,8,.13) 0 1.1px, transparent 1.6px) 40px 55px/103px 67px,
       radial-gradient(circle at 22% 28%, rgba(70,45,20,.05) 0 1.2px, transparent 1.4px) 0 0/13px 13px,
       radial-gradient(circle at 68% 64%, rgba(70,45,20,.04) 0 1px, transparent 1.2px) 6px 7px/16px 16px,
       linear-gradient(160deg,#f6f2e9,#e9e1d2);
-    border:18px solid #5a3d27;
-    border-image:linear-gradient(135deg,#6e4c30 0%,#3c2817 35%,#7a5536 56%,#341f12 100%) 1;
-    border-radius:3px;
-    padding:26px 24px 34px;
-    box-shadow:0 36px 90px -34px rgba(0,0,0,.85),
-      inset 0 0 50px rgba(80,52,24,.16),
-      inset 0 2px 0 rgba(255,255,255,.45);
-  }
+    box-shadow:inset 0 0 50px rgba(80,52,24,.16),
+      inset 0 0 0 2px rgba(40,26,12,.55), inset 0 3px 7px rgba(40,26,12,.4); }
   /* ガラスの映り込み（前面のうすい光のすじ） */
-  .case::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:6;
+  .glass::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:6;
     background:linear-gradient(118deg,
       rgba(255,255,255,.20) 0%, rgba(255,255,255,.05) 15%,
       transparent 33%, transparent 67%,
       rgba(255,255,255,.06) 85%, rgba(255,255,255,.17) 100%); }
   /* ガラスの周辺減光・緑がかった縁・映り込みのムラ */
-  .case::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:7;
+  .glass::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:7;
     box-shadow:inset 0 0 70px rgba(16,26,16,.30), inset 0 0 0 1px rgba(170,205,180,.20);
     background:
       radial-gradient(130% 70% at 82% 6%, rgba(255,255,255,.12), transparent 42%),
@@ -265,24 +272,30 @@ ${bugs}
     background:radial-gradient(circle at 33% 27%, #ffffff 0 9%, #d4d8dc 30%, #8a8f94 65%, #3f4347 100%);
     box-shadow:2px 3px 4px rgba(0,0,0,.45), inset 0 -1.5px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.7);
     z-index:5; }
-  .pin::after { content:""; position:absolute; top:8px; left:50%; width:2px; height:24px;
-    margin-left:-1px;
+  /* 虫ピンの軸: 本体とラベルを串刺しに貫く（隙間からのぞく） */
+  .specimen::before { content:""; position:absolute; top:8px; left:50%; width:2px;
+    height:calc(100% - 8px); margin-left:-1px;
     background:linear-gradient(90deg,#d6dadd 0%,#9aa0a4 42%,#666b6f 62%,#474b4f 100%);
-    box-shadow:2px 1px 2.5px rgba(0,0,0,.28); border-radius:0 0 1px 1px; z-index:1; }
-  .bug { position:relative; z-index:3; margin-top:13px;
+    box-shadow:2px 1px 2.5px rgba(0,0,0,.28); border-radius:0 0 1px 1px; z-index:0; }
+  .bug { position:relative; z-index:3; margin-top:14px;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.92rem;
     color:#2a1c10; background:linear-gradient(#fffdf7,#f1ead9);
     border:1px solid rgba(90,60,30,.3); border-radius:3px; padding:3px 8px;
-    box-shadow:5px 9px 13px -6px rgba(45,27,10,.5), 0 1px 0 rgba(255,255,255,.6) inset;
+    box-shadow:5px 9px 13px -6px rgba(45,27,10,.5), 0 17px 17px -10px rgba(40,24,8,.4), 0 1px 0 rgba(255,255,255,.6) inset;
     white-space:nowrap; text-align:center; }
-  .card { margin-top:7px; text-align:center; line-height:1.5;
-    font-size:.56rem; color:#5a3f25; letter-spacing:.02em;
-    background:rgba(255,252,243,.62); border:.5px solid rgba(90,60,30,.25);
-    border-radius:2px; padding:3px 5px; min-width:96px;
-    box-shadow:3px 5px 8px -5px rgba(45,27,10,.4); }
+  /* データラベル: 同じ虫ピンに串刺しの2枚（採集地ラベル＋同定ラベル） */
+  .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
+    gap:8px; margin-top:9px; line-height:1.5; letter-spacing:.02em; }
+  .lbl { text-align:center; font-size:.56rem; color:#5a3f25;
+    background:linear-gradient(#fffdf6,#f4ecd9); border:.5px solid rgba(90,60,30,.3);
+    border-radius:2px; padding:3px 6px; min-width:96px;
+    box-shadow:3px 5px 8px -5px rgba(45,27,10,.45); }
+  .lbl.loc { transform:rotate(-.7deg); }
+  .lbl.det { transform:rotate(1.2deg); color:#7a2d22; font-style:italic;
+    border-color:rgba(150,52,40,.45);
+    box-shadow:3px 5px 8px -5px rgba(45,27,10,.45), inset 3px 0 0 rgba(150,52,40,.55); }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
-  .card .d.s i { color:#7a2d22; }
 
   .foot { text-align:center; margin:28px auto 0; max-width:760px;
     font-size:.72rem; color:#9c8b70; line-height:1.9; }
@@ -290,7 +303,8 @@ ${bugs}
 
   @media (max-width:560px) {
     .row { grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:26px 10px; }
-    .case { padding:14px 12px 20px; border-width:10px; }
+    .case { padding:13px; }
+    .glass { padding:14px 12px 20px; }
   }
 </style>
 </head>
@@ -302,7 +316,9 @@ ${bugs}
   </header>
 
   <main class="case">
+    <div class="glass">
 ${drawers}
+    </div>
   </main>
 
   <footer class="foot">
