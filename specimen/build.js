@@ -177,9 +177,12 @@ ${labels}
 
 // ── 2) 画面の標本ケース（HTML+CSS のみ）───────────────
 function buildCase() {
+  // タグ名から決定的な「手作業のゆらぎ」を作る（傾き）
+  const hash = s => { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
+  const wob = s => { const h = hash(s); const r = ((h % 1000) / 1000 * 4.4 - 2.2).toFixed(2); return `--r:${r}deg`; };
   const drawers = orderKeys.map(k => {
     const ord = ORDER[k];
-    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen">
+    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen" style="${wob(tagStr(s.tag))}">
         <span class="pin"></span>
         <span class="bug">${tagStr(s.tag)}</span>
         <span class="card">
@@ -216,6 +219,8 @@ ${bugs}
   /* 木箱＋フォーム台紙＋ガラスケース */
   .case { position:relative; max-width:980px; margin:0 auto; overflow:hidden;
     background:
+      radial-gradient(circle at 30% 40%, rgba(35,20,8,.16) 0 1.3px, transparent 1.8px) 11px 9px/79px 91px,
+      radial-gradient(circle at 70% 60%, rgba(35,20,8,.13) 0 1.1px, transparent 1.6px) 40px 55px/103px 67px,
       radial-gradient(circle at 22% 28%, rgba(70,45,20,.05) 0 1.2px, transparent 1.4px) 0 0/13px 13px,
       radial-gradient(circle at 68% 64%, rgba(70,45,20,.04) 0 1px, transparent 1.2px) 6px 7px/16px 16px,
       linear-gradient(160deg,#f6f2e9,#e9e1d2);
@@ -227,12 +232,18 @@ ${bugs}
       inset 0 0 50px rgba(80,52,24,.16),
       inset 0 2px 0 rgba(255,255,255,.45);
   }
-  /* ガラスの映り込み（前面のうすい光） */
+  /* ガラスの映り込み（前面のうすい光のすじ） */
   .case::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:6;
     background:linear-gradient(118deg,
       rgba(255,255,255,.20) 0%, rgba(255,255,255,.05) 15%,
       transparent 33%, transparent 67%,
       rgba(255,255,255,.06) 85%, rgba(255,255,255,.17) 100%); }
+  /* ガラスの周辺減光・緑がかった縁・映り込みのムラ */
+  .case::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:7;
+    box-shadow:inset 0 0 70px rgba(16,26,16,.30), inset 0 0 0 1px rgba(170,205,180,.20);
+    background:
+      radial-gradient(130% 70% at 82% 6%, rgba(255,255,255,.12), transparent 42%),
+      radial-gradient(80% 120% at -5% 110%, rgba(120,150,125,.10), transparent 55%); }
   .drawer { margin:0 0 26px; }
   .drawer:last-child { margin-bottom:0; }
   .order { display:flex; align-items:baseline; gap:.7em; margin:0 0 12px;
@@ -245,13 +256,14 @@ ${bugs}
 
   /* 一匹の標本: 虫ピン + 本体(タグ) + データラベル */
   .specimen { position:relative; display:flex; flex-direction:column; align-items:center;
-    padding-top:15px; transition:transform .18s ease; }
-  .specimen:hover { transform:translateY(-3px); }
+    padding-top:15px; transition:transform .18s ease;
+    transform:rotate(var(--r,0deg)); transform-origin:50% 6px; }
+  .specimen:hover { transform:rotate(var(--r,0deg)) translateY(-4px); z-index:4; }
   /* 虫ピン: 金属光沢の頭 + シャフト */
   .pin { position:absolute; top:0; left:50%; width:11px; height:11px; margin-left:-5.5px;
     border-radius:50%;
     background:radial-gradient(circle at 33% 27%, #ffffff 0 9%, #d4d8dc 30%, #8a8f94 65%, #3f4347 100%);
-    box-shadow:0 2px 3px rgba(0,0,0,.5), inset 0 -1.5px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.7);
+    box-shadow:2px 3px 4px rgba(0,0,0,.45), inset 0 -1.5px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.7);
     z-index:5; }
   .pin::after { content:""; position:absolute; top:8px; left:50%; width:2px; height:24px;
     margin-left:-1px;
@@ -261,12 +273,13 @@ ${bugs}
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.92rem;
     color:#2a1c10; background:linear-gradient(#fffdf7,#f1ead9);
     border:1px solid rgba(90,60,30,.3); border-radius:3px; padding:3px 8px;
-    box-shadow:0 8px 11px -6px rgba(50,30,12,.55), 0 1px 0 rgba(255,255,255,.6) inset;
+    box-shadow:5px 9px 13px -6px rgba(45,27,10,.5), 0 1px 0 rgba(255,255,255,.6) inset;
     white-space:nowrap; text-align:center; }
   .card { margin-top:7px; text-align:center; line-height:1.5;
     font-size:.56rem; color:#5a3f25; letter-spacing:.02em;
-    background:rgba(255,252,243,.55); border:.5px solid rgba(90,60,30,.25);
-    border-radius:2px; padding:3px 5px; min-width:96px; }
+    background:rgba(255,252,243,.62); border:.5px solid rgba(90,60,30,.25);
+    border-radius:2px; padding:3px 5px; min-width:96px;
+    box-shadow:3px 5px 8px -5px rgba(45,27,10,.4); }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
   .card .d.s i { color:#7a2d22; }
