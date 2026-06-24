@@ -141,7 +141,7 @@ function buildLabels() {
     display:flex; flex-direction:column; align-items:center; text-align:center;
     gap:.6mm; break-inside:avoid; background:#fff; }
   .label .pinhole { font-size:6pt; color:#bbb; line-height:1; }
-  .label .sp { font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:11.5pt; margin:.3mm 0 1mm; word-break:break-all; }
+  .label .sp { font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:11.5pt; margin:.3mm 0 1mm; white-space:nowrap; }
   .label .genus { font-size:7pt; color:#333; }
   .label .genus i { letter-spacing:.02em; }
   .label .loc, .label .det { font-size:6.5pt; color:#555; }
@@ -213,17 +213,26 @@ ${bugs}
   .head p { font-size:.8rem; color:#b6a589; letter-spacing:.06em; line-height:1.8; margin:.3rem 0; }
   .head a { color:#d9b48a; }
 
-  /* 木箱＋ガラスケース */
-  .case { max-width:980px; margin:0 auto;
+  /* 木箱＋フォーム台紙＋ガラスケース */
+  .case { position:relative; max-width:980px; margin:0 auto; overflow:hidden;
     background:
-      repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, transparent 2px 7px),
-      linear-gradient(160deg,#caa56f,#b88c52);
-    border:16px solid #6f4f31;
-    border-image:linear-gradient(160deg,#8a6440,#5c3f27) 1;
-    border-radius:4px;
-    padding:22px 22px 30px;
-    box-shadow:0 30px 80px -30px #000, inset 0 0 60px rgba(60,35,15,.45), inset 0 2px 0 rgba(255,255,255,.15);
+      radial-gradient(circle at 22% 28%, rgba(70,45,20,.05) 0 1.2px, transparent 1.4px) 0 0/13px 13px,
+      radial-gradient(circle at 68% 64%, rgba(70,45,20,.04) 0 1px, transparent 1.2px) 6px 7px/16px 16px,
+      linear-gradient(160deg,#f6f2e9,#e9e1d2);
+    border:18px solid #5a3d27;
+    border-image:linear-gradient(135deg,#6e4c30 0%,#3c2817 35%,#7a5536 56%,#341f12 100%) 1;
+    border-radius:3px;
+    padding:26px 24px 34px;
+    box-shadow:0 36px 90px -34px rgba(0,0,0,.85),
+      inset 0 0 50px rgba(80,52,24,.16),
+      inset 0 2px 0 rgba(255,255,255,.45);
   }
+  /* ガラスの映り込み（前面のうすい光） */
+  .case::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:6;
+    background:linear-gradient(118deg,
+      rgba(255,255,255,.20) 0%, rgba(255,255,255,.05) 15%,
+      transparent 33%, transparent 67%,
+      rgba(255,255,255,.06) 85%, rgba(255,255,255,.17) 100%); }
   .drawer { margin:0 0 26px; }
   .drawer:last-child { margin-bottom:0; }
   .order { display:flex; align-items:baseline; gap:.7em; margin:0 0 12px;
@@ -231,25 +240,29 @@ ${bugs}
   .order .o-la { font-style:italic; font-size:1rem; color:#5b3c22; letter-spacing:.04em; }
   .order .o-ja { font-size:.7rem; color:#7c5733; letter-spacing:.18em; }
 
-  .row { display:grid; grid-template-columns:repeat(auto-fill,minmax(118px,1fr));
-    gap:30px 14px; padding:6px 4px 2px; }
+  .row { display:grid; grid-template-columns:repeat(auto-fill,minmax(124px,1fr));
+    gap:38px 14px; padding:8px 4px 2px; }
 
-  /* 一匹の標本: ピン + 本体(タグ) + ラベル札 */
+  /* 一匹の標本: 虫ピン + 本体(タグ) + データラベル */
   .specimen { position:relative; display:flex; flex-direction:column; align-items:center;
-    padding-top:12px; transition:transform .18s ease; }
+    padding-top:15px; transition:transform .18s ease; }
   .specimen:hover { transform:translateY(-3px); }
-  .pin { position:absolute; top:0; left:50%; width:9px; height:9px; margin-left:-4.5px;
+  /* 虫ピン: 金属光沢の頭 + シャフト */
+  .pin { position:absolute; top:0; left:50%; width:11px; height:11px; margin-left:-5.5px;
     border-radius:50%;
-    background:radial-gradient(circle at 35% 30%, #fff, #9aa0a6 45%, #4b5054 100%);
-    box-shadow:0 1px 2px rgba(0,0,0,.6); z-index:3; }
-  .pin::after { content:""; position:absolute; top:7px; left:50%; width:1.5px; height:16px;
-    margin-left:-.75px; background:linear-gradient(#8b9095,#5b6065);
-    box-shadow:1px 0 1px rgba(0,0,0,.35); z-index:1; }
-  .bug { position:relative; z-index:2; margin-top:14px;
+    background:radial-gradient(circle at 33% 27%, #ffffff 0 9%, #d4d8dc 30%, #8a8f94 65%, #3f4347 100%);
+    box-shadow:0 2px 3px rgba(0,0,0,.5), inset 0 -1.5px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.7);
+    z-index:5; }
+  .pin::after { content:""; position:absolute; top:8px; left:50%; width:2px; height:24px;
+    margin-left:-1px;
+    background:linear-gradient(90deg,#d6dadd 0%,#9aa0a4 42%,#666b6f 62%,#474b4f 100%);
+    box-shadow:2px 1px 2.5px rgba(0,0,0,.28); border-radius:0 0 1px 1px; z-index:1; }
+  .bug { position:relative; z-index:3; margin-top:13px;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.92rem;
-    color:#2a1c10; background:rgba(255,253,247,.78);
-    border:1px solid rgba(90,60,30,.35); border-radius:3px; padding:3px 7px;
-    box-shadow:0 4px 8px -4px rgba(0,0,0,.55); word-break:break-all; text-align:center; }
+    color:#2a1c10; background:linear-gradient(#fffdf7,#f1ead9);
+    border:1px solid rgba(90,60,30,.3); border-radius:3px; padding:3px 8px;
+    box-shadow:0 8px 11px -6px rgba(50,30,12,.55), 0 1px 0 rgba(255,255,255,.6) inset;
+    white-space:nowrap; text-align:center; }
   .card { margin-top:7px; text-align:center; line-height:1.5;
     font-size:.56rem; color:#5a3f25; letter-spacing:.02em;
     background:rgba(255,252,243,.55); border:.5px solid rgba(90,60,30,.25);
