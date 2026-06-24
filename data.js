@@ -62,6 +62,13 @@ const ELEMENTS = [
     demo: `<article><p>朝。窓を開ける。</p></article>\n<article><p>朝。窓を、まだ開けない。</p></article>`,
   },
   {
+    tag: "aside", display: "<aside>", category: "structure",
+    summary: "本筋から少し外れた、傍らの内容（余談・補足・脇の声）。",
+    poetic: "本文のかたわらにある、もうひとつの声。脚注、余白の書き込み、心の傍白。主役ではないからこそ言える本音を、そっと脇に置ける。",
+    spark: "main に建前を、aside に本音を流す。読者は、どちらを「本当」と取るだろう。",
+    demo: `<p>きょうは、よく晴れていました。</p>\n<aside><p>（本当は、一日じゅう雨が降ればいいと思っていた）</p></aside>`,
+  },
+  {
     tag: "nav", display: "<nav>", category: "structure",
     summary: "他の場所への道しるべ（リンクの集まり）。",
     poetic: "『行き先』そのものを意味として扱える。リンク先のないナビゲーション、どこにも行けない案内板は、それ自体が詩になる。",
@@ -118,6 +125,14 @@ const ELEMENTS = [
     poetic: "場面の転換。間（ま）。一本の線が、前と後を別の時間にする。詩でいう『一字下げ』や、連と連のあいだの白。",
     spark: "本文をほとんど書かず、<hr> だけを何本も。線の間隔だけで呼吸を描く。",
     demo: `<p>会った。</p>\n<hr>\n<p>別れた。</p>\n<hr>\n<hr>\n<p>思い出した。</p>`,
+  },
+  {
+    tag: "marquee", display: "<marquee>", category: "text",
+    summary: "中の文字を、ひとりでに流れさせる（公式には廃止された、けれど今も動く古い要素）。",
+    poetic: "純HTMLだけで「動き」を生む、数少ない魔法。CSSもJSも無しに、文字が勝手に流れ、往復し、立ちのぼる。仕様上は廃止されたのに、多くのブラウザでまだ生きている——亡霊のように動きつづける言葉。behavior=\"alternate\" で往復、direction=\"up\" で上昇。",
+    spark: "一行を、ゆっくり永遠に流しつづける。あるいは behavior=\"alternate\" で行ったり来たり——決められない心のように。",
+    demo: `<marquee>　この言葉は、止まることを知りません。どこへ行くのかも、知らないまま。　</marquee>\n<marquee behavior="alternate">行こうか、戻ろうか。</marquee>`,
+    note: "公式には廃止(deprecated)。だが主要ブラウザで今も動作し、CSS/JSなしに動きを得られる、古くて貴重な手段。"
   },
   {
     tag: "pre", display: "<pre>", category: "text",
@@ -303,6 +318,29 @@ const ELEMENTS = [
     spark: "感情の数値表に、<caption> で文学的な題をつける。『失われた時間の収支報告』。",
     demo: `<table border="1">\n  <caption>会わなかった日の数</caption>\n  <tr><td>今年</td><td>365</td></tr>\n</table>`,
   },
+  {
+    tag: "tr / td / th", display: "<tr> <td> <th>", category: "table",
+    summary: "表の、行（tr）・データの升（td）・見出しの升（th）。",
+    poetic: "格子をかたちづくる、最小の部屋。td は名もなき升、th は列や行を束ねる見出しの声。空の td は沈黙、colspan/rowspan で引き延ばされた升は、伸びていく時間になる。",
+    spark: "見出し（th）だけが並び、中身（td）はすべて空。問いだけがあって、答えのない表。",
+    demo: `<table border="1">\n  <tr><th>問い</th><th>答え</th></tr>\n  <tr><td>なぜ、別れたの</td><td></td></tr>\n  <tr><td>いま、どこにいるの</td><td></td></tr>\n</table>`,
+    note: "td/th は tr（行）の中に置く。colspan・rowspan で升を結合できる。"
+  },
+  {
+    tag: "thead / tbody / tfoot", display: "<thead> <tbody> <tfoot>", category: "table",
+    summary: "表を、見出し部・本体部・脚部の三つに意味づける。",
+    poetic: "表にも、始まりと本体と終わりがある。thead は宣言、tbody は積み重なる日々、tfoot は総括。長い表を印刷すると thead は各頁の頭でくり返される——何度でも立ち返る、冒頭の一行。",
+    spark: "tfoot に「合計」ではなく、結論めいた一行を置く。積み重ねた tbody の日々の、その果ての言葉。",
+    demo: `<table border="1">\n  <thead><tr><th>日々</th></tr></thead>\n  <tbody>\n    <tr><td>会った</td></tr>\n    <tr><td>笑った</td></tr>\n    <tr><td>別れた</td></tr>\n  </tbody>\n  <tfoot><tr><td>……それだけのことだった</td></tr></tfoot>\n</table>`,
+  },
+  {
+    tag: "colgroup / col", display: "<colgroup> <col>", category: "table",
+    summary: "表の「列」をまとめて指し、列ごとの性質を一括で扱う。",
+    poetic: "行ではなく、縦の連なりに名を与える視点。span でいくつかの列を束ねられる。横（tr）に流れる時間に対し、縦（col）はそれを貫く、もうひとつの軸。",
+    spark: "二列の表で、片方の列だけを束ね、「変わらないもの／移ろうもの」を縦に対比する。",
+    demo: `<table border="1">\n  <colgroup><col><col></colgroup>\n  <tr><td>かわらないもの</td><td>うつろうもの</td></tr>\n  <tr><td>名前</td><td>こえ</td></tr>\n</table>`,
+    note: "colgroup/col は表の冒頭に置き、列単位で意味づける（本来は主にCSS用だが、構造として列を束ねられる）。"
+  },
 
   // ── フォーム・入力 ─────────────────────────────────────
   {
@@ -396,6 +434,29 @@ const ELEMENTS = [
     spark: "<legend> に『以下、すべて任意』と書き、答えようのない質問だけを並べる。",
     demo: `<fieldset>\n  <legend>あなたについて（任意）</legend>\n  <p><label>本当の名前: <input></label></p>\n  <p><label>まだ言えていないこと: <input></label></p>\n</fieldset>`,
   },
+  {
+    tag: "label", display: "<label>", category: "form",
+    summary: "入力欄に結びつく「名札」。クリックでその欄が反応する。",
+    poetic: "入力欄に寄り添う、呼び名。入れ子や for=id で欄と結ばれ、ラベルをクリックすると、対の欄が目を覚ます（チェックが入る、カーソルが灯る）。言葉と、それが指すものとの、目に見える絆。",
+    spark: "チェックボックスのラベルに、長い告白文を書く。文のどこに触れても、ひとつの「はい」に印が付く。",
+    demo: `<p><label><input type="checkbox"> この一文の、どこに触れても、わたしは「はい」と答えます。</label></p>`,
+    note: "label でフォーム部品を包む（または for=id で結ぶ）と、ラベル全体がその部品の操作面になる。JS不要。"
+  },
+  {
+    tag: "optgroup", display: "<optgroup>", category: "form",
+    summary: "select の選択肢（option）を、見出し付きのグループに束ねる。",
+    poetic: "選択肢にも、属する「群れ」がある。optgroup の label が、選択肢たちの上に小さな見出しを掛ける。畳まれたドロップダウンの中に、分類された世界——選べる感情の目録。",
+    spark: "「選べる気持ち」を〈言えるもの〉〈言えないもの〉に分け、その見出しの下にそれぞれの感情を並べる。",
+    demo: `<label>いま、いちばん近いのは:\n  <select>\n    <optgroup label="言えるもの">\n      <option>うれしい</option>\n      <option>たのしい</option>\n    </optgroup>\n    <optgroup label="言えないもの">\n      <option>さみしい</option>\n      <option>こわい</option>\n    </optgroup>\n  </select>\n</label>`,
+  },
+  {
+    tag: "search", display: "<search>", category: "form",
+    summary: "検索や絞り込みのための領域を意味づける、新しめの要素。",
+    poetic: "「探している」という状態そのものに、枠を与える要素。中身は検索欄でなくてもいい。<search> という器は、「何かを探しつづけている」気配を、文書の構造に刻む。",
+    spark: "<search> の中に、答えの出ない問いだけを置く。永遠に検索しつづけている、出口のない一画。",
+    demo: `<search>\n  <p>ずっと、さがしています。</p>\n  <label>みつからないもの: <input type="search" placeholder="（入力しても、見つからない）"></label>\n</search>`,
+    note: "比較的新しい意味要素。検索・フィルタUIをまとめる「ランドマーク」を表す。"
+  },
 
   // ── 埋め込み・メディア ─────────────────────────────────
   {
@@ -464,6 +525,14 @@ const ELEMENTS = [
     spark: "読み込めない object の代わりに、『ここにあったものは、もう失われました』と表示させる。",
     demo: `<object data="" type="application/pdf" width="240" height="60">\n  ここにあったはずのものは、見つかりませんでした。\n</object>`,
   },
+  {
+    tag: "canvas", display: "<canvas>", category: "embed",
+    summary: "JavaScript で絵を描くための、空白の画布。",
+    poetic: "JSを使わないと決めたこの世界では、永遠に塗られない画布。<canvas> は、何も描かれないまま、ただ「描けるはずだった空間」として在る。中に書いた言葉は、canvas が使えない環境にだけ現れる「代わりの絵」になる。",
+    spark: "空の canvas を置き、その中に「ここに描かれるはずだった絵」を言葉で書く。塗られない画布の、不在の絵。",
+    demo: `<canvas width="240" height="60">ここには、JSがあれば絵が描けました。今は、この一文だけが残っています。</canvas>`,
+    note: "JSなしでは何も描画されない。対応ブラウザでは空白、非対応では中のテキストが見える。"
+  },
 
   // ── 対話 interactive ──────────────────────────────────
   {
@@ -520,6 +589,46 @@ const ELEMENTS = [
     poetic: "すべての行き先を、ひとつの言葉で決める要素。target=\"_blank\" を base に置けば、このページのどのリンクも、新しい窓を開く。ページ全体の『振る舞いの前提』を、一行で定める。",
     spark: "base で全リンクの基準を、実在しない場所に置く。どこへ行こうとしても、同じ宛先に集まる構造に。",
     demo: `<!-- &lt;base target="_blank"&gt; を置くと、以後すべてのリンクが新しい窓で開く -->\n<p>ここから先は、すべて、別の窓のむこう。</p>`,
+  },
+  {
+    tag: "head / body", display: "<head> <body>", category: "meta",
+    summary: "head は文書の舞台裏（表示されない情報）、body は舞台（表示される中身）。",
+    poetic: "一篇の文書は、見えない頭（head）と、見える体（body）でできている。head に書いたことは画面に出ないのに、文書のすべてを左右する。表に出ない思考と、表に出る言葉。",
+    spark: "head に置けるもの（title・meta・base…）を「内面」、body を「外面」と捉え、その食い違いを作品にする。",
+    demo: `<!-- &lt;head&gt; は舞台裏。観客（読者）には見えないまま、芝居の全部を決めている。 -->\n<p>あなたが今読んでいるこの言葉は、&lt;body&gt; の中にいます。</p>`,
+    note: "head の中身（title/meta/base/link/style/script）は画面に現れないが、文書の振る舞いを定める。"
+  },
+  {
+    tag: "link", display: "<link>", category: "meta",
+    summary: "外部リソースや、別ページとの「関係」を宣言する（head 内に置く）。",
+    poetic: "本文に現れない「関係」を宣言する要素。rel=\"next\"/\"prev\" で見えない前後関係を、rel=\"canonical\" で「本物はあちら」と告げる。どこにも表示されないのに、文書同士の縁を結ぶ。",
+    spark: "rel=\"prev\"/\"next\" で、実在しない前後の頁との関係だけを宣言する。読めない章に挟まれた一篇。",
+    demo: `<!-- &lt;link rel="prev" href="昨日.html"&gt; … 見えないが、確かに「昨日」と結ばれている -->\n<p>この頁には、見えない縁（えにし）がある。</p>`,
+    note: "<head> 内に置く。画面には出ないが、ブラウザや検索エンジンが読む「関係」の宣言。"
+  },
+  {
+    tag: "style", display: "<style>", category: "meta",
+    summary: "CSS を書き込むための要素。…この企てが、あえて使わないと決めたもの。",
+    poetic: "この辞典が、あえて封印した力。<style> ひとつで、文字は色も大きさも配置も自在になる。それを「使わない」と決めることが、この詩作の出発点だった。封じることで、HTML本来の声が聞こえてくる。",
+    spark: "あえて空の <style></style> だけを置く。「ここに、使わなかった力がある」という、不在の宣言。",
+    demo: `<!-- &lt;style&gt; … この中に一行書けば、すべてを変えられた。だから、書かなかった。 -->\n<p>ここには、何の装飾もありません。それが、この詩のかたちです。</p>`,
+    note: "純HTMLの「作品」では使わないと決めた要素。知っておくことで、その不在が意味を持つ。"
+  },
+  {
+    tag: "script", display: "<script>", category: "meta",
+    summary: "JavaScript を書き込む／読み込む要素。これも、あえて使わないもの。",
+    poetic: "もうひとつの封印。<script> は文書に動きと知能を与える。それを断つことで、HTMLは「ただそこに在るだけ」の純粋さを取り戻す。動かないことを選んだ詩。type を未知の値にすれば、実行されない「ただのテキストの容れ物」にもなる。",
+    spark: "<script type=\"text/plain\"> の中に詩を隠す。実行されず、画面にも出ず、ソースにだけ眠る言葉。noscript と対にしても面白い。",
+    demo: `<!-- &lt;script&gt; を一行も書かない。それが、この世界の約束。 -->\n<p>ここでは、何も起こりません。何も起こらないことだけが、起こります。</p>`,
+    note: "type を未知の値にすると実行されず、ソースにだけ残る隠れたテキスト置き場になる。"
+  },
+  {
+    tag: "slot", display: "<slot>", category: "meta",
+    summary: "他の内容が「差し込まれる」場所の予約（主に Web Components 用）。",
+    poetic: "中身が、まだ無い場所。slot は「ここに、いつか何かが入る」という空席。本来は影の中（Shadow DOM）でしか働かないが、その「差し込まれるのを待つ穴」という概念じたいが、不在と期待の詩になる。",
+    spark: "「ここに、あなたの言葉が入るはずでした」という空席として、slot を概念ごと詩に引用する。",
+    demo: `<p>ここに、<slot>（まだ誰も座っていない席）</slot>があります。</p>`,
+    note: "実際に機能するのは Shadow DOM 内のみ。通常は中の既定テキストがそのまま見える。"
   },
 
   // ── 文字・記号 ─────────────────────────────────────────
