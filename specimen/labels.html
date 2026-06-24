@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タグ標本ラベル — 印刷して、切って、ピンで留める</title>
+<style>
+  :root { --ink:#222; --line:#999; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#e9e6dd; color:var(--ink);
+    font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif; }
+  .intro { max-width:760px; margin:0 auto; padding:24px 18px 8px; }
+  .intro h1 { font-size:1.3rem; letter-spacing:.12em; margin:0 0 .4rem; }
+  .intro p { font-size:.85rem; line-height:1.8; color:#444; margin:.3rem 0; }
+  .sheet { background:#fff; max-width:210mm; margin:12px auto; padding:10mm;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:4mm;
+    box-shadow:0 4px 30px -16px rgba(0,0,0,.5); }
+  .label { border:1px dashed var(--line); border-radius:2px; padding:3mm 2mm;
+    display:flex; flex-direction:column; align-items:center; text-align:center;
+    gap:.6mm; break-inside:avoid; background:#fff; }
+  .label .pinhole { font-size:6pt; color:#bbb; line-height:1; }
+  .label .sp { font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:11.5pt; margin:.3mm 0 1mm; word-break:break-all; }
+  .label .genus { font-size:7pt; color:#333; }
+  .label .genus i { letter-spacing:.02em; }
+  .label .loc, .label .det { font-size:6.5pt; color:#555; }
+  .label .det i { color:#7a2d22; }
+  .label .coll { margin-top:1.2mm; padding-top:1mm; border-top:.3pt solid #ccc;
+    font-size:5.5pt; color:#888; letter-spacing:.04em; width:100%; }
+  @media print {
+    body { background:#fff; }
+    .no-print { display:none !important; }
+    .sheet { box-shadow:none; margin:0; padding:0; max-width:none;
+      grid-template-columns:repeat(4,1fr); gap:3mm; }
+    .label { border-color:#bbb; }
+    @page { size:A4; margin:10mm; }
+  }
+</style>
+</head>
+<body>
+  <div class="intro no-print">
+    <h1>タグ標本ラベル</h1>
+    <p>HTML5 のタグを、昆虫標本のように一匹ずつラベル化したものです。
+    印刷して、点線で切り取り、箱の中にピンで留めてください。</p>
+    <p>各ラベルには、学名（タグ）・<i>目(Order)</i>・生息地(Hab.)・記載の新旧(<i>det.</i>) を、
+    本物の標本ラベル風の極小活字で刷ってあります。<b>coll.</b> の欄には、採集者＝あなたの名前を。</p>
+    <p>計 114 標本 ／ A4・4列。ブラウザの印刷（Ctrl/Cmd+P）から、余白「既定」で。</p>
+  </div>
+  <main class="sheet">
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;html&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;title&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;header&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;footer&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;main&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;section&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;article&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;aside&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;nav&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;h1&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;h2&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;h3&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;h4&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;h5&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;h6&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;hgroup&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;address&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;div&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;span&gt;</span>
+        <span class="genus"><i>Structuralia</i> · 構造目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;p&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;br&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;wbr&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;hr&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;marquee&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. relicta</i> · 絶滅危惧種 †</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;pre&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;blockquote&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;q&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;cite&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;figure&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;figcaption&gt;</span>
+        <span class="genus"><i>Textualia</i> · 本文目</span>
+        <span class="loc">Hab. 図版 (figure)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;a&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;em&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;strong&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;mark&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;s&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;del&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;ins&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;small&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;abbr&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;dfn&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;code&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;kbd&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;samp&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;var&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;sub&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;sup&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;time&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;data&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;ruby&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;rt&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 振仮名 (ruby)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;rp&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 振仮名 (ruby)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;bdo&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;bdi&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;u&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;i&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;b&gt;</span>
+        <span class="genus"><i>Phrasealia</i> · 語句目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;ul&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;li&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 箇条 (list)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;ol&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;dl&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;dt&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 定義 (dl)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;dd&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 定義 (dl)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;menu&gt;</span>
+        <span class="genus"><i>Enumeralia</i> · 列挙目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;table&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;caption&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;tr&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;td&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;th&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;thead&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;tbody&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;tfoot&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;colgroup&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;col&gt;</span>
+        <span class="genus"><i>Tabularia</i> · 格子目</span>
+        <span class="loc">Hab. 表 (table)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;form&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;input&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;textarea&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;button&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;select&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;option&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 選択肢 (select)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;datalist&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;progress&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;meter&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;output&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;fieldset&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;legend&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 区画 (fieldset)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;label&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;optgroup&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 選択肢 (select)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;search&gt;</span>
+        <span class="genus"><i>Formularia</i> · 入力目</span>
+        <span class="loc">Hab. 書式 (form)</span>
+        <span class="det"><i>spec. recens</i> · 新参種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;img&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;picture&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;source&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 媒体 (audio/video)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;audio&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;video&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;track&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 媒体 (audio/video)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;iframe&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;svg&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;map&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;area&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 地図 (map)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;object&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;embed&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;canvas&gt;</span>
+        <span class="genus"><i>Medialia</i> · 埋込目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;details&gt;</span>
+        <span class="genus"><i>Interactiva</i> · 対話目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;summary&gt;</span>
+        <span class="genus"><i>Interactiva</i> · 対話目</span>
+        <span class="loc">Hab. 折畳 (details)</span>
+        <span class="det"><i>spec. nova</i> · 新種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;dialog&gt;</span>
+        <span class="genus"><i>Interactiva</i> · 対話目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. recens</i> · 新参種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;meta&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;noscript&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;template&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. recens</i> · 新参種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;base&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;head&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;body&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 体部 (body)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;link&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;style&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;script&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 頭部 (head)</span>
+        <span class="det"><i>spec. classica</i> · 古種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+      <figure class="label">
+        <span class="pinhole">⊙</span>
+        <span class="sp">&lt;slot&gt;</span>
+        <span class="genus"><i>Invisibilia</i> · 不可視目</span>
+        <span class="loc">Hab. 影 (shadow DOM)</span>
+        <span class="det"><i>spec. recens</i> · 新参種</span>
+        <span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+      </figure>
+  </main>
+</body>
+</html>

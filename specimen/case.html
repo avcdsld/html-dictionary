@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTMLタグ標本箱 — 眺めて、愛でる</title>
+<style>
+  * { box-sizing:border-box; }
+  body { margin:0; padding:28px 16px 60px; color:#eae3d5;
+    background:#241a12;
+    background-image:radial-gradient(circle at 50% -10%, #3a2c1f, #1c140d 70%);
+    font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif; }
+  .head { text-align:center; margin:0 auto 26px; max-width:900px; }
+  .head h1 { font-size:1.5rem; letter-spacing:.2em; margin:.2rem 0; color:#f2ead9; }
+  .head p { font-size:.8rem; color:#b6a589; letter-spacing:.06em; line-height:1.8; margin:.3rem 0; }
+  .head a { color:#d9b48a; }
+
+  /* 木箱＋ガラスケース */
+  .case { max-width:980px; margin:0 auto;
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.05) 0 2px, transparent 2px 7px),
+      linear-gradient(160deg,#caa56f,#b88c52);
+    border:16px solid #6f4f31;
+    border-image:linear-gradient(160deg,#8a6440,#5c3f27) 1;
+    border-radius:4px;
+    padding:22px 22px 30px;
+    box-shadow:0 30px 80px -30px #000, inset 0 0 60px rgba(60,35,15,.45), inset 0 2px 0 rgba(255,255,255,.15);
+  }
+  .drawer { margin:0 0 26px; }
+  .drawer:last-child { margin-bottom:0; }
+  .order { display:flex; align-items:baseline; gap:.7em; margin:0 0 12px;
+    border-bottom:1px solid rgba(80,52,28,.5); padding-bottom:4px; }
+  .order .o-la { font-style:italic; font-size:1rem; color:#5b3c22; letter-spacing:.04em; }
+  .order .o-ja { font-size:.7rem; color:#7c5733; letter-spacing:.18em; }
+
+  .row { display:grid; grid-template-columns:repeat(auto-fill,minmax(118px,1fr));
+    gap:30px 14px; padding:6px 4px 2px; }
+
+  /* 一匹の標本: ピン + 本体(タグ) + ラベル札 */
+  .specimen { position:relative; display:flex; flex-direction:column; align-items:center;
+    padding-top:12px; transition:transform .18s ease; }
+  .specimen:hover { transform:translateY(-3px); }
+  .pin { position:absolute; top:0; left:50%; width:9px; height:9px; margin-left:-4.5px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, #fff, #9aa0a6 45%, #4b5054 100%);
+    box-shadow:0 1px 2px rgba(0,0,0,.6); z-index:3; }
+  .pin::after { content:""; position:absolute; top:7px; left:50%; width:1.5px; height:16px;
+    margin-left:-.75px; background:linear-gradient(#8b9095,#5b6065);
+    box-shadow:1px 0 1px rgba(0,0,0,.35); z-index:1; }
+  .bug { position:relative; z-index:2; margin-top:14px;
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.92rem;
+    color:#2a1c10; background:rgba(255,253,247,.78);
+    border:1px solid rgba(90,60,30,.35); border-radius:3px; padding:3px 7px;
+    box-shadow:0 4px 8px -4px rgba(0,0,0,.55); word-break:break-all; text-align:center; }
+  .card { margin-top:7px; text-align:center; line-height:1.5;
+    font-size:.56rem; color:#5a3f25; letter-spacing:.02em;
+    background:rgba(255,252,243,.55); border:.5px solid rgba(90,60,30,.25);
+    border-radius:2px; padding:3px 5px; min-width:96px; }
+  .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
+  .card .d { display:block; }
+  .card .d.s i { color:#7a2d22; }
+
+  .foot { text-align:center; margin:28px auto 0; max-width:760px;
+    font-size:.72rem; color:#9c8b70; line-height:1.9; }
+  .foot a { color:#d9b48a; }
+
+  @media (max-width:560px) {
+    .row { grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:26px 10px; }
+    .case { padding:14px 12px 20px; border-width:10px; }
+  }
+</style>
+</head>
+<body>
+  <header class="head">
+    <h1>ＨＴＭＬ　タグ標本箱</h1>
+    <p>HTML5 のタグを一匹ずつ採集し、目(Order)ごとに並べた標本ケース。<br>
+    ただ眺めて、愛でるためのものです。114 標本収蔵。</p>
+  </header>
+
+  <main class="case">
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Structuralia</span><span class="o-ja">構造目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;html&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;header&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;footer&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;main&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;section&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;article&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;aside&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;nav&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;h1&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;h2&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;h3&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;h4&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;h5&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;h6&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;hgroup&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;address&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;div&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;span&gt;</span>
+        <span class="card">
+          <span class="g"><i>Structuralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Textualia</span><span class="o-ja">本文目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;p&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;br&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;wbr&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;hr&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;marquee&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. relicta</i> †</span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;pre&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;blockquote&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;q&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;figure&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;figcaption&gt;</span>
+        <span class="card">
+          <span class="g"><i>Textualia</i></span>
+          <span class="d">Hab. 図版 (figure)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Phrasealia</span><span class="o-ja">語句目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;cite&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;a&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;em&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;strong&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;mark&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;s&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;del&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;ins&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;small&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;abbr&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;dfn&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;code&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;kbd&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;samp&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;var&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;sub&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;sup&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;time&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;data&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;ruby&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;rt&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 振仮名 (ruby)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;rp&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 振仮名 (ruby)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;bdo&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;bdi&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;u&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;i&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;b&gt;</span>
+        <span class="card">
+          <span class="g"><i>Phrasealia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Enumeralia</span><span class="o-ja">列挙目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;ul&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;li&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 箇条 (list)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;ol&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;dl&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;dt&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 定義 (dl)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;dd&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 定義 (dl)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;menu&gt;</span>
+        <span class="card">
+          <span class="g"><i>Enumeralia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Tabularia</span><span class="o-ja">格子目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;table&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;caption&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;tr&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;td&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;th&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;thead&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;tbody&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;tfoot&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;colgroup&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;col&gt;</span>
+        <span class="card">
+          <span class="g"><i>Tabularia</i></span>
+          <span class="d">Hab. 表 (table)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Formularia</span><span class="o-ja">入力目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;form&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;input&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;textarea&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;button&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;select&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;option&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 選択肢 (select)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;datalist&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;progress&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;meter&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;output&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;fieldset&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;legend&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 区画 (fieldset)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;label&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;optgroup&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 選択肢 (select)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;search&gt;</span>
+        <span class="card">
+          <span class="g"><i>Formularia</i></span>
+          <span class="d">Hab. 書式 (form)</span>
+          <span class="d s"><i>spec. recens</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Medialia</span><span class="o-ja">埋込目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;img&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;picture&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;source&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 媒体 (audio/video)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;audio&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;video&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;track&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 媒体 (audio/video)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;iframe&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;svg&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;map&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;area&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 地図 (map)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;object&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;embed&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;canvas&gt;</span>
+        <span class="card">
+          <span class="g"><i>Medialia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Interactiva</span><span class="o-ja">対話目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;details&gt;</span>
+        <span class="card">
+          <span class="g"><i>Interactiva</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;summary&gt;</span>
+        <span class="card">
+          <span class="g"><i>Interactiva</i></span>
+          <span class="d">Hab. 折畳 (details)</span>
+          <span class="d s"><i>spec. nova</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;dialog&gt;</span>
+        <span class="card">
+          <span class="g"><i>Interactiva</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. recens</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+    <section class="drawer">
+      <h2 class="order"><span class="o-la">Invisibilia</span><span class="o-ja">不可視目</span></h2>
+      <div class="row">
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;title&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;meta&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;noscript&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;template&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. recens</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;base&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;head&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;body&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 体部 (body)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;link&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;style&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;script&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 頭部 (head)</span>
+          <span class="d s"><i>spec. classica</i></span>
+        </span>
+      </figure>
+      <figure class="specimen">
+        <span class="pin"></span>
+        <span class="bug">&lt;slot&gt;</span>
+        <span class="card">
+          <span class="g"><i>Invisibilia</i></span>
+          <span class="d">Hab. 影 (shadow DOM)</span>
+          <span class="d s"><i>spec. recens</i></span>
+        </span>
+      </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p><i>spec. relicta †</i> は廃止種（&lt;marquee&gt; のように、今も飛んでいる目撃例あり）。<br>
+    <a href="labels.html">▸ 印刷用ラベルシート</a> ／ <a href="../index.html">▸ HTML 詩語辞典へ戻る</a></p>
+  </footer>
+</body>
+</html>

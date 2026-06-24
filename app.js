@@ -414,6 +414,14 @@ function renderAbout() {
       <a class="ex-card" href="examples/ruby-double.html"><b>二重の声</b><span>&lt;ruby&gt; で、表記と読みをずらす</span></a>
       <a class="ex-card" href="examples/eternal-morning.html"><b>終わらない朝</b><span>&lt;meta refresh&gt; で巡るループ詩</span></a>
     </div>
+
+    <h2>タグ標本箱</h2>
+    <p>タグそのものを、昆虫標本のように一匹ずつ並べて眺めるための別室です。
+    HTML5 のタグを「採集された種」として、目(Order)ごとに分類してあります。</p>
+    <div class="examples">
+      <a class="ex-card" href="specimen/case.html"><b>標本ケース（画面）</b><span>木箱にピンで留めた114匹を眺める</span></a>
+      <a class="ex-card" href="specimen/labels.html"><b>標本ラベル（印刷用）</b><span>切って箱にピン留めする物理標本箱用</span></a>
+    </div>
   ` });
   $stage.appendChild(a);
 }

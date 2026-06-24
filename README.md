@@ -47,6 +47,17 @@ xdg-open index.html    # Linux
 - `ruby-double.html` — `<ruby>` で、表記と読みをずらす二重の声
 - `eternal-morning.html` — `<meta refresh>` で巡る、終わらない朝のループ詩
 
+## タグ標本箱（`specimen/`）
+
+「タグそのものを眺めて愛でたい」から生まれた別室。HTML5 のタグを、昆虫標本のように
+一匹ずつ並べたものです。各タグに〈学名＝タグ／目(Order)＝分類のラテン名／生息地／記載の新旧〉
+を、本物の標本ラベル風に添えています（着想の詳細は [`IDEAS.md`](IDEAS.md)）。
+
+- `specimen/case.html` — 画面で眺めるデジタル標本ケース（木箱にピン留め、**HTML+CSSのみ**）
+- `specimen/labels.html` — 印刷用ラベルシート（A4・切って箱にピン留め→物理標本箱）
+
+どちらも `data.js` から自動生成します： `node specimen/build.js`
+
 ## ファイル構成
 
 ```
@@ -55,6 +66,8 @@ style.css       辞書の装い（ツール用）
 app.js          めくり・しおり・掛け合わせの仕掛け（ツール用）
 data.js         HTML5 タグ/機能の辞書データ + 詩の方位 + 題材
 examples/       純HTMLの作例（作品。CSS/JSなし）
+specimen/       タグ標本箱（build.js で case.html / labels.html を生成）
+IDEAS.md        HTML Day に向けたアイデア帳
 ```
 
 ## データを足す
