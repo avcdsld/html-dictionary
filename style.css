@@ -27,6 +27,7 @@ body {
   font-family: var(--serif);
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   min-height: 100vh;
   display: flex;
@@ -437,4 +438,11 @@ details.demo-src[open] > summary::before { content: "▾ "; }
   .card { padding: 1.2rem 1.1rem 1rem; }
   .card-display { font-size: 1.2rem; }
   .stage { padding: 1.2rem 0.8rem 3rem; }
+  .topbar { padding-top: 1.1rem; }
+  .logo { font-size: 1.4rem; }
+  /* iOS で入力欄にフォーカスしたときの自動ズームを防ぐ（16px以上にする） */
+  .search { font-size: 16px; }
+  /* タップ目標を少し大きく */
+  .act, .cat-chip, .mode-btn { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
 }
