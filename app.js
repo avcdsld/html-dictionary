@@ -55,9 +55,6 @@ function el(tag, props, children) {
   }
   return node;
 }
-function escapeHtml(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
 function byTag(tag) { return ELEMENTS.find(e => e.tag === tag); }
 function shuffled(n) {
   const a = Array.from({ length: n }, (_, i) => i);
@@ -104,7 +101,7 @@ function buildDemo(item) {
   wrap.appendChild(live);
   const src = el("details", { class: "demo-src" });
   src.appendChild(el("summary", null, "ソースを見る"));
-  src.appendChild(el("pre", { class: "demo-code" }, escapeHtml(item.demo)));
+  src.appendChild(el("pre", { class: "demo-code" }, item.demo));
   wrap.appendChild(src);
   return wrap;
 }
