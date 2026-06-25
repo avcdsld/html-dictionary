@@ -218,17 +218,18 @@ ${bugs}
   .head p { font-size:.8rem; color:#b6a589; letter-spacing:.06em; line-height:1.8; margin:.3rem 0; }
   .head a { color:#d9b48a; }
 
-  /* 木箱の額縁: 角を留め継ぎ(45°)にした木枠＋木目 */
+  /* 黒檀の額縁: 漆黒の枠に細い金の見切り線（羊皮紙を映えさせる） */
   .case { position:relative; max-width:980px; margin:0 auto; padding:24px;
     border-radius:6px;
     background:
-      linear-gradient(180deg, rgba(255,238,205,.06), transparent 28%, transparent 72%, rgba(0,0,0,.14)),
-      repeating-linear-gradient(90.5deg, rgba(0,0,0,.05) 0 1px, transparent 1px 2px),
-      repeating-linear-gradient(91deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px, rgba(0,0,0,.06) 3px 6px),
-      conic-gradient(from 45deg at 50% 50%,
-        #46301f 0 90deg, #321f0e 90deg 180deg, #6f4d31 180deg 270deg, #7d5839 270deg 360deg);
+      linear-gradient(180deg, rgba(255,255,255,.04), transparent 16%, transparent 84%, rgba(0,0,0,.28)),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.014) 0 1px, transparent 1px 4px),
+      linear-gradient(135deg,#1c1611,#0c0907 50%,#1c1611);
     box-shadow:0 36px 90px -34px rgba(0,0,0,.85),
-      inset 0 0 0 1px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12); }
+      inset 0 0 0 1px rgba(0,0,0,.6),
+      inset 0 0 0 12px #100c08,
+      inset 0 0 0 13px rgba(203,164,80,.9),
+      inset 0 0 0 15px rgba(0,0,0,.45); }
 
   /* ガラスの内側: 古びた羊皮紙の敷き紙（しみ・古いピン穴入り） */
   .glass { position:relative; overflow:hidden; border-radius:2px;
