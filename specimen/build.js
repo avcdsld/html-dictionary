@@ -268,7 +268,7 @@ ${bugs}
 
   /* 一匹の標本: 虫ピン + 本体(タグ) + データラベル */
   .specimen { position:relative; display:flex; flex-direction:column; align-items:center;
-    padding-top:15px; transition:transform .18s ease;
+    padding-top:12px; transition:transform .18s ease;
     transform:rotate(var(--r,0deg)); transform-origin:50% 6px; }
   .specimen:hover { transform:rotate(var(--r,0deg)) translateY(-4px); z-index:4; }
   /* 真鍮の虫ピン: 上が丸く下は平たい甲丸(ドーム)の頭 */
@@ -283,26 +283,32 @@ ${bugs}
     background:linear-gradient(90deg,#f3dc9c 0%,#cda04c 40%,#8a6526 64%,#46300f 100%);
     box-shadow:1.4px 0 2px rgba(0,0,0,.32); z-index:0; }
   /* 標本そのもの（虫の体）: 艶を抑えたマットな暗色の名札。紙ラベルと素材で対比。タグ名は箔押し風 */
-  .bug { position:relative; z-index:3; margin-top:15px;
+  .bug { position:relative; z-index:3; margin-top:11px;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
     color:#ecdfc2; text-shadow:0 1px 0 rgba(0,0,0,.85);
     background:linear-gradient(180deg, #2d2214, #190f08);
-    border:1px solid #0d0703; border-radius:4px; padding:5px 11px;
+    border:1px solid #0d0703; border-radius:4px; padding:6px 11px 5px;
     box-shadow:
       5px 10px 13px -6px rgba(18,11,4,.55),
       0 16px 16px -10px rgba(18,11,4,.4),
       inset 0 1px 0 rgba(255,230,180,.12),
       inset 0 -1px 2px rgba(0,0,0,.5);
     white-space:nowrap; text-align:center; }
-  /* ピンが体の上端を貫く点: 真鍮の光沢＋くぼみの影 */
-  .bug::before { content:""; position:absolute; top:-1px; left:50%; width:4px; height:4px; margin-left:-2px;
+  /* ピンが体を貫く穴: 殻のくぼみ（縁の照り＋窪み＋上に殻のリップ） */
+  .bug::before { content:""; position:absolute; top:2.5px; left:50%; width:5.5px; height:3.6px; margin-left:-2.75px;
     border-radius:50%;
-    background:radial-gradient(circle at 50% 32%, #ffe9b0 0 22%, #b78a3c 60%, #3c2708 100%);
-    box-shadow:0 -1px 1.5px rgba(0,0,0,.55), inset 0 -.5px 1px rgba(0,0,0,.5);
-    z-index:4; }
+    background:
+      radial-gradient(85% 70% at 50% 88%, rgba(255,228,170,.85) 0 24%, transparent 58%),
+      radial-gradient(circle at 50% 42%, #000 0 52%, rgba(0,0,0,.5) 84%, transparent);
+    box-shadow:inset 0 1.6px 1.6px rgba(0,0,0,.95), 0 1.4px 1.2px rgba(0,0,0,.6), 0 -.6px .4px rgba(255,228,175,.35);
+    z-index:5; }
+  /* 上から穴へ入っていく真鍮の軸（前面の短い区間） */
+  .bug::after { content:""; position:absolute; top:-7px; left:50%; width:1.8px; height:9px; margin-left:-.9px;
+    background:linear-gradient(90deg,#f3dc9c,#cda04c 44%,#8a6526 66%,#46300f);
+    box-shadow:1px 0 1.5px rgba(0,0,0,.3); border-radius:1px 1px 0 0; z-index:4; }
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
-    gap:6px; margin-top:14px; line-height:1.5; letter-spacing:.02em; }
+    gap:6px; margin-top:9px; line-height:1.5; letter-spacing:.02em; }
   .lbl { position:relative; text-align:center; font-size:.56rem; color:#5a3f25;
     background:
       radial-gradient(circle at 24% 68%, rgba(125,75,32,.17) 0 1.2px, transparent 1.7px) 4px 3px/19px 16px,
@@ -310,13 +316,21 @@ ${bugs}
       radial-gradient(65% 80% at 82% 88%, rgba(120,80,40,.11), transparent 62%),
       repeating-linear-gradient(0deg, rgba(110,80,40,.05) 0 1px, transparent 1px 3px),
       linear-gradient(160deg,#f4e8ca,#e7d5ad);
-    border:.5px solid rgba(120,85,40,.42); border-radius:2px; padding:4px 7px; min-width:96px;
+    border:.5px solid rgba(120,85,40,.42); border-radius:2px; padding:11px 8px 5px; min-width:96px;
     box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 0 0 9px rgba(140,100,55,.2); }
-  /* ピンがラベルの上端を貫く穴: 紙が破れて軸が入る */
-  .lbl::before { content:""; position:absolute; top:-1.5px; left:50%; width:3.4px; height:3.4px; margin-left:-1.7px;
-    border-radius:50%; background:radial-gradient(circle at 50% 32%, #1b0f05, #6a4a22);
-    box-shadow:0 0 0 .5px rgba(120,80,40,.35), inset 0 0 1px #000; z-index:3; }
-  .lbl { transform:rotate(-.6deg); transform-origin:50% 0; }
+  /* ピンがラベルを貫く穴: 上端から少し下、紙に空いた穴 */
+  .lbl::before { content:""; position:absolute; top:4px; left:50%; width:4px; height:4px; margin-left:-2px;
+    border-radius:50%;
+    background:
+      radial-gradient(72% 60% at 50% 74%, rgba(255,248,222,.7) 0 28%, transparent 58%),
+      radial-gradient(circle at 50% 40%, #120a03 0 48%, #5a3c1c 84%, #7a5226);
+    box-shadow:inset 0 1.4px 1.4px rgba(0,0,0,.85), 0 -1px 1px rgba(255,245,215,.5), 0 1.4px 1px rgba(120,80,40,.4);
+    z-index:5; }
+  /* ラベル上端から穴へ入っていく真鍮の軸（前面の短い区間） */
+  .lbl::after { content:""; position:absolute; top:-4px; left:50%; width:1.8px; height:10px; margin-left:-.9px;
+    background:linear-gradient(90deg,#f3dc9c,#cda04c 44%,#8a6526 66%,#46300f);
+    box-shadow:1px 0 1.5px rgba(0,0,0,.3); border-radius:1px 1px 0 0; z-index:4; }
+  .lbl { transform:rotate(-.6deg); transform-origin:50% 5px; }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
   .card .det { display:block; margin-top:3px; padding-top:3px;
