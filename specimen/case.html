@@ -19,6 +19,8 @@
   .case { position:relative; max-width:980px; margin:0 auto; padding:24px;
     border-radius:6px;
     background:
+      linear-gradient(180deg, rgba(255,238,205,.06), transparent 28%, transparent 72%, rgba(0,0,0,.14)),
+      repeating-linear-gradient(90.5deg, rgba(0,0,0,.05) 0 1px, transparent 1px 2px),
       repeating-linear-gradient(91deg, rgba(255,255,255,.035) 0 1px, transparent 1px 3px, rgba(0,0,0,.06) 3px 6px),
       conic-gradient(from 45deg at 50% 50%,
         #46301f 0 90deg, #321f0e 90deg 180deg, #6f4d31 180deg 270deg, #7d5839 270deg 360deg);
@@ -47,8 +49,9 @@
   .glass::after { content:""; position:absolute; inset:0; pointer-events:none; z-index:7;
     box-shadow:inset 0 0 70px rgba(16,26,16,.30), inset 0 0 0 1px rgba(170,205,180,.20);
     background:
-      radial-gradient(130% 70% at 82% 6%, rgba(255,255,255,.12), transparent 42%),
-      radial-gradient(80% 120% at -5% 110%, rgba(120,150,125,.10), transparent 55%); }
+      radial-gradient(120% 80% at 50% -12%, rgba(255,208,138,.15), transparent 55%),
+      radial-gradient(130% 70% at 82% 6%, rgba(255,255,255,.10), transparent 42%),
+      radial-gradient(80% 120% at -5% 110%, rgba(120,150,125,.09), transparent 55%); }
   .drawer { margin:0 0 26px; }
   .drawer:last-child { margin-bottom:0; }
   .order { display:flex; align-items:baseline; gap:.7em; margin:0 0 12px;
@@ -80,9 +83,11 @@
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
     color:#f1e1ba; text-shadow:0 1px 0 rgba(0,0,0,.65), 0 0 5px rgba(120,80,30,.35);
     background:
-      radial-gradient(120% 85% at 32% 20%, rgba(255,255,255,.40) 0 6%, rgba(255,255,255,.08) 18%, transparent 38%),
-      radial-gradient(150% 110% at 50% 2%, rgba(95,150,120,.20), rgba(120,90,160,.10) 35%, transparent 60%),
-      linear-gradient(180deg, #5b4327 0%, #3a2716 34%, #241608 70%, #150c04 100%);
+      radial-gradient(55% 38% at 31% 16%, rgba(255,255,255,.5) 0 8%, rgba(255,255,255,.05) 32%, transparent 56%),
+      radial-gradient(150% 120% at 50% 0%, rgba(255,238,205,.12), transparent 42%),
+      radial-gradient(150% 110% at 50% 4%, rgba(95,150,120,.16), rgba(120,90,160,.09) 35%, transparent 60%),
+      radial-gradient(120% 130% at 50% 50%, transparent 52%, rgba(0,0,0,.5) 100%),
+      linear-gradient(180deg, #5d4528 0%, #3a2716 34%, #221507 70%, #140b04 100%);
     border:1px solid #110903; border-radius:12px/9px; padding:5px 11px;
     box-shadow:
       5px 11px 14px -6px rgba(18,11,4,.6),
@@ -95,11 +100,13 @@
     gap:6px; margin-top:14px; line-height:1.5; letter-spacing:.02em; }
   .lbl { position:relative; text-align:center; font-size:.56rem; color:#5a3f25;
     background:
-      radial-gradient(circle at 24% 68%, rgba(125,75,32,.16) 0 1.2px, transparent 1.7px) 4px 3px/19px 16px,
+      radial-gradient(circle at 24% 68%, rgba(125,75,32,.17) 0 1.2px, transparent 1.7px) 4px 3px/19px 16px,
       radial-gradient(circle at 76% 30%, rgba(120,68,28,.13) 0 1px, transparent 1.5px) 11px 8px/23px 21px,
-      linear-gradient(160deg,#f3e7c8,#e6d4ac);
+      radial-gradient(65% 80% at 82% 88%, rgba(120,80,40,.11), transparent 62%),
+      repeating-linear-gradient(0deg, rgba(110,80,40,.05) 0 1px, transparent 1px 3px),
+      linear-gradient(160deg,#f4e8ca,#e7d5ad);
     border:.5px solid rgba(120,85,40,.42); border-radius:2px; padding:4px 7px; min-width:96px;
-    box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 0 0 8px rgba(150,110,60,.16); }
+    box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 0 0 9px rgba(140,100,55,.2); }
   /* ピン穴 */
   .lbl::before { content:""; position:absolute; top:2px; left:50%; width:3px; height:3px; margin-left:-1.5px;
     border-radius:50%; background:radial-gradient(circle at 50% 35%, #2a1a0a, #6a4a22);
