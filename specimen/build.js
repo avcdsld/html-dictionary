@@ -210,8 +210,8 @@ ${bugs}
 <style>
   * { box-sizing:border-box; }
   body { margin:0; padding:28px 16px 60px; color:#eae3d5;
-    background:#241a12;
-    background-image:radial-gradient(circle at 50% -10%, #3a2c1f, #1c140d 70%);
+    background:#160f08;
+    background-image:radial-gradient(circle at 50% -10%, #2c2114, #110b06 70%);
     font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif; }
   .head { text-align:center; margin:0 auto 26px; max-width:900px; }
   .head h1 { font-size:1.5rem; letter-spacing:.2em; margin:.2rem 0; color:#f2ead9; }
@@ -228,17 +228,18 @@ ${bugs}
     box-shadow:0 36px 90px -34px rgba(0,0,0,.85),
       inset 0 0 0 1px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.12); }
 
-  /* ガラスの内側: フォーム台紙（古いピン穴入り） */
+  /* ガラスの内側: 古びた羊皮紙の敷き紙（しみ・古いピン穴入り） */
   .glass { position:relative; overflow:hidden; border-radius:2px;
     padding:26px 24px 34px;
     background:
-      radial-gradient(circle at 30% 40%, rgba(35,20,8,.16) 0 1.3px, transparent 1.8px) 11px 9px/79px 91px,
-      radial-gradient(circle at 70% 60%, rgba(35,20,8,.13) 0 1.1px, transparent 1.6px) 40px 55px/103px 67px,
-      radial-gradient(circle at 22% 28%, rgba(70,45,20,.05) 0 1.2px, transparent 1.4px) 0 0/13px 13px,
-      radial-gradient(circle at 68% 64%, rgba(70,45,20,.04) 0 1px, transparent 1.2px) 6px 7px/16px 16px,
-      linear-gradient(160deg,#f6f2e9,#e9e1d2);
-    box-shadow:inset 0 0 50px rgba(80,52,24,.16),
-      inset 0 0 0 2px rgba(40,26,12,.55), inset 0 3px 7px rgba(40,26,12,.4); }
+      radial-gradient(circle at 30% 40%, rgba(60,35,12,.20) 0 1.3px, transparent 1.8px) 11px 9px/79px 91px,
+      radial-gradient(circle at 70% 60%, rgba(60,35,12,.16) 0 1.1px, transparent 1.6px) 40px 55px/103px 67px,
+      radial-gradient(circle at 20% 75%, rgba(125,78,36,.12) 0 2.2px, transparent 3px) 23px 17px/123px 101px,
+      radial-gradient(circle at 80% 22%, rgba(125,78,36,.09) 0 2.6px, transparent 3.4px) 61px 41px/151px 133px,
+      radial-gradient(circle at 22% 28%, rgba(90,58,26,.06) 0 1.2px, transparent 1.4px) 0 0/13px 13px,
+      linear-gradient(160deg,#ece0c0,#d9c499);
+    box-shadow:inset 0 0 60px rgba(70,42,18,.30),
+      inset 0 0 0 2px rgba(48,30,13,.6), inset 0 3px 9px rgba(40,26,12,.45); }
   /* ガラスの映り込み（前面のうすい光のすじ） */
   .glass::before { content:""; position:absolute; inset:0; pointer-events:none; z-index:6;
     background:linear-gradient(118deg,
@@ -266,34 +267,50 @@ ${bugs}
     padding-top:15px; transition:transform .18s ease;
     transform:rotate(var(--r,0deg)); transform-origin:50% 6px; }
   .specimen:hover { transform:rotate(var(--r,0deg)) translateY(-4px); z-index:4; }
-  /* 虫ピン: 金属光沢の頭 + シャフト */
+  /* 真鍮の虫ピン: 光沢のある頭 + シャフト */
   .pin { position:absolute; top:0; left:50%; width:11px; height:11px; margin-left:-5.5px;
     border-radius:50%;
-    background:radial-gradient(circle at 33% 27%, #ffffff 0 9%, #d4d8dc 30%, #8a8f94 65%, #3f4347 100%);
-    box-shadow:2px 3px 4px rgba(0,0,0,.45), inset 0 -1.5px 2px rgba(0,0,0,.35), inset 0 1px 1px rgba(255,255,255,.7);
+    background:radial-gradient(circle at 33% 27%, #fff4cf 0 8%, #e6c570 27%, #ab8232 62%, #5e3f12 100%);
+    box-shadow:2px 3px 4px rgba(0,0,0,.5), inset 0 -1.5px 2px rgba(60,35,5,.5), inset 0 1px 1px rgba(255,240,190,.8);
     z-index:5; }
-  /* 虫ピンの軸: 本体とラベルを串刺しに貫く（隙間からのぞく） */
+  /* 真鍮ピンの軸: 標本とラベルを串刺しに貫く（隙間からのぞく） */
   .specimen::before { content:""; position:absolute; top:8px; left:50%; width:2px;
     height:calc(100% - 8px); margin-left:-1px;
-    background:linear-gradient(90deg,#d6dadd 0%,#9aa0a4 42%,#666b6f 62%,#474b4f 100%);
-    box-shadow:2px 1px 2.5px rgba(0,0,0,.28); border-radius:0 0 1px 1px; z-index:0; }
-  .bug { position:relative; z-index:3; margin-top:14px;
-    font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.92rem;
-    color:#2a1c10; background:linear-gradient(#fffdf7,#f1ead9);
-    border:1px solid rgba(90,60,30,.3); border-radius:3px; padding:3px 8px;
-    box-shadow:5px 9px 13px -6px rgba(45,27,10,.5), 0 17px 17px -10px rgba(40,24,8,.4), 0 1px 0 rgba(255,255,255,.6) inset;
+    background:linear-gradient(90deg,#edd596 0%,#bd9344 42%,#7d5a1f 62%,#46300f 100%);
+    box-shadow:2px 1px 2.5px rgba(0,0,0,.3); border-radius:0 0 1px 1px; z-index:0; }
+  /* 標本そのもの（虫の体）: つやのある立体的なキチン質。タグ名は箔押し風 */
+  .bug { position:relative; z-index:3; margin-top:15px;
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
+    color:#f1e1ba; text-shadow:0 1px 0 rgba(0,0,0,.65), 0 0 5px rgba(120,80,30,.35);
+    background:
+      radial-gradient(120% 85% at 32% 20%, rgba(255,255,255,.40) 0 6%, rgba(255,255,255,.08) 18%, transparent 38%),
+      radial-gradient(150% 110% at 50% 2%, rgba(95,150,120,.20), rgba(120,90,160,.10) 35%, transparent 60%),
+      linear-gradient(180deg, #5b4327 0%, #3a2716 34%, #241608 70%, #150c04 100%);
+    border:1px solid #110903; border-radius:12px/9px; padding:5px 11px;
+    box-shadow:
+      5px 11px 14px -6px rgba(18,11,4,.6),
+      0 19px 18px -10px rgba(18,11,4,.45),
+      inset 0 1px 1px rgba(255,238,198,.28),
+      inset 0 -3px 6px rgba(0,0,0,.55);
     white-space:nowrap; text-align:center; }
-  /* データラベル: 同じ虫ピンに串刺しの2枚（採集地ラベル＋同定ラベル） */
+  /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
-    gap:8px; margin-top:9px; line-height:1.5; letter-spacing:.02em; }
-  .lbl { text-align:center; font-size:.56rem; color:#5a3f25;
-    background:linear-gradient(#fffdf6,#f4ecd9); border:.5px solid rgba(90,60,30,.3);
-    border-radius:2px; padding:3px 6px; min-width:96px;
-    box-shadow:3px 5px 8px -5px rgba(45,27,10,.45); }
+    gap:6px; margin-top:14px; line-height:1.5; letter-spacing:.02em; }
+  .lbl { position:relative; text-align:center; font-size:.56rem; color:#5a3f25;
+    background:
+      radial-gradient(circle at 24% 68%, rgba(125,75,32,.16) 0 1.2px, transparent 1.7px) 4px 3px/19px 16px,
+      radial-gradient(circle at 76% 30%, rgba(120,68,28,.13) 0 1px, transparent 1.5px) 11px 8px/23px 21px,
+      linear-gradient(160deg,#f3e7c8,#e6d4ac);
+    border:.5px solid rgba(120,85,40,.42); border-radius:2px; padding:4px 7px; min-width:96px;
+    box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 0 0 8px rgba(150,110,60,.16); }
+  /* ピン穴 */
+  .lbl::before { content:""; position:absolute; top:2px; left:50%; width:3px; height:3px; margin-left:-1.5px;
+    border-radius:50%; background:radial-gradient(circle at 50% 35%, #2a1a0a, #6a4a22);
+    box-shadow:0 0 0 1px rgba(120,80,40,.22), inset 0 0 1px #000; }
   .lbl.loc { transform:rotate(-.7deg); }
-  .lbl.det { transform:rotate(1.2deg); color:#7a2d22; font-style:italic;
-    border-color:rgba(150,52,40,.45);
-    box-shadow:3px 5px 8px -5px rgba(45,27,10,.45), inset 3px 0 0 rgba(150,52,40,.55); }
+  .lbl.det { transform:rotate(1.2deg); color:#8a3320; font-style:italic;
+    border-color:rgba(150,52,40,.5);
+    box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 3px 0 0 rgba(150,52,40,.5), inset 0 0 8px rgba(150,110,60,.16); }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
 
