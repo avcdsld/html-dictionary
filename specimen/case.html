@@ -68,11 +68,11 @@
     padding-top:15px; transition:transform .18s ease;
     transform:rotate(var(--r,0deg)); transform-origin:50% 6px; }
   .specimen:hover { transform:rotate(var(--r,0deg)) translateY(-4px); z-index:4; }
-  /* 真鍮の虫ピン: 細い真鍮ビーズの頭 */
-  .pin { position:absolute; top:0; left:50%; width:7px; height:7px; margin-left:-3.5px;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 28%, #fff6d6 0 16%, #e9c977 40%, #ab8232 72%, #573a10 100%);
-    box-shadow:1px 1.5px 2.5px rgba(0,0,0,.5), inset 0 -1px 1.5px rgba(60,35,5,.55), inset 0 .5px 1px rgba(255,242,196,.9);
+  /* 真鍮の虫ピン: 上が丸く下は平たい甲丸(ドーム)の頭 */
+  .pin { position:absolute; top:0; left:50%; width:8px; height:6px; margin-left:-4px;
+    border-radius:50% 50% 42% 42% / 72% 72% 30% 30%;
+    background:radial-gradient(120% 135% at 38% 16%, #fff6d6 0 18%, #eccd7e 42%, #a87f30 76%, #4e3410 100%);
+    box-shadow:1px 1.5px 2.5px rgba(0,0,0,.5), inset 0 -1.5px 1.5px rgba(60,35,5,.6), inset 0 1px 1px rgba(255,242,196,.95);
     z-index:6; }
   /* 真鍮ピンの軸: 頭から一本でまっすぐ下り、体とラベルの両方を貫く */
   .specimen::before { content:""; position:absolute; top:5px; left:50%; width:1.8px;
@@ -113,7 +113,7 @@
   .lbl::before { content:""; position:absolute; top:-1.5px; left:50%; width:3.4px; height:3.4px; margin-left:-1.7px;
     border-radius:50%; background:radial-gradient(circle at 50% 32%, #1b0f05, #6a4a22);
     box-shadow:0 0 0 .5px rgba(120,80,40,.35), inset 0 0 1px #000; z-index:3; }
-  .lbl { transform:rotate(-.6deg); }
+  .lbl { transform:rotate(-.6deg); transform-origin:50% 0; }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
   .card .det { display:block; margin-top:3px; padding-top:3px;
