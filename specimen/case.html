@@ -78,21 +78,17 @@
     height:calc(100% - 8px); margin-left:-1px;
     background:linear-gradient(90deg,#edd596 0%,#bd9344 42%,#7d5a1f 62%,#46300f 100%);
     box-shadow:2px 1px 2.5px rgba(0,0,0,.3); border-radius:0 0 1px 1px; z-index:0; }
-  /* 標本そのもの（虫の体）: つやのある立体的なキチン質。タグ名は箔押し風 */
+  /* 標本そのもの（虫の体）: 艶を抑えたマットな暗色の名札。紙ラベルと素材で対比。タグ名は箔押し風 */
   .bug { position:relative; z-index:3; margin-top:15px;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
-    color:#f1e1ba; text-shadow:0 1px 0 rgba(0,0,0,.65), 0 0 5px rgba(120,80,30,.35);
-    background:
-      radial-gradient(75% 50% at 34% 24%, rgba(255,247,225,.26), rgba(255,247,225,.03) 48%, transparent 68%),
-      radial-gradient(150% 120% at 50% 0%, rgba(255,238,205,.09), transparent 46%),
-      radial-gradient(150% 110% at 50% 6%, rgba(95,150,120,.11), rgba(120,90,160,.06) 40%, transparent 64%),
-      linear-gradient(180deg, #574025 0%, #3a2716 36%, #241608 72%, #160d05 100%);
-    border:1px solid #110903; border-radius:12px/9px; padding:5px 11px;
+    color:#ecdfc2; text-shadow:0 1px 0 rgba(0,0,0,.85);
+    background:linear-gradient(180deg, #2d2214, #190f08);
+    border:1px solid #0d0703; border-radius:4px; padding:5px 11px;
     box-shadow:
-      5px 11px 14px -6px rgba(18,11,4,.6),
-      0 19px 18px -10px rgba(18,11,4,.45),
-      inset 0 1px 1px rgba(255,238,198,.22),
-      inset 0 -2px 5px rgba(0,0,0,.42);
+      5px 10px 13px -6px rgba(18,11,4,.55),
+      0 16px 16px -10px rgba(18,11,4,.4),
+      inset 0 1px 0 rgba(255,230,180,.12),
+      inset 0 -1px 2px rgba(0,0,0,.5);
     white-space:nowrap; text-align:center; }
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
