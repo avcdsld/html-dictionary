@@ -186,11 +186,11 @@ function buildCase() {
         <span class="pin"></span>
         <span class="bug">${tagStr(s.tag)}</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>${ord.la}</i></span>
             <span class="d">Hab. ${s.habJa}</span>
+            <span class="det"><i>${s.status.la}</i>${dag(s.status)}</span>
           </span>
-          <span class="lbl det"><i>${s.status.la}</i>${dag(s.status)}</span>
         </span>
       </figure>`).join("\n");
     return `    <section class="drawer">
@@ -286,17 +286,16 @@ ${bugs}
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
     color:#f1e1ba; text-shadow:0 1px 0 rgba(0,0,0,.65), 0 0 5px rgba(120,80,30,.35);
     background:
-      radial-gradient(55% 38% at 31% 16%, rgba(255,255,255,.5) 0 8%, rgba(255,255,255,.05) 32%, transparent 56%),
-      radial-gradient(150% 120% at 50% 0%, rgba(255,238,205,.12), transparent 42%),
-      radial-gradient(150% 110% at 50% 4%, rgba(95,150,120,.16), rgba(120,90,160,.09) 35%, transparent 60%),
-      radial-gradient(120% 130% at 50% 50%, transparent 52%, rgba(0,0,0,.5) 100%),
-      linear-gradient(180deg, #5d4528 0%, #3a2716 34%, #221507 70%, #140b04 100%);
+      radial-gradient(75% 50% at 34% 24%, rgba(255,247,225,.26), rgba(255,247,225,.03) 48%, transparent 68%),
+      radial-gradient(150% 120% at 50% 0%, rgba(255,238,205,.09), transparent 46%),
+      radial-gradient(150% 110% at 50% 6%, rgba(95,150,120,.11), rgba(120,90,160,.06) 40%, transparent 64%),
+      linear-gradient(180deg, #574025 0%, #3a2716 36%, #241608 72%, #160d05 100%);
     border:1px solid #110903; border-radius:12px/9px; padding:5px 11px;
     box-shadow:
       5px 11px 14px -6px rgba(18,11,4,.6),
       0 19px 18px -10px rgba(18,11,4,.45),
-      inset 0 1px 1px rgba(255,238,198,.28),
-      inset 0 -3px 6px rgba(0,0,0,.55);
+      inset 0 1px 1px rgba(255,238,198,.22),
+      inset 0 -2px 5px rgba(0,0,0,.42);
     white-space:nowrap; text-align:center; }
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
@@ -314,12 +313,12 @@ ${bugs}
   .lbl::before { content:""; position:absolute; top:2px; left:50%; width:3px; height:3px; margin-left:-1.5px;
     border-radius:50%; background:radial-gradient(circle at 50% 35%, #2a1a0a, #6a4a22);
     box-shadow:0 0 0 1px rgba(120,80,40,.22), inset 0 0 1px #000; }
-  .lbl.loc { transform:rotate(-.7deg); }
-  .lbl.det { transform:rotate(1.2deg); color:#8a3320; font-style:italic;
-    border-color:rgba(150,52,40,.5);
-    box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 3px 0 0 rgba(150,52,40,.5), inset 0 0 8px rgba(150,110,60,.16); }
+  .lbl { transform:rotate(-.6deg); }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
+  .card .det { display:block; margin-top:3px; padding-top:3px;
+    border-top:.5px solid rgba(150,52,40,.3);
+    color:#8a3320; font-style:italic; }
 
   .foot { text-align:center; margin:28px auto 0; max-width:760px;
     font-size:.72rem; color:#9c8b70; line-height:1.9; }

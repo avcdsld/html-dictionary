@@ -83,17 +83,16 @@
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
     color:#f1e1ba; text-shadow:0 1px 0 rgba(0,0,0,.65), 0 0 5px rgba(120,80,30,.35);
     background:
-      radial-gradient(55% 38% at 31% 16%, rgba(255,255,255,.5) 0 8%, rgba(255,255,255,.05) 32%, transparent 56%),
-      radial-gradient(150% 120% at 50% 0%, rgba(255,238,205,.12), transparent 42%),
-      radial-gradient(150% 110% at 50% 4%, rgba(95,150,120,.16), rgba(120,90,160,.09) 35%, transparent 60%),
-      radial-gradient(120% 130% at 50% 50%, transparent 52%, rgba(0,0,0,.5) 100%),
-      linear-gradient(180deg, #5d4528 0%, #3a2716 34%, #221507 70%, #140b04 100%);
+      radial-gradient(75% 50% at 34% 24%, rgba(255,247,225,.26), rgba(255,247,225,.03) 48%, transparent 68%),
+      radial-gradient(150% 120% at 50% 0%, rgba(255,238,205,.09), transparent 46%),
+      radial-gradient(150% 110% at 50% 6%, rgba(95,150,120,.11), rgba(120,90,160,.06) 40%, transparent 64%),
+      linear-gradient(180deg, #574025 0%, #3a2716 36%, #241608 72%, #160d05 100%);
     border:1px solid #110903; border-radius:12px/9px; padding:5px 11px;
     box-shadow:
       5px 11px 14px -6px rgba(18,11,4,.6),
       0 19px 18px -10px rgba(18,11,4,.45),
-      inset 0 1px 1px rgba(255,238,198,.28),
-      inset 0 -3px 6px rgba(0,0,0,.55);
+      inset 0 1px 1px rgba(255,238,198,.22),
+      inset 0 -2px 5px rgba(0,0,0,.42);
     white-space:nowrap; text-align:center; }
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
@@ -111,12 +110,12 @@
   .lbl::before { content:""; position:absolute; top:2px; left:50%; width:3px; height:3px; margin-left:-1.5px;
     border-radius:50%; background:radial-gradient(circle at 50% 35%, #2a1a0a, #6a4a22);
     box-shadow:0 0 0 1px rgba(120,80,40,.22), inset 0 0 1px #000; }
-  .lbl.loc { transform:rotate(-.7deg); }
-  .lbl.det { transform:rotate(1.2deg); color:#8a3320; font-style:italic;
-    border-color:rgba(150,52,40,.5);
-    box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 3px 0 0 rgba(150,52,40,.5), inset 0 0 8px rgba(150,110,60,.16); }
+  .lbl { transform:rotate(-.6deg); }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
+  .card .det { display:block; margin-top:3px; padding-top:3px;
+    border-top:.5px solid rgba(150,52,40,.3);
+    color:#8a3320; font-style:italic; }
 
   .foot { text-align:center; margin:28px auto 0; max-width:760px;
     font-size:.72rem; color:#9c8b70; line-height:1.9; }
@@ -145,198 +144,198 @@
         <span class="pin"></span>
         <span class="bug">&lt;html&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:2.10deg">
         <span class="pin"></span>
         <span class="bug">&lt;header&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;footer&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.67deg">
         <span class="pin"></span>
         <span class="bug">&lt;main&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.19deg">
         <span class="pin"></span>
         <span class="bug">&lt;section&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.96deg">
         <span class="pin"></span>
         <span class="bug">&lt;article&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.16deg">
         <span class="pin"></span>
         <span class="bug">&lt;aside&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.29deg">
         <span class="pin"></span>
         <span class="bug">&lt;nav&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.44deg">
         <span class="pin"></span>
         <span class="bug">&lt;h1&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.77deg">
         <span class="pin"></span>
         <span class="bug">&lt;h2&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.25deg">
         <span class="pin"></span>
         <span class="bug">&lt;h3&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.94deg">
         <span class="pin"></span>
         <span class="bug">&lt;h4&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.35deg">
         <span class="pin"></span>
         <span class="bug">&lt;h5&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.11deg">
         <span class="pin"></span>
         <span class="bug">&lt;h6&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.95deg">
         <span class="pin"></span>
         <span class="bug">&lt;hgroup&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.55deg">
         <span class="pin"></span>
         <span class="bug">&lt;address&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.61deg">
         <span class="pin"></span>
         <span class="bug">&lt;div&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.72deg">
         <span class="pin"></span>
         <span class="bug">&lt;span&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       </div>
@@ -348,110 +347,110 @@
         <span class="pin"></span>
         <span class="bug">&lt;p&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:2.11deg">
         <span class="pin"></span>
         <span class="bug">&lt;br&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.95deg">
         <span class="pin"></span>
         <span class="bug">&lt;wbr&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.87deg">
         <span class="pin"></span>
         <span class="bug">&lt;hr&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.43deg">
         <span class="pin"></span>
         <span class="bug">&lt;marquee&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. relicta</i> †</span>
           </span>
-          <span class="lbl det"><i>spec. relicta</i> †</span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.73deg">
         <span class="pin"></span>
         <span class="bug">&lt;pre&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.71deg">
         <span class="pin"></span>
         <span class="bug">&lt;blockquote&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;q&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.28deg">
         <span class="pin"></span>
         <span class="bug">&lt;figure&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.40deg">
         <span class="pin"></span>
         <span class="bug">&lt;figcaption&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Textualia</i></span>
             <span class="d">Hab. 図版 (figure)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       </div>
@@ -463,297 +462,297 @@
         <span class="pin"></span>
         <span class="bug">&lt;cite&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.90deg">
         <span class="pin"></span>
         <span class="bug">&lt;a&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.33deg">
         <span class="pin"></span>
         <span class="bug">&lt;em&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.29deg">
         <span class="pin"></span>
         <span class="bug">&lt;strong&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.51deg">
         <span class="pin"></span>
         <span class="bug">&lt;mark&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.82deg">
         <span class="pin"></span>
         <span class="bug">&lt;s&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.20deg">
         <span class="pin"></span>
         <span class="bug">&lt;del&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:2.13deg">
         <span class="pin"></span>
         <span class="bug">&lt;ins&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.93deg">
         <span class="pin"></span>
         <span class="bug">&lt;small&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.15deg">
         <span class="pin"></span>
         <span class="bug">&lt;abbr&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.94deg">
         <span class="pin"></span>
         <span class="bug">&lt;dfn&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.30deg">
         <span class="pin"></span>
         <span class="bug">&lt;code&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;kbd&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-2.09deg">
         <span class="pin"></span>
         <span class="bug">&lt;samp&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;var&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-2.09deg">
         <span class="pin"></span>
         <span class="bug">&lt;sub&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.74deg">
         <span class="pin"></span>
         <span class="bug">&lt;sup&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.79deg">
         <span class="pin"></span>
         <span class="bug">&lt;time&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.46deg">
         <span class="pin"></span>
         <span class="bug">&lt;data&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-2.20deg">
         <span class="pin"></span>
         <span class="bug">&lt;ruby&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.05deg">
         <span class="pin"></span>
         <span class="bug">&lt;rt&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 振仮名 (ruby)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.17deg">
         <span class="pin"></span>
         <span class="bug">&lt;rp&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 振仮名 (ruby)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.85deg">
         <span class="pin"></span>
         <span class="bug">&lt;bdo&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.97deg">
         <span class="pin"></span>
         <span class="bug">&lt;bdi&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.95deg">
         <span class="pin"></span>
         <span class="bug">&lt;u&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.36deg">
         <span class="pin"></span>
         <span class="bug">&lt;i&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.99deg">
         <span class="pin"></span>
         <span class="bug">&lt;b&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       </div>
@@ -765,77 +764,77 @@
         <span class="pin"></span>
         <span class="bug">&lt;ul&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.76deg">
         <span class="pin"></span>
         <span class="bug">&lt;li&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 箇条 (list)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.49deg">
         <span class="pin"></span>
         <span class="bug">&lt;ol&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.02deg">
         <span class="pin"></span>
         <span class="bug">&lt;dl&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.50deg">
         <span class="pin"></span>
         <span class="bug">&lt;dt&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 定義 (dl)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.36deg">
         <span class="pin"></span>
         <span class="bug">&lt;dd&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 定義 (dl)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.43deg">
         <span class="pin"></span>
         <span class="bug">&lt;menu&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       </div>
@@ -847,110 +846,110 @@
         <span class="pin"></span>
         <span class="bug">&lt;table&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.98deg">
         <span class="pin"></span>
         <span class="bug">&lt;caption&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.21deg">
         <span class="pin"></span>
         <span class="bug">&lt;tr&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.48deg">
         <span class="pin"></span>
         <span class="bug">&lt;td&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.35deg">
         <span class="pin"></span>
         <span class="bug">&lt;th&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.22deg">
         <span class="pin"></span>
         <span class="bug">&lt;thead&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.28deg">
         <span class="pin"></span>
         <span class="bug">&lt;tbody&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.72deg">
         <span class="pin"></span>
         <span class="bug">&lt;tfoot&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.57deg">
         <span class="pin"></span>
         <span class="bug">&lt;colgroup&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.26deg">
         <span class="pin"></span>
         <span class="bug">&lt;col&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
             <span class="d">Hab. 表 (table)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       </div>
@@ -962,165 +961,165 @@
         <span class="pin"></span>
         <span class="bug">&lt;form&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:2.08deg">
         <span class="pin"></span>
         <span class="bug">&lt;input&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.33deg">
         <span class="pin"></span>
         <span class="bug">&lt;textarea&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;button&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.71deg">
         <span class="pin"></span>
         <span class="bug">&lt;select&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;option&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 選択肢 (select)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.97deg">
         <span class="pin"></span>
         <span class="bug">&lt;datalist&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.69deg">
         <span class="pin"></span>
         <span class="bug">&lt;progress&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.23deg">
         <span class="pin"></span>
         <span class="bug">&lt;meter&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.91deg">
         <span class="pin"></span>
         <span class="bug">&lt;output&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.32deg">
         <span class="pin"></span>
         <span class="bug">&lt;fieldset&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.15deg">
         <span class="pin"></span>
         <span class="bug">&lt;legend&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 区画 (fieldset)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.49deg">
         <span class="pin"></span>
         <span class="bug">&lt;label&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.83deg">
         <span class="pin"></span>
         <span class="bug">&lt;optgroup&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 選択肢 (select)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.85deg">
         <span class="pin"></span>
         <span class="bug">&lt;search&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Formularia</i></span>
             <span class="d">Hab. 書式 (form)</span>
+            <span class="det"><i>spec. recens</i></span>
           </span>
-          <span class="lbl det"><i>spec. recens</i></span>
         </span>
       </figure>
       </div>
@@ -1132,143 +1131,143 @@
         <span class="pin"></span>
         <span class="bug">&lt;img&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.96deg">
         <span class="pin"></span>
         <span class="bug">&lt;picture&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-2.18deg">
         <span class="pin"></span>
         <span class="bug">&lt;source&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 媒体 (audio/video)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.82deg">
         <span class="pin"></span>
         <span class="bug">&lt;audio&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.77deg">
         <span class="pin"></span>
         <span class="bug">&lt;video&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.03deg">
         <span class="pin"></span>
         <span class="bug">&lt;track&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 媒体 (audio/video)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.85deg">
         <span class="pin"></span>
         <span class="bug">&lt;iframe&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.47deg">
         <span class="pin"></span>
         <span class="bug">&lt;svg&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.54deg">
         <span class="pin"></span>
         <span class="bug">&lt;map&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.66deg">
         <span class="pin"></span>
         <span class="bug">&lt;area&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 地図 (map)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;object&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.13deg">
         <span class="pin"></span>
         <span class="bug">&lt;embed&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.37deg">
         <span class="pin"></span>
         <span class="bug">&lt;canvas&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Medialia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       </div>
@@ -1280,33 +1279,33 @@
         <span class="pin"></span>
         <span class="bug">&lt;details&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Interactiva</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.70deg">
         <span class="pin"></span>
         <span class="bug">&lt;summary&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Interactiva</i></span>
             <span class="d">Hab. 折畳 (details)</span>
+            <span class="det"><i>spec. nova</i></span>
           </span>
-          <span class="lbl det"><i>spec. nova</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.93deg">
         <span class="pin"></span>
         <span class="bug">&lt;dialog&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Interactiva</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. recens</i></span>
           </span>
-          <span class="lbl det"><i>spec. recens</i></span>
         </span>
       </figure>
       </div>
@@ -1318,121 +1317,121 @@
         <span class="pin"></span>
         <span class="bug">&lt;title&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-1.69deg">
         <span class="pin"></span>
         <span class="bug">&lt;meta&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.09deg">
         <span class="pin"></span>
         <span class="bug">&lt;noscript&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;template&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. recens</i></span>
           </span>
-          <span class="lbl det"><i>spec. recens</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.88deg">
         <span class="pin"></span>
         <span class="bug">&lt;base&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.22deg">
         <span class="pin"></span>
         <span class="bug">&lt;head&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.16deg">
         <span class="pin"></span>
         <span class="bug">&lt;body&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 体部 (body)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.48deg">
         <span class="pin"></span>
         <span class="bug">&lt;link&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:0.50deg">
         <span class="pin"></span>
         <span class="bug">&lt;style&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:-0.88deg">
         <span class="pin"></span>
         <span class="bug">&lt;script&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 頭部 (head)</span>
+            <span class="det"><i>spec. classica</i></span>
           </span>
-          <span class="lbl det"><i>spec. classica</i></span>
         </span>
       </figure>
       <figure class="specimen" style="--r:1.90deg">
         <span class="pin"></span>
         <span class="bug">&lt;slot&gt;</span>
         <span class="card">
-          <span class="lbl loc">
+          <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
             <span class="d">Hab. 影 (shadow DOM)</span>
+            <span class="det"><i>spec. recens</i></span>
           </span>
-          <span class="lbl det"><i>spec. recens</i></span>
         </span>
       </figure>
       </div>
