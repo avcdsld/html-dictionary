@@ -270,17 +270,17 @@ ${bugs}
     padding-top:15px; transition:transform .18s ease;
     transform:rotate(var(--r,0deg)); transform-origin:50% 6px; }
   .specimen:hover { transform:rotate(var(--r,0deg)) translateY(-4px); z-index:4; }
-  /* 真鍮の虫ピン: 光沢のある頭 + シャフト */
-  .pin { position:absolute; top:0; left:50%; width:11px; height:11px; margin-left:-5.5px;
+  /* 真鍮の虫ピン: 細い真鍮ビーズの頭 */
+  .pin { position:absolute; top:0; left:50%; width:7px; height:7px; margin-left:-3.5px;
     border-radius:50%;
-    background:radial-gradient(circle at 33% 27%, #fff4cf 0 8%, #e6c570 27%, #ab8232 62%, #5e3f12 100%);
-    box-shadow:2px 3px 4px rgba(0,0,0,.5), inset 0 -1.5px 2px rgba(60,35,5,.5), inset 0 1px 1px rgba(255,240,190,.8);
-    z-index:5; }
-  /* 真鍮ピンの軸: 標本とラベルを串刺しに貫く（隙間からのぞく） */
-  .specimen::before { content:""; position:absolute; top:8px; left:50%; width:2px;
-    height:calc(100% - 8px); margin-left:-1px;
-    background:linear-gradient(90deg,#edd596 0%,#bd9344 42%,#7d5a1f 62%,#46300f 100%);
-    box-shadow:2px 1px 2.5px rgba(0,0,0,.3); border-radius:0 0 1px 1px; z-index:0; }
+    background:radial-gradient(circle at 35% 28%, #fff6d6 0 16%, #e9c977 40%, #ab8232 72%, #573a10 100%);
+    box-shadow:1px 1.5px 2.5px rgba(0,0,0,.5), inset 0 -1px 1.5px rgba(60,35,5,.55), inset 0 .5px 1px rgba(255,242,196,.9);
+    z-index:6; }
+  /* 真鍮ピンの軸: 頭から一本でまっすぐ下り、体とラベルの両方を貫く */
+  .specimen::before { content:""; position:absolute; top:5px; left:50%; width:1.8px;
+    height:calc(100% - 5px); margin-left:-.9px;
+    background:linear-gradient(90deg,#f3dc9c 0%,#cda04c 40%,#8a6526 64%,#46300f 100%);
+    box-shadow:1.4px 0 2px rgba(0,0,0,.32); z-index:0; }
   /* 標本そのもの（虫の体）: 艶を抑えたマットな暗色の名札。紙ラベルと素材で対比。タグ名は箔押し風 */
   .bug { position:relative; z-index:3; margin-top:15px;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
@@ -293,6 +293,12 @@ ${bugs}
       inset 0 1px 0 rgba(255,230,180,.12),
       inset 0 -1px 2px rgba(0,0,0,.5);
     white-space:nowrap; text-align:center; }
+  /* ピンが体の上端を貫く点: 真鍮の光沢＋くぼみの影 */
+  .bug::before { content:""; position:absolute; top:-1px; left:50%; width:4px; height:4px; margin-left:-2px;
+    border-radius:50%;
+    background:radial-gradient(circle at 50% 32%, #ffe9b0 0 22%, #b78a3c 60%, #3c2708 100%);
+    box-shadow:0 -1px 1.5px rgba(0,0,0,.55), inset 0 -.5px 1px rgba(0,0,0,.5);
+    z-index:4; }
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
     gap:6px; margin-top:14px; line-height:1.5; letter-spacing:.02em; }
@@ -305,10 +311,10 @@ ${bugs}
       linear-gradient(160deg,#f4e8ca,#e7d5ad);
     border:.5px solid rgba(120,85,40,.42); border-radius:2px; padding:4px 7px; min-width:96px;
     box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 0 0 9px rgba(140,100,55,.2); }
-  /* ピン穴 */
-  .lbl::before { content:""; position:absolute; top:2px; left:50%; width:3px; height:3px; margin-left:-1.5px;
-    border-radius:50%; background:radial-gradient(circle at 50% 35%, #2a1a0a, #6a4a22);
-    box-shadow:0 0 0 1px rgba(120,80,40,.22), inset 0 0 1px #000; }
+  /* ピンがラベルの上端を貫く穴: 紙が破れて軸が入る */
+  .lbl::before { content:""; position:absolute; top:-1.5px; left:50%; width:3.4px; height:3.4px; margin-left:-1.7px;
+    border-radius:50%; background:radial-gradient(circle at 50% 32%, #1b0f05, #6a4a22);
+    box-shadow:0 0 0 .5px rgba(120,80,40,.35), inset 0 0 1px #000; z-index:3; }
   .lbl { transform:rotate(-.6deg); }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
