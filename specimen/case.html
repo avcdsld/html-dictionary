@@ -53,6 +53,10 @@
       radial-gradient(120% 80% at 50% -12%, rgba(255,208,138,.15), transparent 55%),
       radial-gradient(130% 70% at 82% 6%, rgba(255,255,255,.10), transparent 42%),
       radial-gradient(80% 120% at -5% 110%, rgba(120,150,125,.09), transparent 55%); }
+  /* フィルムの粒状感: 全体に微細なノイズを乗せ「ベクター塗り」感を消す */
+  .grain { position:absolute; inset:0; pointer-events:none; z-index:8;
+    mix-blend-mode:overlay; opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E"); }
   .drawer { margin:0 0 26px; }
   .drawer:last-child { margin-bottom:0; }
   .order { display:flex; align-items:baseline; gap:.7em; margin:0 0 12px;
@@ -74,11 +78,11 @@
     background:radial-gradient(120% 135% at 38% 16%, #fff6d6 0 18%, #eccd7e 42%, #a87f30 76%, #4e3410 100%);
     box-shadow:1px 1.5px 2.5px rgba(0,0,0,.5), inset 0 -1.5px 1.5px rgba(60,35,5,.6), inset 0 1px 1px rgba(255,242,196,.95);
     z-index:6; }
-  /* 真鍮ピンの軸: 頭から一本でまっすぐ下り、体とラベルの両方を貫く */
-  .specimen::before { content:""; position:absolute; top:5px; left:50%; width:1.8px;
-    height:calc(100% - 5px); margin-left:-.9px;
-    background:linear-gradient(90deg,#f3dc9c 0%,#cda04c 40%,#8a6526 64%,#46300f 100%);
-    box-shadow:1.4px 0 2px rgba(0,0,0,.32); z-index:0; }
+  /* 真鍮ピンの軸: 金属の鏡面ハイライトを持つ細い丸棒 */
+  .specimen::before { content:""; position:absolute; top:5px; left:50%; width:1.7px;
+    height:calc(100% - 5px); margin-left:-.85px;
+    background:linear-gradient(90deg,#2c1d0b 0%,#9c7733 22%,#f4e3b4 47%,#a17c34 70%,#3d2a10 100%);
+    box-shadow:1.1px 0 1.6px rgba(0,0,0,.32); z-index:0; }
   /* 標本そのもの（虫の体）: 艶を抑えたマットな暗色の名札。紙ラベルと素材で対比。タグ名は箔押し風 */
   .bug { position:relative; z-index:3; margin-top:11px;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.88rem; letter-spacing:.01em;
@@ -91,18 +95,15 @@
       inset 0 1px 0 rgba(255,230,180,.12),
       inset 0 -1px 2px rgba(0,0,0,.5);
     white-space:nowrap; text-align:center; }
-  /* ピンが体を貫く穴: 殻のくぼみ（縁の照り＋窪み＋上に殻のリップ） */
-  .bug::before { content:""; position:absolute; top:2.5px; left:50%; width:5.5px; height:3.6px; margin-left:-2.75px;
+  /* ピンが沈む所の影だけ（穴は描かない） */
+  .bug::before { content:""; position:absolute; top:3px; left:50%; width:6px; height:3.5px; margin-left:-3px;
     border-radius:50%;
-    background:
-      radial-gradient(85% 70% at 50% 88%, rgba(255,228,170,.85) 0 24%, transparent 58%),
-      radial-gradient(circle at 50% 42%, #000 0 52%, rgba(0,0,0,.5) 84%, transparent);
-    box-shadow:inset 0 1.6px 1.6px rgba(0,0,0,.95), 0 1.4px 1.2px rgba(0,0,0,.6), 0 -.6px .4px rgba(255,228,175,.35);
-    z-index:5; }
-  /* 上から穴へ入っていく真鍮の軸（前面の短い区間） */
-  .bug::after { content:""; position:absolute; top:-7px; left:50%; width:1.8px; height:9px; margin-left:-.9px;
-    background:linear-gradient(90deg,#f3dc9c,#cda04c 44%,#8a6526 66%,#46300f);
-    box-shadow:1px 0 1.5px rgba(0,0,0,.3); border-radius:1px 1px 0 0; z-index:4; }
+    background:radial-gradient(closest-side, rgba(0,0,0,.6), rgba(0,0,0,.25) 60%, transparent 100%);
+    filter:blur(.6px); z-index:3; }
+  /* 体に入っていく真鍮軸（前面の短い区間）＋その落ち影 */
+  .bug::after { content:""; position:absolute; top:-8px; left:50%; width:1.7px; height:10px; margin-left:-.85px;
+    background:linear-gradient(90deg,#2c1d0b,#9c7733 22%,#f4e3b4 47%,#a17c34 70%,#3d2a10);
+    box-shadow:1.4px 1px 2px rgba(0,0,0,.45); z-index:4; }
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
     gap:6px; margin-top:9px; line-height:1.5; letter-spacing:.02em; }
@@ -111,22 +112,18 @@
       radial-gradient(circle at 24% 68%, rgba(125,75,32,.17) 0 1.2px, transparent 1.7px) 4px 3px/19px 16px,
       radial-gradient(circle at 76% 30%, rgba(120,68,28,.13) 0 1px, transparent 1.5px) 11px 8px/23px 21px,
       radial-gradient(65% 80% at 82% 88%, rgba(120,80,40,.11), transparent 62%),
-      repeating-linear-gradient(0deg, rgba(110,80,40,.05) 0 1px, transparent 1px 3px),
       linear-gradient(160deg,#f4e8ca,#e7d5ad);
     border:.5px solid rgba(120,85,40,.42); border-radius:2px; padding:11px 8px 5px; min-width:96px;
     box-shadow:3px 6px 8px -5px rgba(40,26,10,.5), inset 0 0 9px rgba(140,100,55,.2); }
-  /* ピンがラベルを貫く穴: 上端から少し下、紙に空いた穴 */
-  .lbl::before { content:""; position:absolute; top:4px; left:50%; width:4px; height:4px; margin-left:-2px;
+  /* ピンが紙に沈む所の影だけ（穴は描かない） */
+  .lbl::before { content:""; position:absolute; top:6px; left:50%; width:5px; height:3px; margin-left:-2.5px;
     border-radius:50%;
-    background:
-      radial-gradient(72% 60% at 50% 74%, rgba(255,248,222,.7) 0 28%, transparent 58%),
-      radial-gradient(circle at 50% 40%, #120a03 0 48%, #5a3c1c 84%, #7a5226);
-    box-shadow:inset 0 1.4px 1.4px rgba(0,0,0,.85), 0 -1px 1px rgba(255,245,215,.5), 0 1.4px 1px rgba(120,80,40,.4);
-    z-index:5; }
-  /* ラベル上端から穴へ入っていく真鍮の軸（前面の短い区間） */
-  .lbl::after { content:""; position:absolute; top:-4px; left:50%; width:1.8px; height:10px; margin-left:-.9px;
-    background:linear-gradient(90deg,#f3dc9c,#cda04c 44%,#8a6526 66%,#46300f);
-    box-shadow:1px 0 1.5px rgba(0,0,0,.3); border-radius:1px 1px 0 0; z-index:4; }
+    background:radial-gradient(closest-side, rgba(48,28,8,.55), rgba(48,28,8,.2) 60%, transparent 100%);
+    filter:blur(.5px); z-index:3; }
+  /* 紙に入っていく真鍮軸（前面の短い区間）＋その落ち影 */
+  .lbl::after { content:""; position:absolute; top:-4px; left:50%; width:1.7px; height:11px; margin-left:-.85px;
+    background:linear-gradient(90deg,#2c1d0b,#9c7733 22%,#f4e3b4 47%,#a17c34 70%,#3d2a10);
+    box-shadow:1.6px 1px 2px rgba(0,0,0,.4); z-index:4; }
   .lbl { transform:rotate(-.6deg); transform-origin:50% 5px; }
   .card .g { display:block; font-style:italic; color:#3f2a17; font-size:.62rem; }
   .card .d { display:block; }
@@ -1453,6 +1450,7 @@
       </figure>
       </div>
     </section>
+      <span class="grain"></span>
     </div>
   </main>
 
