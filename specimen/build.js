@@ -197,7 +197,7 @@ function buildCase() {
     const ord = ORDER[k];
     const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen" data-tag="${s.tag}" style="${wob(tagStr(s.tag))}">
         <span class="pin"></span>
-        <span class="bug">${tagStr(s.tag)}</span>
+        <span class="bug">${tagStr(s.tag)}<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>${ord.la}</i></span>
@@ -433,6 +433,52 @@ ${bugs}
   .pv-acts button { font-family:inherit; font-size:.68rem; color:#5a3f25; background:rgba(120,85,40,.14);
     border:1px solid rgba(120,85,40,.35); border-radius:3px; padding:4px 10px; cursor:pointer; }
   .cross-tray.min .ct-chips, .cross-tray.min .ct-prov { display:none; }
+  .pv-memo { color:#3f2a17 !important; }
+
+  /* しおり（収蔵）: 朱の蔵印 */
+  .bug .seal { position:absolute; top:-5px; right:-5px; display:none; z-index:6;
+    width:13px; height:13px; line-height:13px; text-align:center; font-style:normal;
+    font-family:"Hiragino Mincho ProN",serif; font-size:8px; color:#fff;
+    background:radial-gradient(circle at 40% 32%, #c75a3c, #7e2414 78%); border-radius:50%;
+    box-shadow:0 1px 2px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,235,200,.3); }
+  .specimen.is-kept .bug .seal { display:block; }
+  body.dim-unkept .specimen:not(.is-kept) { opacity:.18; filter:saturate(.4); transition:opacity .2s; }
+
+  .loupe-card .lc-keep.is-on, .loupe-card .lc-print { background:linear-gradient(180deg,#7a5226,#4a3210); }
+  .loupe-card .lc-keep.is-on { background:linear-gradient(180deg,#a8442a,#6e2010); }
+
+  /* 収蔵バッジ（右上） */
+  .keep-badge[hidden] { display:none; }
+  .keep-badge { position:fixed; top:14px; right:16px; z-index:41; font-family:"Hiragino Mincho ProN",serif;
+    font-size:.74rem; color:#f3e9d2; background:linear-gradient(180deg,#6f4d31,#46301f);
+    border:1px solid #2c1c0d; border-radius:14px; padding:5px 12px; cursor:pointer;
+    box-shadow:0 6px 16px -8px rgba(0,0,0,.7); }
+  .keep-badge.active { background:linear-gradient(180deg,#a8442a,#6e2010); }
+  .keep-badge .kb-n { font-weight:700; }
+
+  /* トースト */
+  .toast { position:fixed; left:50%; bottom:84px; transform:translateX(-50%) translateY(8px);
+    z-index:60; background:rgba(30,20,10,.92); color:#f4ead6; font-family:"Hiragino Mincho ProN",serif;
+    font-size:.78rem; padding:8px 16px; border-radius:4px; border:1px solid rgba(200,170,120,.3);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* 単票の印刷 */
+  #printlabel[hidden] { display:none; }
+  #printlabel { position:fixed; inset:0; z-index:100; background:#fff; }
+  #printlabel .pcard { position:absolute; top:28mm; left:50%; transform:translateX(-50%);
+    width:54mm; border:1px dashed #999; border-radius:2px; padding:6mm 4mm; text-align:center;
+    display:flex; flex-direction:column; gap:1.1mm; font-family:"Hiragino Mincho ProN","Yu Mincho",serif; color:#222; }
+  #printlabel .pl-sp { font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:13pt; margin-bottom:1mm; }
+  #printlabel .pl-genus { font-size:8pt; color:#333; }
+  #printlabel .pl-loc, #printlabel .pl-det { font-size:7pt; color:#555; }
+  #printlabel .pl-det i { color:#7a2d22; }
+  #printlabel .pl-coll { margin-top:2mm; padding-top:1mm; border-top:.3pt solid #ccc; font-size:6pt; color:#888; letter-spacing:.04em; }
+  @media print {
+    body.printing > *:not(#printlabel) { display:none !important; }
+    body.printing #printlabel { display:block !important; }
+    @page { margin:12mm; }
+  }
 
   @media (max-width:560px) {
     .row { grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:26px 10px; }
@@ -480,7 +526,11 @@ ${drawers}
         <div class="lc-demo-live"></div>
         <details class="lc-demo-src"><summary>HTMLのソースを見る</summary><pre class="lc-demo-code"></pre></details>
       </section>
-      <div class="lc-actions"><button class="lc-cross">＋ 交配に加える</button></div>
+      <div class="lc-actions">
+        <button class="lc-cross">＋ 交配に加える</button>
+        <button class="lc-keep">🔖 収蔵する</button>
+        <button class="lc-print">🏷 ラベルを印刷</button>
+      </div>
     </article>
   </div>
 
@@ -495,6 +545,19 @@ ${drawers}
     <div class="ct-prov"></div>
   </aside>
 
+  <button id="keepBadge" class="keep-badge" hidden>🔖 収蔵 <span class="kb-n">0</span></button>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="printlabel" hidden>
+    <figure class="pcard">
+      <span class="pl-sp"></span>
+      <span class="pl-genus"></span>
+      <span class="pl-loc"></span>
+      <span class="pl-det"></span>
+      <span class="pl-coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+    </figure>
+  </div>
+
   <script>window.__DICT__=${dictJson};</script>
   <script>
   (function(){
@@ -508,9 +571,56 @@ ${drawers}
     try{ cross=JSON.parse(localStorage.getItem('htmldict.case.cross')||'[]'); }catch(e){}
     cross=cross.filter(function(t){ return byTag[t]; });
     function saveCross(){ try{ localStorage.setItem('htmldict.case.cross',JSON.stringify(cross)); }catch(e){} }
+    function deco(x){ return String(x).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'); }
+
+    // しおり（収蔵）
+    var kept=new Set();
+    try{ (JSON.parse(localStorage.getItem('htmldict.case.kept')||'[]')||[]).forEach(function(t){ if(byTag[t]) kept.add(t); }); }catch(e){}
+    function saveKept(){ try{ localStorage.setItem('htmldict.case.kept',JSON.stringify(Array.from(kept))); }catch(e){} }
 
     var loupe=document.getElementById('loupe');
     var tray=document.getElementById('cross');
+
+    // トースト
+    var toastEl=document.getElementById('toast');
+    function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(function(){ toastEl.classList.remove('show'); },1800); }
+
+    function markKept(){ document.querySelectorAll('.specimen').forEach(function(f){ f.classList.toggle('is-kept', kept.has(f.getAttribute('data-tag'))); }); }
+    function updateKeepBadge(){ var b=document.getElementById('keepBadge'); b.hidden=false; b.querySelector('.kb-n').textContent=kept.size; if(!kept.size){ document.body.classList.remove('dim-unkept'); b.classList.remove('active'); } }
+    function keepLabel(tag){ return kept.has(tag)?'◉ 収蔵済み（外す）':'🔖 収蔵する'; }
+    function toggleKeep(tag){ if(kept.has(tag)) kept.delete(tag); else kept.add(tag); saveKept(); markKept(); updateKeepBadge(); }
+
+    function printLabel(tag){
+      var s=byTag[tag]; if(!s) return;
+      var box=document.getElementById('printlabel');
+      box.querySelector('.pl-sp').innerHTML=s.display;
+      box.querySelector('.pl-genus').innerHTML='<i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa);
+      box.querySelector('.pl-loc').textContent='Hab. '+s.habJa;
+      box.querySelector('.pl-det').innerHTML='<i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'');
+      box.hidden=false; document.body.classList.add('printing'); window.print();
+    }
+    window.addEventListener('afterprint', function(){ var b=document.getElementById('printlabel'); if(b) b.hidden=true; document.body.classList.remove('printing'); });
+
+    function buildMemo(){
+      var L=['— HTML詩語辞典・交配メモ —',''];
+      if(lastProv){
+        L.push(lastProv.names.map(deco).join(' × '));
+        L.push('そのとき——「'+lastProv.strat+'」');
+        L.push('題材：〈'+lastProv.theme+'〉','');
+      }
+      L.push('［素材の標本］');
+      cross.forEach(function(t){ var s=byTag[t]; if(!s) return;
+        L.push('・'+deco(s.display)+'  '+s.summary);
+        if(s.spark) L.push('   けしかけ: '+s.spark);
+      });
+      return L.join('\\n');
+    }
+    function exportMemo(){
+      var text=buildMemo();
+      function fb(){ var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); var ok=false; try{ ok=document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); toast(ok?'交配メモをコピーしました':'コピーできませんでした'); }
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ toast('交配メモをコピーしました'); }, fb); }
+      else fb();
+    }
 
     function crossLabel(tag){ return cross.indexOf(tag)>=0 ? '◉ 交配中（外す）' : '＋ 交配に加える'; }
     function openLoupe(tag){
@@ -526,6 +636,10 @@ ${drawers}
       var cb=loupe.querySelector('.lc-cross');
       cb.textContent=crossLabel(tag); cb.classList.toggle('is-on', cross.indexOf(tag)>=0);
       cb.onclick=function(){ toggleCross(tag); cb.textContent=crossLabel(tag); cb.classList.toggle('is-on', cross.indexOf(tag)>=0); };
+      var kb=loupe.querySelector('.lc-keep');
+      kb.textContent=keepLabel(tag); kb.classList.toggle('is-on', kept.has(tag));
+      kb.onclick=function(){ toggleKeep(tag); kb.textContent=keepLabel(tag); kb.classList.toggle('is-on', kept.has(tag)); };
+      loupe.querySelector('.lc-print').onclick=function(){ printLabel(tag); };
       loupe.hidden=false; document.body.classList.add('loupe-open');
     }
     function closeLoupe(){ loupe.hidden=true; document.body.classList.remove('loupe-open'); }
@@ -565,8 +679,9 @@ ${drawers}
       var prov=tray.querySelector('.ct-prov');
       if(cross.length>=2){
         if(!lastProv || lastProv.key!==cross.join(',')) lastProv=provFor(cross);
-        prov.innerHTML=provHTML(lastProv)+'<div class="pv-acts"><button class="pv-redraw">引き直す</button><button class="pv-clear">空にする</button></div>';
+        prov.innerHTML=provHTML(lastProv)+'<div class="pv-acts"><button class="pv-redraw">引き直す</button><button class="pv-memo">メモへ書き出す</button><button class="pv-clear">空にする</button></div>';
         prov.querySelector('.pv-redraw').onclick=function(){ lastProv=provFor(cross); renderTray(); };
+        prov.querySelector('.pv-memo').onclick=exportMemo;
         prov.querySelector('.pv-clear').onclick=function(){ cross=[]; saveCross(); lastProv=null; renderTray(); };
       } else { prov.innerHTML=''; }
     }
@@ -578,10 +693,13 @@ ${drawers}
     tray.querySelector('.ct-seed').onclick=sowSeed;
     tray.querySelector('.ct-min').onclick=function(){ tray.classList.toggle('min'); };
 
+    var keepBadge=document.getElementById('keepBadge');
+    keepBadge.onclick=function(){ if(!kept.size){ toast('まだ収蔵した標本がありません'); return; } var on=document.body.classList.toggle('dim-unkept'); keepBadge.classList.toggle('active', on); };
+
     var hint=document.querySelector('.head-hint'); if(hint) hint.hidden=false;
     document.body.classList.add('js-on');
     if(!cross.length) tray.classList.add('min');
-    renderTray();
+    markKept(); updateKeepBadge(); renderTray();
   })();
   </script>
 </body>

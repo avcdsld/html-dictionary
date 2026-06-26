@@ -198,6 +198,52 @@
   .pv-acts button { font-family:inherit; font-size:.68rem; color:#5a3f25; background:rgba(120,85,40,.14);
     border:1px solid rgba(120,85,40,.35); border-radius:3px; padding:4px 10px; cursor:pointer; }
   .cross-tray.min .ct-chips, .cross-tray.min .ct-prov { display:none; }
+  .pv-memo { color:#3f2a17 !important; }
+
+  /* しおり（収蔵）: 朱の蔵印 */
+  .bug .seal { position:absolute; top:-5px; right:-5px; display:none; z-index:6;
+    width:13px; height:13px; line-height:13px; text-align:center; font-style:normal;
+    font-family:"Hiragino Mincho ProN",serif; font-size:8px; color:#fff;
+    background:radial-gradient(circle at 40% 32%, #c75a3c, #7e2414 78%); border-radius:50%;
+    box-shadow:0 1px 2px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,235,200,.3); }
+  .specimen.is-kept .bug .seal { display:block; }
+  body.dim-unkept .specimen:not(.is-kept) { opacity:.18; filter:saturate(.4); transition:opacity .2s; }
+
+  .loupe-card .lc-keep.is-on, .loupe-card .lc-print { background:linear-gradient(180deg,#7a5226,#4a3210); }
+  .loupe-card .lc-keep.is-on { background:linear-gradient(180deg,#a8442a,#6e2010); }
+
+  /* 収蔵バッジ（右上） */
+  .keep-badge[hidden] { display:none; }
+  .keep-badge { position:fixed; top:14px; right:16px; z-index:41; font-family:"Hiragino Mincho ProN",serif;
+    font-size:.74rem; color:#f3e9d2; background:linear-gradient(180deg,#6f4d31,#46301f);
+    border:1px solid #2c1c0d; border-radius:14px; padding:5px 12px; cursor:pointer;
+    box-shadow:0 6px 16px -8px rgba(0,0,0,.7); }
+  .keep-badge.active { background:linear-gradient(180deg,#a8442a,#6e2010); }
+  .keep-badge .kb-n { font-weight:700; }
+
+  /* トースト */
+  .toast { position:fixed; left:50%; bottom:84px; transform:translateX(-50%) translateY(8px);
+    z-index:60; background:rgba(30,20,10,.92); color:#f4ead6; font-family:"Hiragino Mincho ProN",serif;
+    font-size:.78rem; padding:8px 16px; border-radius:4px; border:1px solid rgba(200,170,120,.3);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; }
+  .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  /* 単票の印刷 */
+  #printlabel[hidden] { display:none; }
+  #printlabel { position:fixed; inset:0; z-index:100; background:#fff; }
+  #printlabel .pcard { position:absolute; top:28mm; left:50%; transform:translateX(-50%);
+    width:54mm; border:1px dashed #999; border-radius:2px; padding:6mm 4mm; text-align:center;
+    display:flex; flex-direction:column; gap:1.1mm; font-family:"Hiragino Mincho ProN","Yu Mincho",serif; color:#222; }
+  #printlabel .pl-sp { font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:13pt; margin-bottom:1mm; }
+  #printlabel .pl-genus { font-size:8pt; color:#333; }
+  #printlabel .pl-loc, #printlabel .pl-det { font-size:7pt; color:#555; }
+  #printlabel .pl-det i { color:#7a2d22; }
+  #printlabel .pl-coll { margin-top:2mm; padding-top:1mm; border-top:.3pt solid #ccc; font-size:6pt; color:#888; letter-spacing:.04em; }
+  @media print {
+    body.printing > *:not(#printlabel) { display:none !important; }
+    body.printing #printlabel { display:block !important; }
+    @page { margin:12mm; }
+  }
 
   @media (max-width:560px) {
     .row { grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:26px 10px; }
@@ -221,7 +267,7 @@
       <div class="row">
       <figure class="specimen" data-tag="html" style="--r:1.10deg">
         <span class="pin"></span>
-        <span class="bug">&lt;html&gt;</span>
+        <span class="bug">&lt;html&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -232,7 +278,7 @@
       </figure>
       <figure class="specimen" data-tag="header" style="--r:2.10deg">
         <span class="pin"></span>
-        <span class="bug">&lt;header&gt;</span>
+        <span class="bug">&lt;header&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -243,7 +289,7 @@
       </figure>
       <figure class="specimen" data-tag="footer" style="--r:1.07deg">
         <span class="pin"></span>
-        <span class="bug">&lt;footer&gt;</span>
+        <span class="bug">&lt;footer&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -254,7 +300,7 @@
       </figure>
       <figure class="specimen" data-tag="main" style="--r:-1.67deg">
         <span class="pin"></span>
-        <span class="bug">&lt;main&gt;</span>
+        <span class="bug">&lt;main&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -265,7 +311,7 @@
       </figure>
       <figure class="specimen" data-tag="section" style="--r:0.19deg">
         <span class="pin"></span>
-        <span class="bug">&lt;section&gt;</span>
+        <span class="bug">&lt;section&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -276,7 +322,7 @@
       </figure>
       <figure class="specimen" data-tag="article" style="--r:1.96deg">
         <span class="pin"></span>
-        <span class="bug">&lt;article&gt;</span>
+        <span class="bug">&lt;article&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -287,7 +333,7 @@
       </figure>
       <figure class="specimen" data-tag="aside" style="--r:-0.16deg">
         <span class="pin"></span>
-        <span class="bug">&lt;aside&gt;</span>
+        <span class="bug">&lt;aside&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -298,7 +344,7 @@
       </figure>
       <figure class="specimen" data-tag="nav" style="--r:-0.29deg">
         <span class="pin"></span>
-        <span class="bug">&lt;nav&gt;</span>
+        <span class="bug">&lt;nav&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -309,7 +355,7 @@
       </figure>
       <figure class="specimen" data-tag="h1" style="--r:-0.44deg">
         <span class="pin"></span>
-        <span class="bug">&lt;h1&gt;</span>
+        <span class="bug">&lt;h1&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -320,7 +366,7 @@
       </figure>
       <figure class="specimen" data-tag="h2" style="--r:1.77deg">
         <span class="pin"></span>
-        <span class="bug">&lt;h2&gt;</span>
+        <span class="bug">&lt;h2&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -331,7 +377,7 @@
       </figure>
       <figure class="specimen" data-tag="h3" style="--r:0.25deg">
         <span class="pin"></span>
-        <span class="bug">&lt;h3&gt;</span>
+        <span class="bug">&lt;h3&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -342,7 +388,7 @@
       </figure>
       <figure class="specimen" data-tag="h4" style="--r:-1.94deg">
         <span class="pin"></span>
-        <span class="bug">&lt;h4&gt;</span>
+        <span class="bug">&lt;h4&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -353,7 +399,7 @@
       </figure>
       <figure class="specimen" data-tag="h5" style="--r:0.35deg">
         <span class="pin"></span>
-        <span class="bug">&lt;h5&gt;</span>
+        <span class="bug">&lt;h5&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -364,7 +410,7 @@
       </figure>
       <figure class="specimen" data-tag="h6" style="--r:-0.11deg">
         <span class="pin"></span>
-        <span class="bug">&lt;h6&gt;</span>
+        <span class="bug">&lt;h6&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -375,7 +421,7 @@
       </figure>
       <figure class="specimen" data-tag="hgroup" style="--r:-0.95deg">
         <span class="pin"></span>
-        <span class="bug">&lt;hgroup&gt;</span>
+        <span class="bug">&lt;hgroup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -386,7 +432,7 @@
       </figure>
       <figure class="specimen" data-tag="address" style="--r:0.55deg">
         <span class="pin"></span>
-        <span class="bug">&lt;address&gt;</span>
+        <span class="bug">&lt;address&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -397,7 +443,7 @@
       </figure>
       <figure class="specimen" data-tag="div" style="--r:-1.61deg">
         <span class="pin"></span>
-        <span class="bug">&lt;div&gt;</span>
+        <span class="bug">&lt;div&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -408,7 +454,7 @@
       </figure>
       <figure class="specimen" data-tag="span" style="--r:-0.72deg">
         <span class="pin"></span>
-        <span class="bug">&lt;span&gt;</span>
+        <span class="bug">&lt;span&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Structuralia</i></span>
@@ -424,7 +470,7 @@
       <div class="row">
       <figure class="specimen" data-tag="p" style="--r:1.94deg">
         <span class="pin"></span>
-        <span class="bug">&lt;p&gt;</span>
+        <span class="bug">&lt;p&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -435,7 +481,7 @@
       </figure>
       <figure class="specimen" data-tag="br" style="--r:2.11deg">
         <span class="pin"></span>
-        <span class="bug">&lt;br&gt;</span>
+        <span class="bug">&lt;br&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -446,7 +492,7 @@
       </figure>
       <figure class="specimen" data-tag="wbr" style="--r:-0.95deg">
         <span class="pin"></span>
-        <span class="bug">&lt;wbr&gt;</span>
+        <span class="bug">&lt;wbr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -457,7 +503,7 @@
       </figure>
       <figure class="specimen" data-tag="hr" style="--r:-0.87deg">
         <span class="pin"></span>
-        <span class="bug">&lt;hr&gt;</span>
+        <span class="bug">&lt;hr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -468,7 +514,7 @@
       </figure>
       <figure class="specimen" data-tag="marquee" style="--r:-1.43deg">
         <span class="pin"></span>
-        <span class="bug">&lt;marquee&gt;</span>
+        <span class="bug">&lt;marquee&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -479,7 +525,7 @@
       </figure>
       <figure class="specimen" data-tag="pre" style="--r:0.73deg">
         <span class="pin"></span>
-        <span class="bug">&lt;pre&gt;</span>
+        <span class="bug">&lt;pre&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -490,7 +536,7 @@
       </figure>
       <figure class="specimen" data-tag="blockquote" style="--r:-0.71deg">
         <span class="pin"></span>
-        <span class="bug">&lt;blockquote&gt;</span>
+        <span class="bug">&lt;blockquote&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -501,7 +547,7 @@
       </figure>
       <figure class="specimen" data-tag="q" style="--r:-1.24deg">
         <span class="pin"></span>
-        <span class="bug">&lt;q&gt;</span>
+        <span class="bug">&lt;q&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -512,7 +558,7 @@
       </figure>
       <figure class="specimen" data-tag="figure" style="--r:-0.28deg">
         <span class="pin"></span>
-        <span class="bug">&lt;figure&gt;</span>
+        <span class="bug">&lt;figure&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -523,7 +569,7 @@
       </figure>
       <figure class="specimen" data-tag="figcaption" style="--r:-0.40deg">
         <span class="pin"></span>
-        <span class="bug">&lt;figcaption&gt;</span>
+        <span class="bug">&lt;figcaption&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Textualia</i></span>
@@ -539,7 +585,7 @@
       <div class="row">
       <figure class="specimen" data-tag="cite" style="--r:1.54deg">
         <span class="pin"></span>
-        <span class="bug">&lt;cite&gt;</span>
+        <span class="bug">&lt;cite&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -550,7 +596,7 @@
       </figure>
       <figure class="specimen" data-tag="a" style="--r:1.90deg">
         <span class="pin"></span>
-        <span class="bug">&lt;a&gt;</span>
+        <span class="bug">&lt;a&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -561,7 +607,7 @@
       </figure>
       <figure class="specimen" data-tag="em" style="--r:1.33deg">
         <span class="pin"></span>
-        <span class="bug">&lt;em&gt;</span>
+        <span class="bug">&lt;em&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -572,7 +618,7 @@
       </figure>
       <figure class="specimen" data-tag="strong" style="--r:0.29deg">
         <span class="pin"></span>
-        <span class="bug">&lt;strong&gt;</span>
+        <span class="bug">&lt;strong&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -583,7 +629,7 @@
       </figure>
       <figure class="specimen" data-tag="mark" style="--r:-0.51deg">
         <span class="pin"></span>
-        <span class="bug">&lt;mark&gt;</span>
+        <span class="bug">&lt;mark&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -594,7 +640,7 @@
       </figure>
       <figure class="specimen" data-tag="s" style="--r:-0.82deg">
         <span class="pin"></span>
-        <span class="bug">&lt;s&gt;</span>
+        <span class="bug">&lt;s&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -605,7 +651,7 @@
       </figure>
       <figure class="specimen" data-tag="del" style="--r:0.20deg">
         <span class="pin"></span>
-        <span class="bug">&lt;del&gt;</span>
+        <span class="bug">&lt;del&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -616,7 +662,7 @@
       </figure>
       <figure class="specimen" data-tag="ins" style="--r:2.13deg">
         <span class="pin"></span>
-        <span class="bug">&lt;ins&gt;</span>
+        <span class="bug">&lt;ins&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -627,7 +673,7 @@
       </figure>
       <figure class="specimen" data-tag="small" style="--r:1.93deg">
         <span class="pin"></span>
-        <span class="bug">&lt;small&gt;</span>
+        <span class="bug">&lt;small&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -638,7 +684,7 @@
       </figure>
       <figure class="specimen" data-tag="abbr" style="--r:-0.15deg">
         <span class="pin"></span>
-        <span class="bug">&lt;abbr&gt;</span>
+        <span class="bug">&lt;abbr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -649,7 +695,7 @@
       </figure>
       <figure class="specimen" data-tag="dfn" style="--r:-1.94deg">
         <span class="pin"></span>
-        <span class="bug">&lt;dfn&gt;</span>
+        <span class="bug">&lt;dfn&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -660,7 +706,7 @@
       </figure>
       <figure class="specimen" data-tag="code" style="--r:-1.30deg">
         <span class="pin"></span>
-        <span class="bug">&lt;code&gt;</span>
+        <span class="bug">&lt;code&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -671,7 +717,7 @@
       </figure>
       <figure class="specimen" data-tag="kbd" style="--r:1.07deg">
         <span class="pin"></span>
-        <span class="bug">&lt;kbd&gt;</span>
+        <span class="bug">&lt;kbd&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -682,7 +728,7 @@
       </figure>
       <figure class="specimen" data-tag="samp" style="--r:-2.09deg">
         <span class="pin"></span>
-        <span class="bug">&lt;samp&gt;</span>
+        <span class="bug">&lt;samp&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -693,7 +739,7 @@
       </figure>
       <figure class="specimen" data-tag="var" style="--r:1.24deg">
         <span class="pin"></span>
-        <span class="bug">&lt;var&gt;</span>
+        <span class="bug">&lt;var&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -704,7 +750,7 @@
       </figure>
       <figure class="specimen" data-tag="sub" style="--r:-2.09deg">
         <span class="pin"></span>
-        <span class="bug">&lt;sub&gt;</span>
+        <span class="bug">&lt;sub&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -715,7 +761,7 @@
       </figure>
       <figure class="specimen" data-tag="sup" style="--r:-0.74deg">
         <span class="pin"></span>
-        <span class="bug">&lt;sup&gt;</span>
+        <span class="bug">&lt;sup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -726,7 +772,7 @@
       </figure>
       <figure class="specimen" data-tag="time" style="--r:-0.79deg">
         <span class="pin"></span>
-        <span class="bug">&lt;time&gt;</span>
+        <span class="bug">&lt;time&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -737,7 +783,7 @@
       </figure>
       <figure class="specimen" data-tag="data" style="--r:1.46deg">
         <span class="pin"></span>
-        <span class="bug">&lt;data&gt;</span>
+        <span class="bug">&lt;data&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -748,7 +794,7 @@
       </figure>
       <figure class="specimen" data-tag="ruby" style="--r:-2.20deg">
         <span class="pin"></span>
-        <span class="bug">&lt;ruby&gt;</span>
+        <span class="bug">&lt;ruby&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -759,7 +805,7 @@
       </figure>
       <figure class="specimen" data-tag="rt" style="--r:-1.05deg">
         <span class="pin"></span>
-        <span class="bug">&lt;rt&gt;</span>
+        <span class="bug">&lt;rt&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -770,7 +816,7 @@
       </figure>
       <figure class="specimen" data-tag="rp" style="--r:0.17deg">
         <span class="pin"></span>
-        <span class="bug">&lt;rp&gt;</span>
+        <span class="bug">&lt;rp&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -781,7 +827,7 @@
       </figure>
       <figure class="specimen" data-tag="bdo" style="--r:-0.85deg">
         <span class="pin"></span>
-        <span class="bug">&lt;bdo&gt;</span>
+        <span class="bug">&lt;bdo&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -792,7 +838,7 @@
       </figure>
       <figure class="specimen" data-tag="bdi" style="--r:-1.97deg">
         <span class="pin"></span>
-        <span class="bug">&lt;bdi&gt;</span>
+        <span class="bug">&lt;bdi&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -803,7 +849,7 @@
       </figure>
       <figure class="specimen" data-tag="u" style="--r:1.95deg">
         <span class="pin"></span>
-        <span class="bug">&lt;u&gt;</span>
+        <span class="bug">&lt;u&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -814,7 +860,7 @@
       </figure>
       <figure class="specimen" data-tag="i" style="--r:-0.36deg">
         <span class="pin"></span>
-        <span class="bug">&lt;i&gt;</span>
+        <span class="bug">&lt;i&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -825,7 +871,7 @@
       </figure>
       <figure class="specimen" data-tag="b" style="--r:-0.99deg">
         <span class="pin"></span>
-        <span class="bug">&lt;b&gt;</span>
+        <span class="bug">&lt;b&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Phrasealia</i></span>
@@ -841,7 +887,7 @@
       <div class="row">
       <figure class="specimen" data-tag="ul" style="--r:-2.02deg">
         <span class="pin"></span>
-        <span class="bug">&lt;ul&gt;</span>
+        <span class="bug">&lt;ul&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -852,7 +898,7 @@
       </figure>
       <figure class="specimen" data-tag="li" style="--r:-1.76deg">
         <span class="pin"></span>
-        <span class="bug">&lt;li&gt;</span>
+        <span class="bug">&lt;li&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -863,7 +909,7 @@
       </figure>
       <figure class="specimen" data-tag="ol" style="--r:0.49deg">
         <span class="pin"></span>
-        <span class="bug">&lt;ol&gt;</span>
+        <span class="bug">&lt;ol&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -874,7 +920,7 @@
       </figure>
       <figure class="specimen" data-tag="dl" style="--r:0.02deg">
         <span class="pin"></span>
-        <span class="bug">&lt;dl&gt;</span>
+        <span class="bug">&lt;dl&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -885,7 +931,7 @@
       </figure>
       <figure class="specimen" data-tag="dt" style="--r:-1.50deg">
         <span class="pin"></span>
-        <span class="bug">&lt;dt&gt;</span>
+        <span class="bug">&lt;dt&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -896,7 +942,7 @@
       </figure>
       <figure class="specimen" data-tag="dd" style="--r:1.36deg">
         <span class="pin"></span>
-        <span class="bug">&lt;dd&gt;</span>
+        <span class="bug">&lt;dd&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -907,7 +953,7 @@
       </figure>
       <figure class="specimen" data-tag="menu" style="--r:-1.43deg">
         <span class="pin"></span>
-        <span class="bug">&lt;menu&gt;</span>
+        <span class="bug">&lt;menu&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Enumeralia</i></span>
@@ -923,7 +969,7 @@
       <div class="row">
       <figure class="specimen" data-tag="table" style="--r:1.41deg">
         <span class="pin"></span>
-        <span class="bug">&lt;table&gt;</span>
+        <span class="bug">&lt;table&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -934,7 +980,7 @@
       </figure>
       <figure class="specimen" data-tag="caption" style="--r:1.98deg">
         <span class="pin"></span>
-        <span class="bug">&lt;caption&gt;</span>
+        <span class="bug">&lt;caption&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -945,7 +991,7 @@
       </figure>
       <figure class="specimen" data-tag="tr" style="--r:-1.21deg">
         <span class="pin"></span>
-        <span class="bug">&lt;tr&gt;</span>
+        <span class="bug">&lt;tr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -956,7 +1002,7 @@
       </figure>
       <figure class="specimen" data-tag="td" style="--r:-0.48deg">
         <span class="pin"></span>
-        <span class="bug">&lt;td&gt;</span>
+        <span class="bug">&lt;td&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -967,7 +1013,7 @@
       </figure>
       <figure class="specimen" data-tag="th" style="--r:-0.35deg">
         <span class="pin"></span>
-        <span class="bug">&lt;th&gt;</span>
+        <span class="bug">&lt;th&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -978,7 +1024,7 @@
       </figure>
       <figure class="specimen" data-tag="thead" style="--r:-1.22deg">
         <span class="pin"></span>
-        <span class="bug">&lt;thead&gt;</span>
+        <span class="bug">&lt;thead&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -989,7 +1035,7 @@
       </figure>
       <figure class="specimen" data-tag="tbody" style="--r:-0.28deg">
         <span class="pin"></span>
-        <span class="bug">&lt;tbody&gt;</span>
+        <span class="bug">&lt;tbody&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -1000,7 +1046,7 @@
       </figure>
       <figure class="specimen" data-tag="tfoot" style="--r:0.72deg">
         <span class="pin"></span>
-        <span class="bug">&lt;tfoot&gt;</span>
+        <span class="bug">&lt;tfoot&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -1011,7 +1057,7 @@
       </figure>
       <figure class="specimen" data-tag="colgroup" style="--r:1.57deg">
         <span class="pin"></span>
-        <span class="bug">&lt;colgroup&gt;</span>
+        <span class="bug">&lt;colgroup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -1022,7 +1068,7 @@
       </figure>
       <figure class="specimen" data-tag="col" style="--r:1.26deg">
         <span class="pin"></span>
-        <span class="bug">&lt;col&gt;</span>
+        <span class="bug">&lt;col&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Tabularia</i></span>
@@ -1038,7 +1084,7 @@
       <div class="row">
       <figure class="specimen" data-tag="form" style="--r:0.29deg">
         <span class="pin"></span>
-        <span class="bug">&lt;form&gt;</span>
+        <span class="bug">&lt;form&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1049,7 +1095,7 @@
       </figure>
       <figure class="specimen" data-tag="input" style="--r:2.08deg">
         <span class="pin"></span>
-        <span class="bug">&lt;input&gt;</span>
+        <span class="bug">&lt;input&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1060,7 +1106,7 @@
       </figure>
       <figure class="specimen" data-tag="textarea" style="--r:-0.33deg">
         <span class="pin"></span>
-        <span class="bug">&lt;textarea&gt;</span>
+        <span class="bug">&lt;textarea&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1071,7 +1117,7 @@
       </figure>
       <figure class="specimen" data-tag="button" style="--r:1.07deg">
         <span class="pin"></span>
-        <span class="bug">&lt;button&gt;</span>
+        <span class="bug">&lt;button&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1082,7 +1128,7 @@
       </figure>
       <figure class="specimen" data-tag="select" style="--r:-1.71deg">
         <span class="pin"></span>
-        <span class="bug">&lt;select&gt;</span>
+        <span class="bug">&lt;select&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1093,7 +1139,7 @@
       </figure>
       <figure class="specimen" data-tag="option" style="--r:-0.07deg">
         <span class="pin"></span>
-        <span class="bug">&lt;option&gt;</span>
+        <span class="bug">&lt;option&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1104,7 +1150,7 @@
       </figure>
       <figure class="specimen" data-tag="datalist" style="--r:1.97deg">
         <span class="pin"></span>
-        <span class="bug">&lt;datalist&gt;</span>
+        <span class="bug">&lt;datalist&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1115,7 +1161,7 @@
       </figure>
       <figure class="specimen" data-tag="progress" style="--r:-0.69deg">
         <span class="pin"></span>
-        <span class="bug">&lt;progress&gt;</span>
+        <span class="bug">&lt;progress&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1126,7 +1172,7 @@
       </figure>
       <figure class="specimen" data-tag="meter" style="--r:0.23deg">
         <span class="pin"></span>
-        <span class="bug">&lt;meter&gt;</span>
+        <span class="bug">&lt;meter&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1137,7 +1183,7 @@
       </figure>
       <figure class="specimen" data-tag="output" style="--r:-1.91deg">
         <span class="pin"></span>
-        <span class="bug">&lt;output&gt;</span>
+        <span class="bug">&lt;output&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1148,7 +1194,7 @@
       </figure>
       <figure class="specimen" data-tag="fieldset" style="--r:0.32deg">
         <span class="pin"></span>
-        <span class="bug">&lt;fieldset&gt;</span>
+        <span class="bug">&lt;fieldset&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1159,7 +1205,7 @@
       </figure>
       <figure class="specimen" data-tag="legend" style="--r:1.15deg">
         <span class="pin"></span>
-        <span class="bug">&lt;legend&gt;</span>
+        <span class="bug">&lt;legend&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1170,7 +1216,7 @@
       </figure>
       <figure class="specimen" data-tag="label" style="--r:-1.49deg">
         <span class="pin"></span>
-        <span class="bug">&lt;label&gt;</span>
+        <span class="bug">&lt;label&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1181,7 +1227,7 @@
       </figure>
       <figure class="specimen" data-tag="optgroup" style="--r:-0.83deg">
         <span class="pin"></span>
-        <span class="bug">&lt;optgroup&gt;</span>
+        <span class="bug">&lt;optgroup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1192,7 +1238,7 @@
       </figure>
       <figure class="specimen" data-tag="search" style="--r:-1.85deg">
         <span class="pin"></span>
-        <span class="bug">&lt;search&gt;</span>
+        <span class="bug">&lt;search&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Formularia</i></span>
@@ -1208,7 +1254,7 @@
       <div class="row">
       <figure class="specimen" data-tag="img" style="--r:-0.99deg">
         <span class="pin"></span>
-        <span class="bug">&lt;img&gt;</span>
+        <span class="bug">&lt;img&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1219,7 +1265,7 @@
       </figure>
       <figure class="specimen" data-tag="picture" style="--r:1.96deg">
         <span class="pin"></span>
-        <span class="bug">&lt;picture&gt;</span>
+        <span class="bug">&lt;picture&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1230,7 +1276,7 @@
       </figure>
       <figure class="specimen" data-tag="source" style="--r:-2.18deg">
         <span class="pin"></span>
-        <span class="bug">&lt;source&gt;</span>
+        <span class="bug">&lt;source&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1241,7 +1287,7 @@
       </figure>
       <figure class="specimen" data-tag="audio" style="--r:0.82deg">
         <span class="pin"></span>
-        <span class="bug">&lt;audio&gt;</span>
+        <span class="bug">&lt;audio&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1252,7 +1298,7 @@
       </figure>
       <figure class="specimen" data-tag="video" style="--r:0.77deg">
         <span class="pin"></span>
-        <span class="bug">&lt;video&gt;</span>
+        <span class="bug">&lt;video&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1263,7 +1309,7 @@
       </figure>
       <figure class="specimen" data-tag="track" style="--r:0.03deg">
         <span class="pin"></span>
-        <span class="bug">&lt;track&gt;</span>
+        <span class="bug">&lt;track&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1274,7 +1320,7 @@
       </figure>
       <figure class="specimen" data-tag="iframe" style="--r:-1.85deg">
         <span class="pin"></span>
-        <span class="bug">&lt;iframe&gt;</span>
+        <span class="bug">&lt;iframe&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1285,7 +1331,7 @@
       </figure>
       <figure class="specimen" data-tag="svg" style="--r:-0.47deg">
         <span class="pin"></span>
-        <span class="bug">&lt;svg&gt;</span>
+        <span class="bug">&lt;svg&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1296,7 +1342,7 @@
       </figure>
       <figure class="specimen" data-tag="map" style="--r:0.54deg">
         <span class="pin"></span>
-        <span class="bug">&lt;map&gt;</span>
+        <span class="bug">&lt;map&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1307,7 +1353,7 @@
       </figure>
       <figure class="specimen" data-tag="area" style="--r:1.66deg">
         <span class="pin"></span>
-        <span class="bug">&lt;area&gt;</span>
+        <span class="bug">&lt;area&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1318,7 +1364,7 @@
       </figure>
       <figure class="specimen" data-tag="object" style="--r:-1.24deg">
         <span class="pin"></span>
-        <span class="bug">&lt;object&gt;</span>
+        <span class="bug">&lt;object&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1329,7 +1375,7 @@
       </figure>
       <figure class="specimen" data-tag="embed" style="--r:1.13deg">
         <span class="pin"></span>
-        <span class="bug">&lt;embed&gt;</span>
+        <span class="bug">&lt;embed&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1340,7 +1386,7 @@
       </figure>
       <figure class="specimen" data-tag="canvas" style="--r:1.37deg">
         <span class="pin"></span>
-        <span class="bug">&lt;canvas&gt;</span>
+        <span class="bug">&lt;canvas&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Medialia</i></span>
@@ -1356,7 +1402,7 @@
       <div class="row">
       <figure class="specimen" data-tag="details" style="--r:-0.33deg">
         <span class="pin"></span>
-        <span class="bug">&lt;details&gt;</span>
+        <span class="bug">&lt;details&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Interactiva</i></span>
@@ -1367,7 +1413,7 @@
       </figure>
       <figure class="specimen" data-tag="summary" style="--r:-0.70deg">
         <span class="pin"></span>
-        <span class="bug">&lt;summary&gt;</span>
+        <span class="bug">&lt;summary&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Interactiva</i></span>
@@ -1378,7 +1424,7 @@
       </figure>
       <figure class="specimen" data-tag="dialog" style="--r:0.93deg">
         <span class="pin"></span>
-        <span class="bug">&lt;dialog&gt;</span>
+        <span class="bug">&lt;dialog&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Interactiva</i></span>
@@ -1394,7 +1440,7 @@
       <div class="row">
       <figure class="specimen" data-tag="title" style="--r:1.45deg">
         <span class="pin"></span>
-        <span class="bug">&lt;title&gt;</span>
+        <span class="bug">&lt;title&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1405,7 +1451,7 @@
       </figure>
       <figure class="specimen" data-tag="meta" style="--r:-1.69deg">
         <span class="pin"></span>
-        <span class="bug">&lt;meta&gt;</span>
+        <span class="bug">&lt;meta&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1416,7 +1462,7 @@
       </figure>
       <figure class="specimen" data-tag="noscript" style="--r:1.09deg">
         <span class="pin"></span>
-        <span class="bug">&lt;noscript&gt;</span>
+        <span class="bug">&lt;noscript&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1427,7 +1473,7 @@
       </figure>
       <figure class="specimen" data-tag="template" style="--r:1.24deg">
         <span class="pin"></span>
-        <span class="bug">&lt;template&gt;</span>
+        <span class="bug">&lt;template&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1438,7 +1484,7 @@
       </figure>
       <figure class="specimen" data-tag="base" style="--r:0.88deg">
         <span class="pin"></span>
-        <span class="bug">&lt;base&gt;</span>
+        <span class="bug">&lt;base&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1449,7 +1495,7 @@
       </figure>
       <figure class="specimen" data-tag="head" style="--r:0.22deg">
         <span class="pin"></span>
-        <span class="bug">&lt;head&gt;</span>
+        <span class="bug">&lt;head&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1460,7 +1506,7 @@
       </figure>
       <figure class="specimen" data-tag="body" style="--r:1.16deg">
         <span class="pin"></span>
-        <span class="bug">&lt;body&gt;</span>
+        <span class="bug">&lt;body&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1471,7 +1517,7 @@
       </figure>
       <figure class="specimen" data-tag="link" style="--r:0.48deg">
         <span class="pin"></span>
-        <span class="bug">&lt;link&gt;</span>
+        <span class="bug">&lt;link&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1482,7 +1528,7 @@
       </figure>
       <figure class="specimen" data-tag="style" style="--r:0.50deg">
         <span class="pin"></span>
-        <span class="bug">&lt;style&gt;</span>
+        <span class="bug">&lt;style&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1493,7 +1539,7 @@
       </figure>
       <figure class="specimen" data-tag="script" style="--r:-0.88deg">
         <span class="pin"></span>
-        <span class="bug">&lt;script&gt;</span>
+        <span class="bug">&lt;script&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1504,7 +1550,7 @@
       </figure>
       <figure class="specimen" data-tag="slot" style="--r:1.90deg">
         <span class="pin"></span>
-        <span class="bug">&lt;slot&gt;</span>
+        <span class="bug">&lt;slot&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
           <span class="lbl">
             <span class="g"><i>Invisibilia</i></span>
@@ -1543,7 +1589,11 @@
         <div class="lc-demo-live"></div>
         <details class="lc-demo-src"><summary>HTMLのソースを見る</summary><pre class="lc-demo-code"></pre></details>
       </section>
-      <div class="lc-actions"><button class="lc-cross">＋ 交配に加える</button></div>
+      <div class="lc-actions">
+        <button class="lc-cross">＋ 交配に加える</button>
+        <button class="lc-keep">🔖 収蔵する</button>
+        <button class="lc-print">🏷 ラベルを印刷</button>
+      </div>
     </article>
   </div>
 
@@ -1558,6 +1608,19 @@
     <div class="ct-prov"></div>
   </aside>
 
+  <button id="keepBadge" class="keep-badge" hidden>🔖 収蔵 <span class="kb-n">0</span></button>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <div id="printlabel" hidden>
+    <figure class="pcard">
+      <span class="pl-sp"></span>
+      <span class="pl-genus"></span>
+      <span class="pl-loc"></span>
+      <span class="pl-det"></span>
+      <span class="pl-coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
+    </figure>
+  </div>
+
   <script>window.__DICT__={"specimens":[{"tag":"html","display":"&lt;html&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"文書ぜんたいを抱える、いちばん外側の器。","poetic":"すべての詩がこの中で起きる。lang 属性ひとつで、文書に『母語』を与えられる。lang=\"ja\" と書くだけで、この紙は日本語で考えはじめる。","spark":"lang を、ありえない言語コードにしてみる。あるいは、嘘の母語を宣言してみる。","demo":"\u003cp lang=\"ja\">この文書は、何語で夢を見るのだろう。\u003c/p>","note":"\u003chtml lang=\"…\"> は読み上げや約物の扱いに影響する。"},{"tag":"title","display":"&lt;title&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"ブラウザのタブやブックマークに出る、文書の名前。","poetic":"本文の外側にある、もう一つのキャンバス。読者はまずタブで詩を読む。ページを開く前から、詩は始まっている。","spark":"タイトルだけで完結する一行詩。本文は真っ白のまま、タブの中だけで物語を終わらせる。","demo":"\u003c!-- このページの &lt;title&gt; を見上げてごらん。タブに詩が住んでいる。 -->\n\u003cp>本文より先に、タブを読む人がいる。\u003c/p>","note":""},{"tag":"header","display":"&lt;header&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"冒頭と末尾。導入と署名のための、意味の枠。","poetic":"始まりと終わり。header は息を吸う場所、footer は息を吐く場所。中身がなくても、その『位置』だけで時間が流れる。","spark":"header と footer に同じ一行を置く。詩は円環になり、終わりが始まりに戻る。","demo":"\u003cheader>\u003cp>はじめに、沈黙があった。\u003c/p>\u003c/header>\n\u003cfooter>\u003cp>はじめに、沈黙があった。\u003c/p>\u003c/footer>","note":""},{"tag":"footer","display":"&lt;footer&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"冒頭と末尾。導入と署名のための、意味の枠。","poetic":"始まりと終わり。header は息を吸う場所、footer は息を吐く場所。中身がなくても、その『位置』だけで時間が流れる。","spark":"header と footer に同じ一行を置く。詩は円環になり、終わりが始まりに戻る。","demo":"\u003cheader>\u003cp>はじめに、沈黙があった。\u003c/p>\u003c/header>\n\u003cfooter>\u003cp>はじめに、沈黙があった。\u003c/p>\u003c/footer>","note":""},{"tag":"main","display":"&lt;main&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"文書のいちばん大事な、中心の内容。","poetic":"『ここが主役だ』と宣言する要素。一文書にひとつだけ。何を main にするかは、何を詩の中心にするかと同じ問い。","spark":"あえて、空白や余白を \u003cmain> で囲ってみる。中心に『無』を据える。","demo":"\u003cmain>\u003cp>　\u003c/p>\u003c/main>\n\u003caside>\u003cp>（すべては、この余白の周りで起きている）\u003c/p>\u003c/aside>","note":""},{"tag":"section","display":"&lt;section&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"意味のまとまり。article は単独で完結する一片。","poetic":"連や段落より大きな、意味の部屋。article は切り取って持ち運べる一篇。section は、章。","spark":"同じ article を繰り返し並べる。少しずつ言葉を変えながら、変奏曲のように。","demo":"\u003carticle>\u003cp>朝。窓を開ける。\u003c/p>\u003c/article>\n\u003carticle>\u003cp>朝。窓を、まだ開けない。\u003c/p>\u003c/article>","note":""},{"tag":"article","display":"&lt;article&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"意味のまとまり。article は単独で完結する一片。","poetic":"連や段落より大きな、意味の部屋。article は切り取って持ち運べる一篇。section は、章。","spark":"同じ article を繰り返し並べる。少しずつ言葉を変えながら、変奏曲のように。","demo":"\u003carticle>\u003cp>朝。窓を開ける。\u003c/p>\u003c/article>\n\u003carticle>\u003cp>朝。窓を、まだ開けない。\u003c/p>\u003c/article>","note":""},{"tag":"aside","display":"&lt;aside&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"本筋から少し外れた、傍らの内容（余談・補足・脇の声）。","poetic":"本文のかたわらにある、もうひとつの声。脚注、余白の書き込み、心の傍白。主役ではないからこそ言える本音を、そっと脇に置ける。","spark":"main に建前を、aside に本音を流す。読者は、どちらを「本当」と取るだろう。","demo":"\u003cp>きょうは、よく晴れていました。\u003c/p>\n\u003caside>\u003cp>（本当は、一日じゅう雨が降ればいいと思っていた）\u003c/p>\u003c/aside>","note":""},{"tag":"nav","display":"&lt;nav&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"他の場所への道しるべ（リンクの集まり）。","poetic":"『行き先』そのものを意味として扱える。リンク先のないナビゲーション、どこにも行けない案内板は、それ自体が詩になる。","spark":"実在しない場所への目次を作る。『#忘れた約束』『#まだない明日』へのリンク。","demo":"\u003cnav>\n  \u003ca href=\"#kinou\">きのう\u003c/a> ／\n  \u003ca href=\"#asu\">あす\u003c/a> ／\n  \u003ca href=\"#nai\">どこでもない場所\u003c/a>\n\u003c/nav>","note":""},{"tag":"h1","display":"&lt;h1&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"見出し。h1 がいちばん大きく、h6 がいちばん小さい。","poetic":"声の大きさの階段。同じ言葉を h1 から h6 へ降りていくと、叫びが囁きへと細っていく。文字の大きさで、距離や時間を描ける。","spark":"ひとつの言葉を h1→h6 と並べる。遠ざかる足音、消えていく名前。","demo":"\u003ch1>わすれない\u003c/h1>\n\u003ch2>わすれない\u003c/h2>\n\u003ch3>わすれない\u003c/h3>\n\u003ch4>わすれない\u003c/h4>\n\u003ch5>わすれない\u003c/h5>\n\u003ch6>わすれ…\u003c/h6>","note":""},{"tag":"h2","display":"&lt;h2&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"見出し。h1 がいちばん大きく、h6 がいちばん小さい。","poetic":"声の大きさの階段。同じ言葉を h1 から h6 へ降りていくと、叫びが囁きへと細っていく。文字の大きさで、距離や時間を描ける。","spark":"ひとつの言葉を h1→h6 と並べる。遠ざかる足音、消えていく名前。","demo":"\u003ch1>わすれない\u003c/h1>\n\u003ch2>わすれない\u003c/h2>\n\u003ch3>わすれない\u003c/h3>\n\u003ch4>わすれない\u003c/h4>\n\u003ch5>わすれない\u003c/h5>\n\u003ch6>わすれ…\u003c/h6>","note":""},{"tag":"h3","display":"&lt;h3&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"見出し。h1 がいちばん大きく、h6 がいちばん小さい。","poetic":"声の大きさの階段。同じ言葉を h1 から h6 へ降りていくと、叫びが囁きへと細っていく。文字の大きさで、距離や時間を描ける。","spark":"ひとつの言葉を h1→h6 と並べる。遠ざかる足音、消えていく名前。","demo":"\u003ch1>わすれない\u003c/h1>\n\u003ch2>わすれない\u003c/h2>\n\u003ch3>わすれない\u003c/h3>\n\u003ch4>わすれない\u003c/h4>\n\u003ch5>わすれない\u003c/h5>\n\u003ch6>わすれ…\u003c/h6>","note":""},{"tag":"h4","display":"&lt;h4&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"見出し。h1 がいちばん大きく、h6 がいちばん小さい。","poetic":"声の大きさの階段。同じ言葉を h1 から h6 へ降りていくと、叫びが囁きへと細っていく。文字の大きさで、距離や時間を描ける。","spark":"ひとつの言葉を h1→h6 と並べる。遠ざかる足音、消えていく名前。","demo":"\u003ch1>わすれない\u003c/h1>\n\u003ch2>わすれない\u003c/h2>\n\u003ch3>わすれない\u003c/h3>\n\u003ch4>わすれない\u003c/h4>\n\u003ch5>わすれない\u003c/h5>\n\u003ch6>わすれ…\u003c/h6>","note":""},{"tag":"h5","display":"&lt;h5&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"見出し。h1 がいちばん大きく、h6 がいちばん小さい。","poetic":"声の大きさの階段。同じ言葉を h1 から h6 へ降りていくと、叫びが囁きへと細っていく。文字の大きさで、距離や時間を描ける。","spark":"ひとつの言葉を h1→h6 と並べる。遠ざかる足音、消えていく名前。","demo":"\u003ch1>わすれない\u003c/h1>\n\u003ch2>わすれない\u003c/h2>\n\u003ch3>わすれない\u003c/h3>\n\u003ch4>わすれない\u003c/h4>\n\u003ch5>わすれない\u003c/h5>\n\u003ch6>わすれ…\u003c/h6>","note":""},{"tag":"h6","display":"&lt;h6&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"見出し。h1 がいちばん大きく、h6 がいちばん小さい。","poetic":"声の大きさの階段。同じ言葉を h1 から h6 へ降りていくと、叫びが囁きへと細っていく。文字の大きさで、距離や時間を描ける。","spark":"ひとつの言葉を h1→h6 と並べる。遠ざかる足音、消えていく名前。","demo":"\u003ch1>わすれない\u003c/h1>\n\u003ch2>わすれない\u003c/h2>\n\u003ch3>わすれない\u003c/h3>\n\u003ch4>わすれない\u003c/h4>\n\u003ch5>わすれない\u003c/h5>\n\u003ch6>わすれ…\u003c/h6>","note":""},{"tag":"hgroup","display":"&lt;hgroup&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"見出しと、その副題をひとまとめにする。","poetic":"題と、副題。大きな声と、それに寄り添う小さな声。表題詩の構造そのもの。","spark":"副題で、表題を裏切る。『春／ただし、誰もいない』。","demo":"\u003chgroup>\n  \u003ch1>春\u003c/h1>\n  \u003cp>ただし、誰もいない\u003c/p>\n\u003c/hgroup>","note":""},{"tag":"address","display":"&lt;address&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"連絡先や差出人を示す。","poetic":"『誰から』を刻む要素。手紙の、宛名のない差出人欄。届かない手紙の住所を書ける。","spark":"宛先も連絡先も書かず、\u003caddress> の中に感情だけを置く。","demo":"\u003caddress>\n  さみしさ より\u003cbr>\n  返信は、いりません\n\u003c/address>","note":""},{"tag":"div","display":"&lt;div&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"意味を持たない、ただの容れもの（ブロックとインライン）。","poetic":"何の意味も持たないことが、逆に自由。名前のない器。CSSなしでは見た目も変わらない——だからこそ、純粋な『区切り』としてだけ存在する。","spark":"意味のないものに意味のある名前を付ける。\u003cdiv title=\"心臓\"> の中に、何も入れない。","demo":"\u003cspan>言葉と\u003c/span>\u003cspan>言葉のあいだに\u003c/span>\u003cspan>、見えない継ぎ目がある。\u003c/span>","note":""},{"tag":"span","display":"&lt;span&gt;","orderLa":"Structuralia","orderJa":"構造目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"意味を持たない、ただの容れもの（ブロックとインライン）。","poetic":"何の意味も持たないことが、逆に自由。名前のない器。CSSなしでは見た目も変わらない——だからこそ、純粋な『区切り』としてだけ存在する。","spark":"意味のないものに意味のある名前を付ける。\u003cdiv title=\"心臓\"> の中に、何も入れない。","demo":"\u003cspan>言葉と\u003c/span>\u003cspan>言葉のあいだに\u003c/span>\u003cspan>、見えない継ぎ目がある。\u003c/span>","note":""},{"tag":"p","display":"&lt;p&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"段落。文章のいちばん基本的なまとまり。","poetic":"もっとも素朴な、もっとも強い器。一行を \u003cp> で囲むだけで、それは『ひとまとまりの息』になる。詩のいちばんの友。","spark":"空の \u003cp>\u003c/p> をいくつも並べる。沈黙の段落、語られなかった連。","demo":"\u003cp>ここに、ひとつの息がある。\u003c/p>\n\u003cp>\u003c/p>\n\u003cp>\u003c/p>\n\u003cp>ここに、もうひとつ。\u003c/p>","note":""},{"tag":"br","display":"&lt;br&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"br は強制改行。wbr は『折り返してよい』という見えない印。","poetic":"br は息継ぎ、行分け、断ち切り。詩でいちばん使う一打。wbr は目に見えない——画面が狭いときだけ、そこで折れる。誰も気づかない関節。","spark":"ひとつの長い単語の中に \u003cwbr> を仕込む。読者の画面の幅しだいで、言葉が割れる場所が変わる。","demo":"\u003cp>さよ\u003cwbr>うな\u003cwbr>らを、ど\u003cwbr>こで折る?\u003c/p>\n\u003cp>夜が\u003cbr>明けない\u003cbr>うちに\u003c/p>","note":""},{"tag":"wbr","display":"&lt;wbr&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"br は強制改行。wbr は『折り返してよい』という見えない印。","poetic":"br は息継ぎ、行分け、断ち切り。詩でいちばん使う一打。wbr は目に見えない——画面が狭いときだけ、そこで折れる。誰も気づかない関節。","spark":"ひとつの長い単語の中に \u003cwbr> を仕込む。読者の画面の幅しだいで、言葉が割れる場所が変わる。","demo":"\u003cp>さよ\u003cwbr>うな\u003cwbr>らを、ど\u003cwbr>こで折る?\u003c/p>\n\u003cp>夜が\u003cbr>明けない\u003cbr>うちに\u003c/p>","note":""},{"tag":"hr","display":"&lt;hr&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"意味の切れ目を示す、横の罫線。","poetic":"場面の転換。間（ま）。一本の線が、前と後を別の時間にする。詩でいう『一字下げ』や、連と連のあいだの白。","spark":"本文をほとんど書かず、\u003chr> だけを何本も。線の間隔だけで呼吸を描く。","demo":"\u003cp>会った。\u003c/p>\n\u003chr>\n\u003cp>別れた。\u003c/p>\n\u003chr>\n\u003chr>\n\u003cp>思い出した。\u003c/p>","note":""},{"tag":"marquee","display":"&lt;marquee&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. relicta","statusJa":"絶滅危惧種","dagger":true,"summary":"中の文字を、ひとりでに流れさせる（公式には廃止された、けれど今も動く古い要素）。","poetic":"純HTMLだけで「動き」を生む、数少ない魔法。CSSもJSも無しに、文字が勝手に流れ、往復し、立ちのぼる。仕様上は廃止されたのに、多くのブラウザでまだ生きている——亡霊のように動きつづける言葉。behavior=\"alternate\" で往復、direction=\"up\" で上昇。","spark":"一行を、ゆっくり永遠に流しつづける。あるいは behavior=\"alternate\" で行ったり来たり——決められない心のように。","demo":"\u003cmarquee>　この言葉は、止まることを知りません。どこへ行くのかも、知らないまま。　\u003c/marquee>\n\u003cmarquee behavior=\"alternate\">行こうか、戻ろうか。\u003c/marquee>","note":"公式には廃止(deprecated)。だが主要ブラウザで今も動作し、CSS/JSなしに動きを得られる、古くて貴重な手段。"},{"tag":"pre","display":"&lt;pre&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"書いたとおりの空白と改行を、そのまま保つ。","poetic":"唯一、空白が空白のまま生き残る場所。スペースも改行も握りつぶされない。文字で絵を描く『具体詩』『アスキーアート』の聖域。","spark":"言葉を、空白で配置して図形にする。雨を降らせる、川を流す、星を散らす。","demo":"\u003cpre>\n   あ\n  あ あ\n あ   あ\nあ     あ\n   雨\n\u003c/pre>","note":""},{"tag":"blockquote","display":"&lt;blockquote&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"引用。blockquote はブロック、q は文中の短い引用。","poetic":"『これは私の言葉ではない』と告げる枠。誰の声か。出典を cite に書ける——その出典を、偽ることもできる。q は約物（引用符）を自動でつけてくれる。","spark":"自分の言葉を \u003cblockquote> で囲い、出典を『未来の私』にする。声を、他人にする。","demo":"\u003cblockquote cite=\"まだ書かれていない手紙\">\n  \u003cp>あのとき、もっと言葉を惜しまなければよかった。\u003c/p>\n\u003c/blockquote>\n\u003cp>母はいつも \u003cq>だいじょうぶ\u003c/q> と言った。\u003c/p>","note":""},{"tag":"q","display":"&lt;q&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"引用。blockquote はブロック、q は文中の短い引用。","poetic":"『これは私の言葉ではない』と告げる枠。誰の声か。出典を cite に書ける——その出典を、偽ることもできる。q は約物（引用符）を自動でつけてくれる。","spark":"自分の言葉を \u003cblockquote> で囲い、出典を『未来の私』にする。声を、他人にする。","demo":"\u003cblockquote cite=\"まだ書かれていない手紙\">\n  \u003cp>あのとき、もっと言葉を惜しまなければよかった。\u003c/p>\n\u003c/blockquote>\n\u003cp>母はいつも \u003cq>だいじょうぶ\u003c/q> と言った。\u003c/p>","note":""},{"tag":"cite","display":"&lt;cite&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"作品の題名や、出典の名を示す。","poetic":"『出どころ』に名を与える要素。実在しない本、歌わなかった歌の題名を、堂々と引用元にできる。","spark":"存在しない作品から引用する。\u003ccite>未完の交響曲第十番\u003c/cite> より。","demo":"\u003cp>それは \u003ccite>夜の図書館・閉架の部\u003c/cite> に書いてあった。\u003c/p>","note":""},{"tag":"figure","display":"&lt;figure&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"図版と、その説明文をひとまとめにする。","poetic":"『これには、こういう題がついている』という枠。中身は画像でなくてもいい。一行のテキストに、キャプションという名の声を添えられる。","spark":"本文を figure に、注釈を figcaption に。詩のほうを『図版』として展示する。","demo":"\u003cfigure>\n  \u003cp>　　　水たまりに、空がひとつ落ちていた。\u003c/p>\n  \u003cfigcaption>図1. 拾えなかったもの\u003c/figcaption>\n\u003c/figure>","note":""},{"tag":"figcaption","display":"&lt;figcaption&gt;","orderLa":"Textualia","orderJa":"本文目","habJa":"図版 (figure)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"図版と、その説明文をひとまとめにする。","poetic":"『これには、こういう題がついている』という枠。中身は画像でなくてもいい。一行のテキストに、キャプションという名の声を添えられる。","spark":"本文を figure に、注釈を figcaption に。詩のほうを『図版』として展示する。","demo":"\u003cfigure>\n  \u003cp>　　　水たまりに、空がひとつ落ちていた。\u003c/p>\n  \u003cfigcaption>図1. 拾えなかったもの\u003c/figcaption>\n\u003c/figure>","note":""},{"tag":"a","display":"&lt;a&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"リンク。別の場所や文書、ページ内の一点へ繋ぐ。","poetic":"詩で唯一、読者を『連れて行ける』要素。href=\"#…\" でページ内の一語へ飛ばせる。href=\"\" で自分自身へ。リンク先が空なら、どこへも行けない。その行き止まりすら詩になる。","spark":"ある言葉から、遠く離れた同じ言葉へリンクを張る。詩の中に、隠された対応をつくる。","demo":"\u003cp>\u003ca href=\"#kotae\">問い\u003c/a>は、ここにある。\u003c/p>\n\u003cp>……\u003c/p>\n\u003cp id=\"kotae\">そして\u003ca href=\"#\">答え\u003c/a>は、たぶんここではない。\u003c/p>","note":"id を振った要素へ href=\"#その id\" で飛べる。これだけで純HTMLの『仕掛け』になる。"},{"tag":"em","display":"&lt;em&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"em は強調（声の抑揚）、strong は重要性。","poetic":"声の起伏。em は『そこを読むときの息のかかり方』。同じ文でも、どの語を em にするかで意味がまるごと変わる。","spark":"一文の中で em の位置を一語ずつずらした複数版を並べ、意味の変化を見せる。","demo":"\u003cp>\u003cem>私\u003c/em>は行かない。\u003c/p>\n\u003cp>私は\u003cem>行か\u003c/em>ない。\u003c/p>\n\u003cp>私は行か\u003cem>ない\u003c/em>。\u003c/p>","note":""},{"tag":"strong","display":"&lt;strong&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"em は強調（声の抑揚）、strong は重要性。","poetic":"声の起伏。em は『そこを読むときの息のかかり方』。同じ文でも、どの語を em にするかで意味がまるごと変わる。","spark":"一文の中で em の位置を一語ずつずらした複数版を並べ、意味の変化を見せる。","demo":"\u003cp>\u003cem>私\u003c/em>は行かない。\u003c/p>\n\u003cp>私は\u003cem>行か\u003c/em>ない。\u003c/p>\n\u003cp>私は行か\u003cem>ない\u003c/em>。\u003c/p>","note":""},{"tag":"mark","display":"&lt;mark&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"蛍光ペンのように、注目すべき箇所を目立たせる。","poetic":"テキストの上に引かれた、消えない線。何を『重要』として光らせるか。マーカーの黄色は、記憶の色にも、警告の色にもなる。","spark":"本文の中の、たった一文字だけを mark する。読者の目が、まずそこへ落ちるように。","demo":"\u003cp>たくさんの言葉の中で、わたしはただ \u003cmark>あなた\u003c/mark> だけを覚えている。\u003c/p>","note":""},{"tag":"s","display":"&lt;s&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"s は『もう正しくない』、del は削除、ins は挿入を示す。","poetic":"取り消し線は、消したのに残っている言葉。del と ins を並べれば、推敲の過程そのものを作品にできる。書き直しの痕、ためらいの記録。","spark":"本心を \u003cdel> で消し、建前を \u003cins> で足す。消したほうがよく読めてしまう。","demo":"\u003cp>きみが \u003cdel>すきだ\u003c/del>\u003cins>きらいだ\u003c/ins>。\u003c/p>\n\u003cp>もう \u003cs>会えない\u003c/s>。\u003c/p>","note":""},{"tag":"del","display":"&lt;del&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"s は『もう正しくない』、del は削除、ins は挿入を示す。","poetic":"取り消し線は、消したのに残っている言葉。del と ins を並べれば、推敲の過程そのものを作品にできる。書き直しの痕、ためらいの記録。","spark":"本心を \u003cdel> で消し、建前を \u003cins> で足す。消したほうがよく読めてしまう。","demo":"\u003cp>きみが \u003cdel>すきだ\u003c/del>\u003cins>きらいだ\u003c/ins>。\u003c/p>\n\u003cp>もう \u003cs>会えない\u003c/s>。\u003c/p>","note":""},{"tag":"ins","display":"&lt;ins&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"s は『もう正しくない』、del は削除、ins は挿入を示す。","poetic":"取り消し線は、消したのに残っている言葉。del と ins を並べれば、推敲の過程そのものを作品にできる。書き直しの痕、ためらいの記録。","spark":"本心を \u003cdel> で消し、建前を \u003cins> で足す。消したほうがよく読めてしまう。","demo":"\u003cp>きみが \u003cdel>すきだ\u003c/del>\u003cins>きらいだ\u003c/ins>。\u003c/p>\n\u003cp>もう \u003cs>会えない\u003c/s>。\u003c/p>","note":""},{"tag":"small","display":"&lt;small&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"細目（こまかい注記）。免責や但し書きを表す。","poetic":"小さな声。ためらいながら付け足す本音。契約書の隅に書かれた、いちばん大事な一文のような囁き。","spark":"堂々とした宣言のあとに、\u003csmall> で取り消すような但し書きを添える。","demo":"\u003cp>きみを永遠に愛する。\u003c/p>\n\u003cp>\u003csmall>※ 個人の感想です。予告なく変更される場合があります。\u003c/small>\u003c/p>","note":""},{"tag":"abbr","display":"&lt;abbr&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"略語。title 属性で正式名称を隠し持てる。","poetic":"表に出ている言葉と、その下に隠した本当の意味。title にカーソルを乗せた者だけが、隠された語に出会える。二重底の言葉。","spark":"ありふれた略語に、嘘の正式名称を与える。\u003cabbr title=\"二度と戻らない瞬間\">今\u003c/abbr>。","demo":"\u003cp>わたしたちは \u003cabbr title=\"また会えると信じていた頃\">あのとき\u003c/abbr> 笑っていた。\u003c/p>","note":"title の中身は、マウスを乗せるとツールチップで現れる(純HTMLの隠し機能)。"},{"tag":"dfn","display":"&lt;dfn&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"その語が、ここで初めて定義されることを示す。","poetic":"『この言葉を、私はこう決める』という宣言。辞書を自分で書き換える権利。詩の中で、ある言葉に勝手な定義を与えられる。","spark":"ありふれた言葉を \u003cdfn> で囲い、独自の定義を続ける。『\u003cdfn>夜\u003c/dfn>とは、…』","demo":"\u003cp>\u003cdfn>さみしさ\u003c/dfn>とは、だれかが居たことの、形のことだ。\u003c/p>","note":""},{"tag":"code","display":"&lt;code&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"プログラムの語句・キー入力・出力・変数を表す等幅の語。","poetic":"機械の言葉づかい。等幅フォントの硬質な質感。kbd は『押すべきキー』——詩の中に、読者への命令を埋め込める。var は名前のない量、x や y の孤独。","spark":"感情を変数として書く。\u003cvar>かなしみ\u003c/var> = \u003cvar>あなた\u003c/var> × 時間。","demo":"\u003cp>\u003cvar>こころ\u003c/var> を \u003ckbd>Esc\u003c/kbd> で閉じる。\u003c/p>\n\u003cp>出力: \u003csamp>応答なし\u003c/samp>\u003c/p>","note":""},{"tag":"kbd","display":"&lt;kbd&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"プログラムの語句・キー入力・出力・変数を表す等幅の語。","poetic":"機械の言葉づかい。等幅フォントの硬質な質感。kbd は『押すべきキー』——詩の中に、読者への命令を埋め込める。var は名前のない量、x や y の孤独。","spark":"感情を変数として書く。\u003cvar>かなしみ\u003c/var> = \u003cvar>あなた\u003c/var> × 時間。","demo":"\u003cp>\u003cvar>こころ\u003c/var> を \u003ckbd>Esc\u003c/kbd> で閉じる。\u003c/p>\n\u003cp>出力: \u003csamp>応答なし\u003c/samp>\u003c/p>","note":""},{"tag":"samp","display":"&lt;samp&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"プログラムの語句・キー入力・出力・変数を表す等幅の語。","poetic":"機械の言葉づかい。等幅フォントの硬質な質感。kbd は『押すべきキー』——詩の中に、読者への命令を埋め込める。var は名前のない量、x や y の孤独。","spark":"感情を変数として書く。\u003cvar>かなしみ\u003c/var> = \u003cvar>あなた\u003c/var> × 時間。","demo":"\u003cp>\u003cvar>こころ\u003c/var> を \u003ckbd>Esc\u003c/kbd> で閉じる。\u003c/p>\n\u003cp>出力: \u003csamp>応答なし\u003c/samp>\u003c/p>","note":""},{"tag":"var","display":"&lt;var&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"プログラムの語句・キー入力・出力・変数を表す等幅の語。","poetic":"機械の言葉づかい。等幅フォントの硬質な質感。kbd は『押すべきキー』——詩の中に、読者への命令を埋め込める。var は名前のない量、x や y の孤独。","spark":"感情を変数として書く。\u003cvar>かなしみ\u003c/var> = \u003cvar>あなた\u003c/var> × 時間。","demo":"\u003cp>\u003cvar>こころ\u003c/var> を \u003ckbd>Esc\u003c/kbd> で閉じる。\u003c/p>\n\u003cp>出力: \u003csamp>応答なし\u003c/samp>\u003c/p>","note":""},{"tag":"sub","display":"&lt;sub&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"sub は下付き、sup は上付きの小さな文字。","poetic":"文字が、行から少しだけ沈む／浮く。脚注の番号、化学式、累乗。本文の高さから外れた、ためらいの位置。注釈という名の、もう一つの声。","spark":"ひとつの文の中で、本音だけを sub で沈める。地の文より少し低いところで呟かせる。","demo":"\u003cp>だいじょうぶ\u003csub>じゃない\u003c/sub>。\u003c/p>\n\u003cp>愛\u003csup>※\u003c/sup> は、いつも注釈つきだ。\u003c/p>","note":""},{"tag":"sup","display":"&lt;sup&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"sub は下付き、sup は上付きの小さな文字。","poetic":"文字が、行から少しだけ沈む／浮く。脚注の番号、化学式、累乗。本文の高さから外れた、ためらいの位置。注釈という名の、もう一つの声。","spark":"ひとつの文の中で、本音だけを sub で沈める。地の文より少し低いところで呟かせる。","demo":"\u003cp>だいじょうぶ\u003csub>じゃない\u003c/sub>。\u003c/p>\n\u003cp>愛\u003csup>※\u003c/sup> は、いつも注釈つきだ。\u003c/p>","note":""},{"tag":"time","display":"&lt;time&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"日付や時刻を、機械にも読める形で刻む。","poetic":"時間に、正確な座標を与える要素。datetime に刻まれた時刻と、表に見える言葉が、食い違ってもいい。『永遠』と表示して、datetime には一秒だけを刻む。","spark":"見えるテキストと datetime をわざとずらす。表は『むかしむかし』、中身は今日の日付。","demo":"\u003cp>\u003ctime datetime=\"0001-01-01\">むかしむかし\u003c/time>、あるところに。\u003c/p>\n\u003cp>会えるのは \u003ctime datetime=\"9999-12-31\">いつか\u003c/time>。\u003c/p>","note":""},{"tag":"data","display":"&lt;data&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"見える言葉の裏に、機械向けの値を隠し持つ。","poetic":"表の言葉と、裏の数値。\u003cdata value=\"…\"> は、見えない本心を一語ごとに仕込める。表向きは詩、裏側には冷たいコード。","spark":"やさしい言葉ごとに、value で冷たい数値を割り当てる。値の総和に、別の意味を持たせる。","demo":"\u003cp>きみへの気持ちは \u003cdata value=\"0\">ことば\u003c/data> にならない。\u003c/p>","note":""},{"tag":"ruby","display":"&lt;ruby&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"ふりがな（ルビ)。文字の上（横）に、小さな読みを振る。","poetic":"ひとつの言葉に、ふたつの声を同時に響かせる究極の装置。漢字の上に、本来とは違う読みを振れる。『本気』と書いて『マジ』、『運命』と書いて『さだめ』。表記と読みの二重奏。","spark":"漢字に、辞書にない読みを振る。表の意味と裏の音を、わざとぶつける。","demo":"\u003cruby>永遠\u003crp>(\u003c/rp>\u003crt>いっしゅん\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby> を、きみと過ごした。","note":""},{"tag":"rt","display":"&lt;rt&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"振仮名 (ruby)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"ふりがな（ルビ)。文字の上（横）に、小さな読みを振る。","poetic":"ひとつの言葉に、ふたつの声を同時に響かせる究極の装置。漢字の上に、本来とは違う読みを振れる。『本気』と書いて『マジ』、『運命』と書いて『さだめ』。表記と読みの二重奏。","spark":"漢字に、辞書にない読みを振る。表の意味と裏の音を、わざとぶつける。","demo":"\u003cruby>永遠\u003crp>(\u003c/rp>\u003crt>いっしゅん\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby> を、きみと過ごした。","note":""},{"tag":"rp","display":"&lt;rp&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"振仮名 (ruby)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"ふりがな（ルビ)。文字の上（横）に、小さな読みを振る。","poetic":"ひとつの言葉に、ふたつの声を同時に響かせる究極の装置。漢字の上に、本来とは違う読みを振れる。『本気』と書いて『マジ』、『運命』と書いて『さだめ』。表記と読みの二重奏。","spark":"漢字に、辞書にない読みを振る。表の意味と裏の音を、わざとぶつける。","demo":"\u003cruby>永遠\u003crp>(\u003c/rp>\u003crt>いっしゅん\u003c/rt>\u003crp>)\u003c/rp>\u003c/ruby> を、きみと過ごした。","note":""},{"tag":"bdo","display":"&lt;bdo&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"文字の流れる向きを、強制的に反転させる。","poetic":"右から左へ。文字を、鏡の中へ送る要素。読めそうで読めない、裏返しの言葉。dir=\"rtl\" は、時間や記憶を逆回しにする装置にもなる。","spark":"本文を bdo で反転させ、ところどころ正立した語を混ぜる。逆さの世界に、一つだけ正しい言葉。","demo":"\u003cp>\u003cbdo dir=\"rtl\">これは、鏡のなかから書いています。\u003c/bdo>\u003c/p>","note":""},{"tag":"bdi","display":"&lt;bdi&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"向きの異なる文字を、周りから隔離する。","poetic":"他と混ざりたくない一語のための、結界。アラビア語やヘブライ語、絵文字、記号——向きの違うものを、孤立させて守る。","spark":"日本語の流れの中に、逆向きの言語の断片を bdi で置く。異物として、そっと光らせる。","demo":"\u003cp>名前は \u003cbdi>‮ولاء‬\u003c/bdi>、意味は『忠誠』だと言った。\u003c/p>","note":""},{"tag":"u","display":"&lt;u&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"下線・斜体（声色の違い）・太字。意味より見た目寄りの装飾。","poetic":"もっとも素朴な強さ。i は『ここだけ声色が違う』囁き、独白、心の声。u は固有名や誤りの下線。意味より先に、まず目に届く印。","spark":"地の文を b、心の声を i にする。二つの声を、ひとつの段落で同時に流す。","demo":"\u003cp>\u003cb>行ってきます\u003c/b>、と言った。\u003ci>（もう帰らないつもりで）\u003c/i>\u003c/p>","note":""},{"tag":"i","display":"&lt;i&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"下線・斜体（声色の違い）・太字。意味より見た目寄りの装飾。","poetic":"もっとも素朴な強さ。i は『ここだけ声色が違う』囁き、独白、心の声。u は固有名や誤りの下線。意味より先に、まず目に届く印。","spark":"地の文を b、心の声を i にする。二つの声を、ひとつの段落で同時に流す。","demo":"\u003cp>\u003cb>行ってきます\u003c/b>、と言った。\u003ci>（もう帰らないつもりで）\u003c/i>\u003c/p>","note":""},{"tag":"b","display":"&lt;b&gt;","orderLa":"Phrasealia","orderJa":"語句目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"下線・斜体（声色の違い）・太字。意味より見た目寄りの装飾。","poetic":"もっとも素朴な強さ。i は『ここだけ声色が違う』囁き、独白、心の声。u は固有名や誤りの下線。意味より先に、まず目に届く印。","spark":"地の文を b、心の声を i にする。二つの声を、ひとつの段落で同時に流す。","demo":"\u003cp>\u003cb>行ってきます\u003c/b>、と言った。\u003ci>（もう帰らないつもりで）\u003c/i>\u003c/p>","note":""},{"tag":"ul","display":"&lt;ul&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"順序のない箇条書き。点（・）で並ぶ項目。","poetic":"順番のないものたち。買い物のメモ、心残りのリスト、忘れ物の一覧。並列であること自体が、ひとつの平等な眼差し。","spark":"『持っていけなかったもの』『言えなかったこと』を、ただ淡々と箇条書きにする。","demo":"\u003cul>\n  \u003cli>かさ\u003c/li>\n  \u003cli>さようなら\u003c/li>\n  \u003cli>もう一杯のコーヒー\u003c/li>\n\u003c/ul>","note":""},{"tag":"li","display":"&lt;li&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"箇条 (list)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"順序のない箇条書き。点（・）で並ぶ項目。","poetic":"順番のないものたち。買い物のメモ、心残りのリスト、忘れ物の一覧。並列であること自体が、ひとつの平等な眼差し。","spark":"『持っていけなかったもの』『言えなかったこと』を、ただ淡々と箇条書きにする。","demo":"\u003cul>\n  \u003cli>かさ\u003c/li>\n  \u003cli>さようなら\u003c/li>\n  \u003cli>もう一杯のコーヒー\u003c/li>\n\u003c/ul>","note":""},{"tag":"ol","display":"&lt;ol&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"順序のある番号つきリスト。reversed で逆順、start で開始番号を指定。","poetic":"順番が意味を持つ列。手順書、カウントダウン。reversed を付ければ 3, 2, 1 と減っていく——終わりに向かう時間を、番号で刻める。start や value で番号を飛ばし、欠落を演出できる。","spark":"reversed のリストで、ロケットでも別れでもないカウントダウンを書く。0 のあとに、何を置く?","demo":"\u003col reversed>\n  \u003cli>もう少しで、夏が終わる\u003c/li>\n  \u003cli>もう少しで、声を忘れる\u003c/li>\n  \u003cli>もう少しで\u003c/li>\n\u003c/ol>","note":""},{"tag":"dl","display":"&lt;dl&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"定義リスト。dt（語）と dd（その説明）の組。","poetic":"自分だけの辞書を作る器。dt に言葉、dd にあなたの定義。ひとつの dt に複数の dd を付け、一語に幾通りもの意味を持たせられる。","spark":"ありふれた言葉ばかりを並べ、すべてに私的な定義を与える。世界を、もう一度名づけ直す。","demo":"\u003cdl>\n  \u003cdt>夜\u003c/dt>\n  \u003cdd>昼に言えなかったことの、置き場所。\u003c/dd>\n  \u003cdt>あなた\u003c/dt>\n  \u003cdd>まだ、うまく定義できない。\u003c/dd>\n  \u003cdd>たぶん、一生かかる。\u003c/dd>\n\u003c/dl>","note":""},{"tag":"dt","display":"&lt;dt&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"定義 (dl)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"定義リスト。dt（語）と dd（その説明）の組。","poetic":"自分だけの辞書を作る器。dt に言葉、dd にあなたの定義。ひとつの dt に複数の dd を付け、一語に幾通りもの意味を持たせられる。","spark":"ありふれた言葉ばかりを並べ、すべてに私的な定義を与える。世界を、もう一度名づけ直す。","demo":"\u003cdl>\n  \u003cdt>夜\u003c/dt>\n  \u003cdd>昼に言えなかったことの、置き場所。\u003c/dd>\n  \u003cdt>あなた\u003c/dt>\n  \u003cdd>まだ、うまく定義できない。\u003c/dd>\n  \u003cdd>たぶん、一生かかる。\u003c/dd>\n\u003c/dl>","note":""},{"tag":"dd","display":"&lt;dd&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"定義 (dl)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"定義リスト。dt（語）と dd（その説明）の組。","poetic":"自分だけの辞書を作る器。dt に言葉、dd にあなたの定義。ひとつの dt に複数の dd を付け、一語に幾通りもの意味を持たせられる。","spark":"ありふれた言葉ばかりを並べ、すべてに私的な定義を与える。世界を、もう一度名づけ直す。","demo":"\u003cdl>\n  \u003cdt>夜\u003c/dt>\n  \u003cdd>昼に言えなかったことの、置き場所。\u003c/dd>\n  \u003cdt>あなた\u003c/dt>\n  \u003cdd>まだ、うまく定義できない。\u003c/dd>\n  \u003cdd>たぶん、一生かかる。\u003c/dd>\n\u003c/dl>","note":""},{"tag":"menu","display":"&lt;menu&gt;","orderLa":"Enumeralia","orderJa":"列挙目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"操作の選択肢を並べる、もうひとつのリスト。","poetic":"『選べる』ことを示すリスト。差し出された選択肢——どれも選べない選択肢、選んでも何も起きない選択肢を並べられる。","spark":"人生の岐路をメニューにする。どの項目もリンク先がなく、ただ選択肢としてだけ存在する。","demo":"\u003cmenu>\n  \u003cli>進む\u003c/li>\n  \u003cli>戻る\u003c/li>\n  \u003cli>ここに留まる\u003c/li>\n\u003c/menu>","note":""},{"tag":"table","display":"&lt;table&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"行と列のます目。tr（行）, td（升）, th（見出し）で組む。","poetic":"格子。碁盤の目に言葉を置く、視覚詩の道具。空のセルは沈黙、横長に結合したセルは引き伸ばされた時間。表は『関係』を空間で描く。","spark":"升目の対角線だけに文字を置き、あとは空白に。表で図形詩を組む。","demo":"\u003ctable border=\"1\">\n  \u003ctr>\u003ctd>朝\u003c/td>\u003ctd>\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>\u003c/td>\u003ctd>昼\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>\u003c/td>\u003ctd>\u003c/td>\u003ctd>夜\u003c/td>\u003c/tr>\n\u003c/table>","note":"colspan / rowspan でセルを結合できる。空セルは空白として効く。"},{"tag":"caption","display":"&lt;caption&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表につけるタイトル。表の上（または下）に置かれる。","poetic":"格子に与える題。データの一覧に、詩的な見出しを冠することで、ただの表が作品の様相を帯びる。","spark":"感情の数値表に、\u003ccaption> で文学的な題をつける。『失われた時間の収支報告』。","demo":"\u003ctable border=\"1\">\n  \u003ccaption>会わなかった日の数\u003c/caption>\n  \u003ctr>\u003ctd>今年\u003c/td>\u003ctd>365\u003c/td>\u003c/tr>\n\u003c/table>","note":""},{"tag":"tr","display":"&lt;tr&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表の、行（tr）・データの升（td）・見出しの升（th）。","poetic":"格子をかたちづくる、最小の部屋。td は名もなき升、th は列や行を束ねる見出しの声。空の td は沈黙、colspan/rowspan で引き延ばされた升は、伸びていく時間になる。","spark":"見出し（th）だけが並び、中身（td）はすべて空。問いだけがあって、答えのない表。","demo":"\u003ctable border=\"1\">\n  \u003ctr>\u003cth>問い\u003c/th>\u003cth>答え\u003c/th>\u003c/tr>\n  \u003ctr>\u003ctd>なぜ、別れたの\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>いま、どこにいるの\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n\u003c/table>","note":"td/th は tr（行）の中に置く。colspan・rowspan で升を結合できる。"},{"tag":"td","display":"&lt;td&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表の、行（tr）・データの升（td）・見出しの升（th）。","poetic":"格子をかたちづくる、最小の部屋。td は名もなき升、th は列や行を束ねる見出しの声。空の td は沈黙、colspan/rowspan で引き延ばされた升は、伸びていく時間になる。","spark":"見出し（th）だけが並び、中身（td）はすべて空。問いだけがあって、答えのない表。","demo":"\u003ctable border=\"1\">\n  \u003ctr>\u003cth>問い\u003c/th>\u003cth>答え\u003c/th>\u003c/tr>\n  \u003ctr>\u003ctd>なぜ、別れたの\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>いま、どこにいるの\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n\u003c/table>","note":"td/th は tr（行）の中に置く。colspan・rowspan で升を結合できる。"},{"tag":"th","display":"&lt;th&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表の、行（tr）・データの升（td）・見出しの升（th）。","poetic":"格子をかたちづくる、最小の部屋。td は名もなき升、th は列や行を束ねる見出しの声。空の td は沈黙、colspan/rowspan で引き延ばされた升は、伸びていく時間になる。","spark":"見出し（th）だけが並び、中身（td）はすべて空。問いだけがあって、答えのない表。","demo":"\u003ctable border=\"1\">\n  \u003ctr>\u003cth>問い\u003c/th>\u003cth>答え\u003c/th>\u003c/tr>\n  \u003ctr>\u003ctd>なぜ、別れたの\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>いま、どこにいるの\u003c/td>\u003ctd>\u003c/td>\u003c/tr>\n\u003c/table>","note":"td/th は tr（行）の中に置く。colspan・rowspan で升を結合できる。"},{"tag":"thead","display":"&lt;thead&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表を、見出し部・本体部・脚部の三つに意味づける。","poetic":"表にも、始まりと本体と終わりがある。thead は宣言、tbody は積み重なる日々、tfoot は総括。長い表を印刷すると thead は各頁の頭でくり返される——何度でも立ち返る、冒頭の一行。","spark":"tfoot に「合計」ではなく、結論めいた一行を置く。積み重ねた tbody の日々の、その果ての言葉。","demo":"\u003ctable border=\"1\">\n  \u003cthead>\u003ctr>\u003cth>日々\u003c/th>\u003c/tr>\u003c/thead>\n  \u003ctbody>\n    \u003ctr>\u003ctd>会った\u003c/td>\u003c/tr>\n    \u003ctr>\u003ctd>笑った\u003c/td>\u003c/tr>\n    \u003ctr>\u003ctd>別れた\u003c/td>\u003c/tr>\n  \u003c/tbody>\n  \u003ctfoot>\u003ctr>\u003ctd>……それだけのことだった\u003c/td>\u003c/tr>\u003c/tfoot>\n\u003c/table>","note":""},{"tag":"tbody","display":"&lt;tbody&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表を、見出し部・本体部・脚部の三つに意味づける。","poetic":"表にも、始まりと本体と終わりがある。thead は宣言、tbody は積み重なる日々、tfoot は総括。長い表を印刷すると thead は各頁の頭でくり返される——何度でも立ち返る、冒頭の一行。","spark":"tfoot に「合計」ではなく、結論めいた一行を置く。積み重ねた tbody の日々の、その果ての言葉。","demo":"\u003ctable border=\"1\">\n  \u003cthead>\u003ctr>\u003cth>日々\u003c/th>\u003c/tr>\u003c/thead>\n  \u003ctbody>\n    \u003ctr>\u003ctd>会った\u003c/td>\u003c/tr>\n    \u003ctr>\u003ctd>笑った\u003c/td>\u003c/tr>\n    \u003ctr>\u003ctd>別れた\u003c/td>\u003c/tr>\n  \u003c/tbody>\n  \u003ctfoot>\u003ctr>\u003ctd>……それだけのことだった\u003c/td>\u003c/tr>\u003c/tfoot>\n\u003c/table>","note":""},{"tag":"tfoot","display":"&lt;tfoot&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表を、見出し部・本体部・脚部の三つに意味づける。","poetic":"表にも、始まりと本体と終わりがある。thead は宣言、tbody は積み重なる日々、tfoot は総括。長い表を印刷すると thead は各頁の頭でくり返される——何度でも立ち返る、冒頭の一行。","spark":"tfoot に「合計」ではなく、結論めいた一行を置く。積み重ねた tbody の日々の、その果ての言葉。","demo":"\u003ctable border=\"1\">\n  \u003cthead>\u003ctr>\u003cth>日々\u003c/th>\u003c/tr>\u003c/thead>\n  \u003ctbody>\n    \u003ctr>\u003ctd>会った\u003c/td>\u003c/tr>\n    \u003ctr>\u003ctd>笑った\u003c/td>\u003c/tr>\n    \u003ctr>\u003ctd>別れた\u003c/td>\u003c/tr>\n  \u003c/tbody>\n  \u003ctfoot>\u003ctr>\u003ctd>……それだけのことだった\u003c/td>\u003c/tr>\u003c/tfoot>\n\u003c/table>","note":""},{"tag":"colgroup","display":"&lt;colgroup&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表の「列」をまとめて指し、列ごとの性質を一括で扱う。","poetic":"行ではなく、縦の連なりに名を与える視点。span でいくつかの列を束ねられる。横（tr）に流れる時間に対し、縦（col）はそれを貫く、もうひとつの軸。","spark":"二列の表で、片方の列だけを束ね、「変わらないもの／移ろうもの」を縦に対比する。","demo":"\u003ctable border=\"1\">\n  \u003ccolgroup>\u003ccol>\u003ccol>\u003c/colgroup>\n  \u003ctr>\u003ctd>かわらないもの\u003c/td>\u003ctd>うつろうもの\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>名前\u003c/td>\u003ctd>こえ\u003c/td>\u003c/tr>\n\u003c/table>","note":"colgroup/col は表の冒頭に置き、列単位で意味づける（本来は主にCSS用だが、構造として列を束ねられる）。"},{"tag":"col","display":"&lt;col&gt;","orderLa":"Tabularia","orderJa":"格子目","habJa":"表 (table)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"表の「列」をまとめて指し、列ごとの性質を一括で扱う。","poetic":"行ではなく、縦の連なりに名を与える視点。span でいくつかの列を束ねられる。横（tr）に流れる時間に対し、縦（col）はそれを貫く、もうひとつの軸。","spark":"二列の表で、片方の列だけを束ね、「変わらないもの／移ろうもの」を縦に対比する。","demo":"\u003ctable border=\"1\">\n  \u003ccolgroup>\u003ccol>\u003ccol>\u003c/colgroup>\n  \u003ctr>\u003ctd>かわらないもの\u003c/td>\u003ctd>うつろうもの\u003c/td>\u003c/tr>\n  \u003ctr>\u003ctd>名前\u003c/td>\u003ctd>こえ\u003c/td>\u003c/tr>\n\u003c/table>","note":"colgroup/col は表の冒頭に置き、列単位で意味づける（本来は主にCSS用だが、構造として列を束ねられる）。"},{"tag":"form","display":"&lt;form&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"入力をまとめ、どこかへ送るための器。","poetic":"『送信』という行為の器。action を空にすれば、送り先のないフォーム。書いても、押しても、どこにも届かない申し込み用紙。それ自体が片想いの構造。","spark":"宛先のない申込書を作る。『あなたへの気持ち申請フォーム』、送信ボタンは押せるが、何も起きない。","demo":"\u003cform>\n  \u003cp>これは、どこにも送られません。\u003c/p>\n  \u003clabel>ひとこと: \u003cinput type=\"text\" value=\"さようなら\">\u003c/label>\n\u003c/form>","note":""},{"tag":"input","display":"&lt;input&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"一行のテキスト入力欄。読者が文字を書き込める。","poetic":"読者の手に、ペンを渡す。value で最初から言葉を仕込んでおき、placeholder で薄い問いを浮かべる。読者が書き換えれば、詩は読者のものになる。","spark":"詩の一部を空欄にし、value も placeholder も置く。読者が消すか、書き足すかで、詩が変わる。","demo":"\u003cp>わたしは \u003cinput type=\"text\" value=\"ここにいる\" size=\"8\"> と書いて、すぐに消した。\u003c/p>\n\u003cp>\u003cinput type=\"text\" placeholder=\"あなたの名前を、まだ知らない\" size=\"30\">\u003c/p>","note":""},{"tag":"textarea","display":"&lt;textarea&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"複数行のテキスト入力欄。長い文章を書き込める。","poetic":"読者に渡す、白い原稿用紙。書きかけの手紙を仕込んでおける。読者は続きを書くことも、すべて消すこともできる。詩を、共作にする装置。","spark":"書きかけの手紙を textarea に入れておく。『拝啓、…』のあと、続きは読者に委ねる。","demo":"\u003ctextarea rows=\"4\" cols=\"30\">拝啓。\nあれから、ずいぶん経ちました。\nわたしは、\u003c/textarea>","note":""},{"tag":"button","display":"&lt;button&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"押せるボタン。JSなしでは、押しても基本は何も起きない。","poetic":"押せるのに、何も起こらないボタン。その『無反応』こそ詩になる。押したくなる衝動と、虚しさ。期待と、沈黙。","spark":"切実な言葉のボタンを並べる。『もう一度会いたい』を押しても、画面は微動だにしない。","demo":"\u003cbutton type=\"button\">もう一度、会いたい\u003c/button>\n\u003cbutton type=\"button\">時間を、巻き戻す\u003c/button>","note":""},{"tag":"select","display":"&lt;select&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"ドロップダウンの選択肢。option で項目を並べる。","poetic":"畳まれた選択肢。開くまで、一つしか見えない。select は『可能性が隠れている』状態そのもの。selected で初期値を決め、運命を仕込める。","spark":"『この物語の結末』を select にする。どれを選んでも、表示は変わらないのに、選ばせる。","demo":"\u003clabel>この恋の結末:\n  \u003cselect>\n    \u003coption>実る\u003c/option>\n    \u003coption selected>実らない\u003c/option>\n    \u003coption>まだ、わからない\u003c/option>\n  \u003c/select>\n\u003c/label>","note":""},{"tag":"option","display":"&lt;option&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"選択肢 (select)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"ドロップダウンの選択肢。option で項目を並べる。","poetic":"畳まれた選択肢。開くまで、一つしか見えない。select は『可能性が隠れている』状態そのもの。selected で初期値を決め、運命を仕込める。","spark":"『この物語の結末』を select にする。どれを選んでも、表示は変わらないのに、選ばせる。","demo":"\u003clabel>この恋の結末:\n  \u003cselect>\n    \u003coption>実る\u003c/option>\n    \u003coption selected>実らない\u003c/option>\n    \u003coption>まだ、わからない\u003c/option>\n  \u003c/select>\n\u003c/label>","note":""},{"tag":"datalist","display":"&lt;datalist&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"入力欄に、入力候補をそっと添える。","poetic":"書こうとすると、ささやかれる候補たち。読者が一文字打つと、用意しておいた言葉が下から現れる。誘導。先回り。言葉を、そっと差し出す手。","spark":"問いの入力欄に、ありえない候補ばかりを datalist で仕込む。読者の指を、思わぬ言葉へ導く。","demo":"\u003clabel>あなたが探しているのは:\n  \u003cinput list=\"opt\" placeholder=\"一文字、打ってみて\">\n\u003c/label>\n\u003cdatalist id=\"opt\">\n  \u003coption value=\"許し\">\n  \u003coption value=\"許される理由\">\n  \u003coption value=\"許せない自分\">\n\u003c/datalist>","note":""},{"tag":"progress","display":"&lt;progress&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"進み具合を示すバー。value と max で満ち具合が決まる。","poetic":"満ちていく／満たない、を一本のバーで描く。人生の残り、忘却の進み具合、傷の癒え方。value を max に届かせないことで、永遠に終わらない何かを描ける。","spark":"『立ち直り』の progress を、ほんの少しだけ満たして止める。あるいは value を空にして、まだ始まってすらいない何かを。","demo":"\u003cp>立ち直り:\u003c/p>\n\u003cprogress value=\"3\" max=\"100\">\u003c/progress>\n\u003cp>忘却:\u003c/p>\n\u003cprogress value=\"98\" max=\"100\">\u003c/progress>","note":""},{"tag":"meter","display":"&lt;meter&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"ある範囲の中での『今の値』を示すゲージ。","poetic":"progress が『進み』なら、meter は『状態』。タンクの残り、温度、気力。low/high/optimum で『どこが良い状態か』まで指定でき、色が変わる。感情の計器。","spark":"『こころの残量』を meter にする。低い領域を optimum にして、満ちていることを不調として描く。","demo":"\u003cp>きょうの元気:\u003c/p>\n\u003cmeter value=\"2\" min=\"0\" max=\"10\" low=\"3\" high=\"7\" optimum=\"9\">\u003c/meter>","note":""},{"tag":"output","display":"&lt;output&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"計算や処理の『結果』を置くための要素。","poetic":"答えが入るべき場所。けれど、JSなしでは、その答えは永遠に空のまま。結果の出ない計算式、出力されない解。空っぽの \u003coutput> は、待ち続ける器。","spark":"切実な問いの式を書き、\u003coutput> を空のままにする。『さみしさ ÷ 時間 = 　』。","demo":"\u003cp>あなた − わたし = \u003coutput>\u003c/output>\u003c/p>","note":""},{"tag":"fieldset","display":"&lt;fieldset&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"入力欄をグループにし、legend でその枠に題をつける。","poetic":"問いの群れを、ひとつの枠で囲う。legend は、その枠に掛けられた表札。『記入してはいけない欄』『答えなくてよい質問』という名の枠を作れる。","spark":"\u003clegend> に『以下、すべて任意』と書き、答えようのない質問だけを並べる。","demo":"\u003cfieldset>\n  \u003clegend>あなたについて（任意）\u003c/legend>\n  \u003cp>\u003clabel>本当の名前: \u003cinput>\u003c/label>\u003c/p>\n  \u003cp>\u003clabel>まだ言えていないこと: \u003cinput>\u003c/label>\u003c/p>\n\u003c/fieldset>","note":""},{"tag":"legend","display":"&lt;legend&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"区画 (fieldset)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"入力欄をグループにし、legend でその枠に題をつける。","poetic":"問いの群れを、ひとつの枠で囲う。legend は、その枠に掛けられた表札。『記入してはいけない欄』『答えなくてよい質問』という名の枠を作れる。","spark":"\u003clegend> に『以下、すべて任意』と書き、答えようのない質問だけを並べる。","demo":"\u003cfieldset>\n  \u003clegend>あなたについて（任意）\u003c/legend>\n  \u003cp>\u003clabel>本当の名前: \u003cinput>\u003c/label>\u003c/p>\n  \u003cp>\u003clabel>まだ言えていないこと: \u003cinput>\u003c/label>\u003c/p>\n\u003c/fieldset>","note":""},{"tag":"label","display":"&lt;label&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"入力欄に結びつく「名札」。クリックでその欄が反応する。","poetic":"入力欄に寄り添う、呼び名。入れ子や for=id で欄と結ばれ、ラベルをクリックすると、対の欄が目を覚ます（チェックが入る、カーソルが灯る）。言葉と、それが指すものとの、目に見える絆。","spark":"チェックボックスのラベルに、長い告白文を書く。文のどこに触れても、ひとつの「はい」に印が付く。","demo":"\u003cp>\u003clabel>\u003cinput type=\"checkbox\"> この一文の、どこに触れても、わたしは「はい」と答えます。\u003c/label>\u003c/p>","note":"label でフォーム部品を包む（または for=id で結ぶ）と、ラベル全体がその部品の操作面になる。JS不要。"},{"tag":"optgroup","display":"&lt;optgroup&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"選択肢 (select)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"select の選択肢（option）を、見出し付きのグループに束ねる。","poetic":"選択肢にも、属する「群れ」がある。optgroup の label が、選択肢たちの上に小さな見出しを掛ける。畳まれたドロップダウンの中に、分類された世界——選べる感情の目録。","spark":"「選べる気持ち」を〈言えるもの〉〈言えないもの〉に分け、その見出しの下にそれぞれの感情を並べる。","demo":"\u003clabel>いま、いちばん近いのは:\n  \u003cselect>\n    \u003coptgroup label=\"言えるもの\">\n      \u003coption>うれしい\u003c/option>\n      \u003coption>たのしい\u003c/option>\n    \u003c/optgroup>\n    \u003coptgroup label=\"言えないもの\">\n      \u003coption>さみしい\u003c/option>\n      \u003coption>こわい\u003c/option>\n    \u003c/optgroup>\n  \u003c/select>\n\u003c/label>","note":""},{"tag":"search","display":"&lt;search&gt;","orderLa":"Formularia","orderJa":"入力目","habJa":"書式 (form)","statusLa":"spec. recens","statusJa":"新参種","dagger":false,"summary":"検索や絞り込みのための領域を意味づける、新しめの要素。","poetic":"「探している」という状態そのものに、枠を与える要素。中身は検索欄でなくてもいい。\u003csearch> という器は、「何かを探しつづけている」気配を、文書の構造に刻む。","spark":"\u003csearch> の中に、答えの出ない問いだけを置く。永遠に検索しつづけている、出口のない一画。","demo":"\u003csearch>\n  \u003cp>ずっと、さがしています。\u003c/p>\n  \u003clabel>みつからないもの: \u003cinput type=\"search\" placeholder=\"（入力しても、見つからない）\">\u003c/label>\n\u003c/search>","note":"比較的新しい意味要素。検索・フィルタUIをまとめる「ランドマーク」を表す。"},{"tag":"img","display":"&lt;img&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"画像。alt 属性に、画像が見えないときの代わりの言葉を書く。","poetic":"alt 属性こそ詩の隠し場所。src を空にすれば画像は表示されず、alt のテキストだけが残る——『見えない絵を説明する言葉』だけの作品。画像なき画像の詩。","spark":"src を意図的に壊し、alt にだけ詩を書く。誰の目にも映らない絵を、言葉で見せる。","demo":"\u003cimg src=\"\" alt=\"ここには、二度と撮れない写真が表示されるはずでした。\">","note":"存在しない src は『壊れた画像』になり、alt のテキストが現れる。これも純HTMLの仕掛け。"},{"tag":"picture","display":"&lt;picture&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"画面の幅などに応じて、表示する画像を切り替える。","poetic":"見る者の環境で、姿を変える絵。media 属性で『画面が狭いとき』『広いとき』に別の画像を出せる。読者のデバイス次第で、別の詩が立ち上がる。","spark":"スマホでは別の絵、PCでは別の絵。同じURLが、見る人によって違う顔を見せる仕掛けに。","demo":"\u003cpicture>\n  \u003csource media=\"(max-width: 600px)\" srcset=\"\">\n  \u003cimg src=\"\" alt=\"画面の幅で、わたしの見え方は変わります。\">\n\u003c/picture>","note":""},{"tag":"source","display":"&lt;source&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"媒体 (audio/video)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"画面の幅などに応じて、表示する画像を切り替える。","poetic":"見る者の環境で、姿を変える絵。media 属性で『画面が狭いとき』『広いとき』に別の画像を出せる。読者のデバイス次第で、別の詩が立ち上がる。","spark":"スマホでは別の絵、PCでは別の絵。同じURLが、見る人によって違う顔を見せる仕掛けに。","demo":"\u003cpicture>\n  \u003csource media=\"(max-width: 600px)\" srcset=\"\">\n  \u003cimg src=\"\" alt=\"画面の幅で、わたしの見え方は変わります。\">\n\u003c/picture>","note":""},{"tag":"audio","display":"&lt;audio&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"音声プレイヤー。controls で再生バーが出る。","poetic":"詩に、本物の音を。loop で無限に繰り返す環境音、autoplay の是非。src のない \u003caudio controls> は、再生できないプレイヤー——鳴らない音楽という存在。","spark":"再生できない音声プレイヤーを置き、その下に『この曲を、あなたはもう聴けない』と書く。","demo":"\u003caudio controls src=\"\">\u003c/audio>\n\u003cp>（再生ボタンはあるのに、音は鳴らない）\u003c/p>","note":""},{"tag":"video","display":"&lt;video&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"動画プレイヤー。poster で表紙画像を指定できる。","poetic":"動かない動画。poster だけを置き、再生しても何も起きない映像。止まったままの一枚と、『再生できる』という嘘の約束。","spark":"poster に一枚の絵、src は空。永遠に再生されない映画の、ポスターだけを展示する。","demo":"\u003cvideo controls poster=\"\" width=\"240\">\n  \u003cp>この動画は、もう存在しません。\u003c/p>\n\u003c/video>","note":""},{"tag":"track","display":"&lt;track&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"媒体 (audio/video)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"動画・音声に、字幕やキャプションを重ねる。","poetic":"映像の上を流れる、もう一つの声。字幕は、音とずれてもいい。映像が無音でも、字幕だけが語り続ける。声なき声の、テキスト。","spark":"音のない映像に、語りすぎる字幕をつける。あるいは、内容と無関係な字幕を流す。","demo":"\u003cvideo controls width=\"240\">\n  \u003ctrack kind=\"captions\" label=\"きこえない声\" default>\n  \u003cp>字幕だけが、ここにいる。\u003c/p>\n\u003c/video>","note":""},{"tag":"iframe","display":"&lt;iframe&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"別のHTML文書を、窓のように埋め込む。","poetic":"ページの中に開いた、別世界への窓。自分自身を src にすれば、入れ子の無限——詩の中に同じ詩が、その中にまた同じ詩が。srcdoc で、その場に小さな別文書を書き込める。","spark":"srcdoc に、本文と矛盾する『もう一つのページ』を埋め込む。窓の向こうに、別の真実を見せる。","demo":"\u003ciframe srcdoc=\"\u003cp>これは、窓の向こうの世界です。\u003c/p>\" width=\"260\" height=\"60\">\u003c/iframe>","note":"srcdoc の中身は完結したHTML文書として描かれる。窓を入れ子にもできる。"},{"tag":"svg","display":"&lt;svg&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"図形を、数値の座標で描くベクター画像。HTMLに直接書ける。","poetic":"CSSもJSも使わず、HTMLの中に線や円を描ける。\u003csvg> の中の \u003ctext> は、回転も、曲線に沿わせることもできる。言葉を、図形として配置する純粋な手段。","spark":"円周に沿って文字を流す、線で言葉を貫く。文字を『絵』として置く。","demo":"\u003csvg width=\"200\" height=\"80\">\n  \u003ccircle cx=\"40\" cy=\"40\" r=\"30\" fill=\"none\" stroke=\"black\"/>\n  \u003ctext x=\"85\" y=\"45\">ここに、穴がある\u003c/text>\n\u003c/svg>","note":"SVG はそれ自体が言語。HTML に素のまま埋め込め、style 属性なしでも図形と文字を置ける。"},{"tag":"map","display":"&lt;map&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"画像の上に、クリックできる領域を重ねる。","poetic":"一枚の絵の、見えない急所。画像のどの部分に触れると、どこへ飛ぶか。表向きはただの絵、しかし特定の場所だけが秘密の扉になっている。","spark":"風景画の、ある一点だけにリンクを仕込む。読者が偶然そこに触れたとき、別の言葉が開く。","demo":"\u003cimg src=\"\" alt=\"この絵の、どこかに扉がある\" usemap=\"#m\" width=\"200\" height=\"120\">\n\u003cmap name=\"m\">\n  \u003carea shape=\"circle\" coords=\"100,60,30\" href=\"#\" alt=\"ここ\">\n\u003c/map>","note":""},{"tag":"area","display":"&lt;area&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"地図 (map)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"画像の上に、クリックできる領域を重ねる。","poetic":"一枚の絵の、見えない急所。画像のどの部分に触れると、どこへ飛ぶか。表向きはただの絵、しかし特定の場所だけが秘密の扉になっている。","spark":"風景画の、ある一点だけにリンクを仕込む。読者が偶然そこに触れたとき、別の言葉が開く。","demo":"\u003cimg src=\"\" alt=\"この絵の、どこかに扉がある\" usemap=\"#m\" width=\"200\" height=\"120\">\n\u003cmap name=\"m\">\n  \u003carea shape=\"circle\" coords=\"100,60,30\" href=\"#\" alt=\"ここ\">\n\u003c/map>","note":""},{"tag":"object","display":"&lt;object&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"外部リソース（PDFや他文書など）を、文書内に取り込む。","poetic":"他のものを丸ごと飲み込む器。読み込めなかったときに表示される『代わりの内容』を仕込める。失敗が前提の埋め込み——その代替テキストこそが、本当の中身。","spark":"読み込めない object の代わりに、『ここにあったものは、もう失われました』と表示させる。","demo":"\u003cobject data=\"\" type=\"application/pdf\" width=\"240\" height=\"60\">\n  ここにあったはずのものは、見つかりませんでした。\n\u003c/object>","note":""},{"tag":"embed","display":"&lt;embed&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"外部リソース（PDFや他文書など）を、文書内に取り込む。","poetic":"他のものを丸ごと飲み込む器。読み込めなかったときに表示される『代わりの内容』を仕込める。失敗が前提の埋め込み——その代替テキストこそが、本当の中身。","spark":"読み込めない object の代わりに、『ここにあったものは、もう失われました』と表示させる。","demo":"\u003cobject data=\"\" type=\"application/pdf\" width=\"240\" height=\"60\">\n  ここにあったはずのものは、見つかりませんでした。\n\u003c/object>","note":""},{"tag":"canvas","display":"&lt;canvas&gt;","orderLa":"Medialia","orderJa":"埋込目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"JavaScript で絵を描くための、空白の画布。","poetic":"JSを使わないと決めたこの世界では、永遠に塗られない画布。\u003ccanvas> は、何も描かれないまま、ただ「描けるはずだった空間」として在る。中に書いた言葉は、canvas が使えない環境にだけ現れる「代わりの絵」になる。","spark":"空の canvas を置き、その中に「ここに描かれるはずだった絵」を言葉で書く。塗られない画布の、不在の絵。","demo":"\u003ccanvas width=\"240\" height=\"60\">ここには、JSがあれば絵が描けました。今は、この一文だけが残っています。\u003c/canvas>","note":"JSなしでは何も描画されない。対応ブラウザでは空白、非対応では中のテキストが見える。"},{"tag":"details","display":"&lt;details&gt;","orderLa":"Interactiva","orderJa":"対話目","habJa":"体部 (body)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"クリックで開閉する折りたたみ。summary が見出し。","poetic":"純HTMLだけで作れる、最強の『仕掛け』。閉じた summary に問いを、開いた中に答えを。読者が開くまで、詩は半分しか存在しない。秘密、告白、ネタばらし。open 属性で最初から開けておくことも、ずっと隠しておくこともできる。入れ子にすれば、何重もの扉。","spark":"summary に当たり障りのない一言、中に本音を。あるいは details を入れ子にして、開けても開けても、まだ奥がある構造に。","demo":"\u003cdetails>\n  \u003csummary>なんでもない一日でした。\u003c/summary>\n  \u003cp>本当は、一日じゅう、あなたのことを考えていました。\u003c/p>\n  \u003cdetails>\n    \u003csummary>それと、もうひとつ。\u003c/summary>\n    \u003cp>……いえ、やっぱり、なんでもありません。\u003c/p>\n  \u003c/details>\n\u003c/details>","note":"JS不要。これだけでインタラクティブな詩が組める、純HTMLの主役級。"},{"tag":"summary","display":"&lt;summary&gt;","orderLa":"Interactiva","orderJa":"対話目","habJa":"折畳 (details)","statusLa":"spec. nova","statusJa":"新種","dagger":false,"summary":"クリックで開閉する折りたたみ。summary が見出し。","poetic":"純HTMLだけで作れる、最強の『仕掛け』。閉じた summary に問いを、開いた中に答えを。読者が開くまで、詩は半分しか存在しない。秘密、告白、ネタばらし。open 属性で最初から開けておくことも、ずっと隠しておくこともできる。入れ子にすれば、何重もの扉。","spark":"summary に当たり障りのない一言、中に本音を。あるいは details を入れ子にして、開けても開けても、まだ奥がある構造に。","demo":"\u003cdetails>\n  \u003csummary>なんでもない一日でした。\u003c/summary>\n  \u003cp>本当は、一日じゅう、あなたのことを考えていました。\u003c/p>\n  \u003cdetails>\n    \u003csummary>それと、もうひとつ。\u003c/summary>\n    \u003cp>……いえ、やっぱり、なんでもありません。\u003c/p>\n  \u003c/details>\n\u003c/details>","note":"JS不要。これだけでインタラクティブな詩が組める、純HTMLの主役級。"},{"tag":"dialog","display":"&lt;dialog&gt;","orderLa":"Interactiva","orderJa":"対話目","habJa":"体部 (body)","statusLa":"spec. recens","statusJa":"新参種","dagger":false,"summary":"ダイアログ（小窓）。open 属性で表示される。","poetic":"画面の手前にせり出す、もう一つの層。open を付ければ、開いたまま固定された告白の窓。閉じられない問い、消せない通知として置ける。","spark":"\u003cdialog open> に、本文を遮るような一言を置く。読者は、それを閉じる手段を持たない。","demo":"\u003cdialog open>\n  \u003cp>あなたは今、ここを読んでいます。\u003cbr>それだけが、確かなことです。\u003c/p>\n\u003c/dialog>","note":"JSなしでも open 属性で表示できる(閉じるのには本来JSが要る——閉じられないことを逆手に取れる)。"},{"tag":"meta","display":"&lt;meta&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"文書についての情報。文字コード、説明文、自動更新などを指定。","poetic":"本文に現れない、文書の『настройка(設定)』。meta refresh で、一定秒後に自分自身へ飛び、ページを無限に再読み込みさせられる——終わらない反復、抜け出せないループを純HTMLで作れる。","spark":"meta refresh で数秒ごとにページを更新させ、そのたびに『同じ朝』が始まる詩を作る。","demo":"\u003c!-- &lt;meta http-equiv=\"refresh\" content=\"5\"&gt; を書くと、5秒ごとにページが甦る -->\n\u003cp>このページは、何度でも、最初からやり直せます。\u003c/p>","note":"\u003cmeta http-equiv=\"refresh\" content=\"秒;url=…\"> で自動遷移・自動更新。ループ詩の核になる。"},{"tag":"noscript","display":"&lt;noscript&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"JavaScript が無効なときだけ表示される内容。","poetic":"『JSを使わない』という、この企て全体への祝福。noscript の中身は、JSを切った世界でだけ現れる。素のHTMLだけを愛する者への、隠されたメッセージ。","spark":"noscript の中に、本当の詩を隠す。スクリプトを切った人にだけ、本文が立ち上がる作品。","demo":"\u003cnoscript>\n  \u003cp>ようこそ。ここは、何も動かない世界です。\u003c/p>\n\u003c/noscript>\n\u003cp>（JSが有効なら、上の言葉は隠れています）\u003c/p>","note":""},{"tag":"template","display":"&lt;template&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"体部 (body)","statusLa":"spec. recens","statusJa":"新参種","dagger":false,"summary":"描画されないまま、文書の中に保持される内容。","poetic":"そこに在るのに、見えないもの。\u003ctemplate> の中身は、HTMLとして正しく存在するのに、画面には決して現れない。語られなかった言葉の、完全な保管庫。","spark":"\u003ctemplate> の中に、いちばん言いたかったことを書く。読者には決して見えない、けれど確かにそこに在る一行。","demo":"\u003ctemplate>\n  \u003cp>ほんとうは、こう言いたかった。\u003c/p>\n\u003c/template>\n\u003cp>（上の段落は、ソースには在るが、画面には無い）\u003c/p>","note":""},{"tag":"base","display":"&lt;base&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"そのページの全リンクの『基準』や、開き方を一括指定する。","poetic":"すべての行き先を、ひとつの言葉で決める要素。target=\"_blank\" を base に置けば、このページのどのリンクも、新しい窓を開く。ページ全体の『振る舞いの前提』を、一行で定める。","spark":"base で全リンクの基準を、実在しない場所に置く。どこへ行こうとしても、同じ宛先に集まる構造に。","demo":"\u003c!-- &lt;base target=\"_blank\"&gt; を置くと、以後すべてのリンクが新しい窓で開く -->\n\u003cp>ここから先は、すべて、別の窓のむこう。\u003c/p>","note":""},{"tag":"head","display":"&lt;head&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"head は文書の舞台裏（表示されない情報）、body は舞台（表示される中身）。","poetic":"一篇の文書は、見えない頭（head）と、見える体（body）でできている。head に書いたことは画面に出ないのに、文書のすべてを左右する。表に出ない思考と、表に出る言葉。","spark":"head に置けるもの（title・meta・base…）を「内面」、body を「外面」と捉え、その食い違いを作品にする。","demo":"\u003c!-- &lt;head&gt; は舞台裏。観客（読者）には見えないまま、芝居の全部を決めている。 -->\n\u003cp>あなたが今読んでいるこの言葉は、&lt;body&gt; の中にいます。\u003c/p>","note":"head の中身（title/meta/base/link/style/script）は画面に現れないが、文書の振る舞いを定める。"},{"tag":"body","display":"&lt;body&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"体部 (body)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"head は文書の舞台裏（表示されない情報）、body は舞台（表示される中身）。","poetic":"一篇の文書は、見えない頭（head）と、見える体（body）でできている。head に書いたことは画面に出ないのに、文書のすべてを左右する。表に出ない思考と、表に出る言葉。","spark":"head に置けるもの（title・meta・base…）を「内面」、body を「外面」と捉え、その食い違いを作品にする。","demo":"\u003c!-- &lt;head&gt; は舞台裏。観客（読者）には見えないまま、芝居の全部を決めている。 -->\n\u003cp>あなたが今読んでいるこの言葉は、&lt;body&gt; の中にいます。\u003c/p>","note":"head の中身（title/meta/base/link/style/script）は画面に現れないが、文書の振る舞いを定める。"},{"tag":"link","display":"&lt;link&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"外部リソースや、別ページとの「関係」を宣言する（head 内に置く）。","poetic":"本文に現れない「関係」を宣言する要素。rel=\"next\"/\"prev\" で見えない前後関係を、rel=\"canonical\" で「本物はあちら」と告げる。どこにも表示されないのに、文書同士の縁を結ぶ。","spark":"rel=\"prev\"/\"next\" で、実在しない前後の頁との関係だけを宣言する。読めない章に挟まれた一篇。","demo":"\u003c!-- &lt;link rel=\"prev\" href=\"昨日.html\"&gt; … 見えないが、確かに「昨日」と結ばれている -->\n\u003cp>この頁には、見えない縁（えにし）がある。\u003c/p>","note":"\u003chead> 内に置く。画面には出ないが、ブラウザや検索エンジンが読む「関係」の宣言。"},{"tag":"style","display":"&lt;style&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"CSS を書き込むための要素。…この企てが、あえて使わないと決めたもの。","poetic":"この辞典が、あえて封印した力。\u003cstyle> ひとつで、文字は色も大きさも配置も自在になる。それを「使わない」と決めることが、この詩作の出発点だった。封じることで、HTML本来の声が聞こえてくる。","spark":"あえて空の \u003cstyle>\u003c/style> だけを置く。「ここに、使わなかった力がある」という、不在の宣言。","demo":"\u003c!-- &lt;style&gt; … この中に一行書けば、すべてを変えられた。だから、書かなかった。 -->\n\u003cp>ここには、何の装飾もありません。それが、この詩のかたちです。\u003c/p>","note":"純HTMLの「作品」では使わないと決めた要素。知っておくことで、その不在が意味を持つ。"},{"tag":"script","display":"&lt;script&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"頭部 (head)","statusLa":"spec. classica","statusJa":"古種","dagger":false,"summary":"JavaScript を書き込む／読み込む要素。これも、あえて使わないもの。","poetic":"もうひとつの封印。\u003cscript> は文書に動きと知能を与える。それを断つことで、HTMLは「ただそこに在るだけ」の純粋さを取り戻す。動かないことを選んだ詩。type を未知の値にすれば、実行されない「ただのテキストの容れ物」にもなる。","spark":"\u003cscript type=\"text/plain\"> の中に詩を隠す。実行されず、画面にも出ず、ソースにだけ眠る言葉。noscript と対にしても面白い。","demo":"\u003c!-- &lt;script&gt; を一行も書かない。それが、この世界の約束。 -->\n\u003cp>ここでは、何も起こりません。何も起こらないことだけが、起こります。\u003c/p>","note":"type を未知の値にすると実行されず、ソースにだけ残る隠れたテキスト置き場になる。"},{"tag":"slot","display":"&lt;slot&gt;","orderLa":"Invisibilia","orderJa":"不可視目","habJa":"影 (shadow DOM)","statusLa":"spec. recens","statusJa":"新参種","dagger":false,"summary":"他の内容が「差し込まれる」場所の予約（主に Web Components 用）。","poetic":"中身が、まだ無い場所。slot は「ここに、いつか何かが入る」という空席。本来は影の中（Shadow DOM）でしか働かないが、その「差し込まれるのを待つ穴」という概念じたいが、不在と期待の詩になる。","spark":"「ここに、あなたの言葉が入るはずでした」という空席として、slot を概念ごと詩に引用する。","demo":"\u003cp>ここに、\u003cslot>（まだ誰も座っていない席）\u003c/slot>があります。\u003c/p>","note":"実際に機能するのは Shadow DOM 内のみ。通常は中の既定テキストがそのまま見える。"}],"strategies":["繰り返しは、祈りになる。同じ要素を、しつこく重ねてみる。","閉じているものを、ひとつだけ開けておく。","見えないところに、本当のことを書く。","読者に、書き換えさせる。完成を手放す。","タグの名前そのものを、意味として使う。","余白を主役にする。中身を捨てる勇気。","壊れた表示を、わざと残す。エラーを詩にする。","表に出る言葉と、裏に隠す言葉を、正反対にする。","時間を、datetime として正確に刻む。あるいは、嘘の時刻を刻む。","ひとつの言葉に、ふたつの読みを同時に与える。","順序を、逆にする。終わりから始める。","定義することで、世界を名づけ直す。","引用の出典を、偽る。声を、他人のものにする。","押せるのに、何も起きない。その無反応を、味わわせる。","読者の画面の幅で、詩の形が変わるようにする。","alt 属性にだけ、本音を書く。見えない絵の、見える言葉。","選択肢を、ひとつしか用意しない。選ばせて、選ばせない。","ループさせる。終わらない。抜け出せない。","入れ子にする。開けても開けても、まだ奥がある。","二つの声を、ひとつの段落で同時に流す。","数値の裏に、感情を隠す。value に、本心を。","送り先のないフォームを作る。届かない手紙の構造。","見える層、なぞると出る層、ソースにだけある層——三層に書く。","正しさを拒む。機械が『間違い』と言う言葉を、あえて選ぶ。","ひとつだけ、向きを変える。みんなと逆に流れる、一語。","満たさない。バーを、最後まで届かせない。","持ち帰らせる。読者の手元に、一語だけ残す。","リンク先を、空にする。どこへも行けない案内。","最小限の言葉と、最大限の記号。約物だけで、感情を描く。","属性ひとつで、ページぜんたいの振る舞いを変える。"],"themes":["水","窓","沈黙","別れ","名前","影","約束","余白","雨","鏡","朝","夜明け","忘却","手紙","距離","声","傷","呼吸","境界","残響","未完","反復","気配","対称","欠落","二重","逆さ","蛇行","結び目","余韻"]};</script>
   <script>
   (function(){
@@ -1571,9 +1634,56 @@
     try{ cross=JSON.parse(localStorage.getItem('htmldict.case.cross')||'[]'); }catch(e){}
     cross=cross.filter(function(t){ return byTag[t]; });
     function saveCross(){ try{ localStorage.setItem('htmldict.case.cross',JSON.stringify(cross)); }catch(e){} }
+    function deco(x){ return String(x).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'); }
+
+    // しおり（収蔵）
+    var kept=new Set();
+    try{ (JSON.parse(localStorage.getItem('htmldict.case.kept')||'[]')||[]).forEach(function(t){ if(byTag[t]) kept.add(t); }); }catch(e){}
+    function saveKept(){ try{ localStorage.setItem('htmldict.case.kept',JSON.stringify(Array.from(kept))); }catch(e){} }
 
     var loupe=document.getElementById('loupe');
     var tray=document.getElementById('cross');
+
+    // トースト
+    var toastEl=document.getElementById('toast');
+    function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(function(){ toastEl.classList.remove('show'); },1800); }
+
+    function markKept(){ document.querySelectorAll('.specimen').forEach(function(f){ f.classList.toggle('is-kept', kept.has(f.getAttribute('data-tag'))); }); }
+    function updateKeepBadge(){ var b=document.getElementById('keepBadge'); b.hidden=false; b.querySelector('.kb-n').textContent=kept.size; if(!kept.size){ document.body.classList.remove('dim-unkept'); b.classList.remove('active'); } }
+    function keepLabel(tag){ return kept.has(tag)?'◉ 収蔵済み（外す）':'🔖 収蔵する'; }
+    function toggleKeep(tag){ if(kept.has(tag)) kept.delete(tag); else kept.add(tag); saveKept(); markKept(); updateKeepBadge(); }
+
+    function printLabel(tag){
+      var s=byTag[tag]; if(!s) return;
+      var box=document.getElementById('printlabel');
+      box.querySelector('.pl-sp').innerHTML=s.display;
+      box.querySelector('.pl-genus').innerHTML='<i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa);
+      box.querySelector('.pl-loc').textContent='Hab. '+s.habJa;
+      box.querySelector('.pl-det').innerHTML='<i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'');
+      box.hidden=false; document.body.classList.add('printing'); window.print();
+    }
+    window.addEventListener('afterprint', function(){ var b=document.getElementById('printlabel'); if(b) b.hidden=true; document.body.classList.remove('printing'); });
+
+    function buildMemo(){
+      var L=['— HTML詩語辞典・交配メモ —',''];
+      if(lastProv){
+        L.push(lastProv.names.map(deco).join(' × '));
+        L.push('そのとき——「'+lastProv.strat+'」');
+        L.push('題材：〈'+lastProv.theme+'〉','');
+      }
+      L.push('［素材の標本］');
+      cross.forEach(function(t){ var s=byTag[t]; if(!s) return;
+        L.push('・'+deco(s.display)+'  '+s.summary);
+        if(s.spark) L.push('   けしかけ: '+s.spark);
+      });
+      return L.join('\n');
+    }
+    function exportMemo(){
+      var text=buildMemo();
+      function fb(){ var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); var ok=false; try{ ok=document.execCommand('copy'); }catch(e){} document.body.removeChild(ta); toast(ok?'交配メモをコピーしました':'コピーできませんでした'); }
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(function(){ toast('交配メモをコピーしました'); }, fb); }
+      else fb();
+    }
 
     function crossLabel(tag){ return cross.indexOf(tag)>=0 ? '◉ 交配中（外す）' : '＋ 交配に加える'; }
     function openLoupe(tag){
@@ -1589,6 +1699,10 @@
       var cb=loupe.querySelector('.lc-cross');
       cb.textContent=crossLabel(tag); cb.classList.toggle('is-on', cross.indexOf(tag)>=0);
       cb.onclick=function(){ toggleCross(tag); cb.textContent=crossLabel(tag); cb.classList.toggle('is-on', cross.indexOf(tag)>=0); };
+      var kb=loupe.querySelector('.lc-keep');
+      kb.textContent=keepLabel(tag); kb.classList.toggle('is-on', kept.has(tag));
+      kb.onclick=function(){ toggleKeep(tag); kb.textContent=keepLabel(tag); kb.classList.toggle('is-on', kept.has(tag)); };
+      loupe.querySelector('.lc-print').onclick=function(){ printLabel(tag); };
       loupe.hidden=false; document.body.classList.add('loupe-open');
     }
     function closeLoupe(){ loupe.hidden=true; document.body.classList.remove('loupe-open'); }
@@ -1628,8 +1742,9 @@
       var prov=tray.querySelector('.ct-prov');
       if(cross.length>=2){
         if(!lastProv || lastProv.key!==cross.join(',')) lastProv=provFor(cross);
-        prov.innerHTML=provHTML(lastProv)+'<div class="pv-acts"><button class="pv-redraw">引き直す</button><button class="pv-clear">空にする</button></div>';
+        prov.innerHTML=provHTML(lastProv)+'<div class="pv-acts"><button class="pv-redraw">引き直す</button><button class="pv-memo">メモへ書き出す</button><button class="pv-clear">空にする</button></div>';
         prov.querySelector('.pv-redraw').onclick=function(){ lastProv=provFor(cross); renderTray(); };
+        prov.querySelector('.pv-memo').onclick=exportMemo;
         prov.querySelector('.pv-clear').onclick=function(){ cross=[]; saveCross(); lastProv=null; renderTray(); };
       } else { prov.innerHTML=''; }
     }
@@ -1641,10 +1756,13 @@
     tray.querySelector('.ct-seed').onclick=sowSeed;
     tray.querySelector('.ct-min').onclick=function(){ tray.classList.toggle('min'); };
 
+    var keepBadge=document.getElementById('keepBadge');
+    keepBadge.onclick=function(){ if(!kept.size){ toast('まだ収蔵した標本がありません'); return; } var on=document.body.classList.toggle('dim-unkept'); keepBadge.classList.toggle('active', on); };
+
     var hint=document.querySelector('.head-hint'); if(hint) hint.hidden=false;
     document.body.classList.add('js-on');
     if(!cross.length) tray.classList.add('min');
-    renderTray();
+    markKept(); updateKeepBadge(); renderTray();
   })();
   </script>
 </body>
