@@ -402,10 +402,12 @@ ${bugs}
   .lc-demo-code { margin:0; padding:10px 12px; background:#241a0e; color:#e8dcc2;
     font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.7rem; line-height:1.55;
     overflow:auto; white-space:pre-wrap; word-break:break-word; }
-  .lc-actions { margin-top:16px; text-align:center; }
-  .lc-cross { font-family:inherit; font-size:.82rem; color:#f3e9d2; background:linear-gradient(180deg,#6f4d31,#46301f);
-    border:1px solid #2c1c0d; border-radius:4px; padding:7px 18px; cursor:pointer; }
-  .lc-cross.is-on { background:linear-gradient(180deg,#8a3320,#5e2114); }
+  .lc-actions { margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+  .lc-actions button { font-family:inherit; font-size:.78rem; color:#f3e9d2;
+    background:linear-gradient(180deg,#6f4d31,#46301f); border:1px solid #2c1c0d; border-radius:4px;
+    padding:7px 14px; cursor:pointer; transition:background .15s; }
+  .lc-actions button:hover { background:linear-gradient(180deg,#7d5839,#503723); }
+  .lc-actions button.is-on { background:linear-gradient(180deg,#9a3a23,#5e2114); }
 
   .cross-tray[hidden] { display:none; }
   .cross-tray { position:fixed; right:16px; bottom:16px; z-index:40; width:min(332px,92vw);
@@ -442,10 +444,20 @@ ${bugs}
     background:radial-gradient(circle at 40% 32%, #c75a3c, #7e2414 78%); border-radius:50%;
     box-shadow:0 1px 2px rgba(0,0,0,.5), inset 0 0 0 1px rgba(255,235,200,.3); }
   .specimen.is-kept .bug .seal { display:block; }
-  body.dim-unkept .specimen:not(.is-kept) { opacity:.18; filter:saturate(.4); transition:opacity .2s; }
 
-  .loupe-card .lc-keep.is-on, .loupe-card .lc-print { background:linear-gradient(180deg,#7a5226,#4a3210); }
-  .loupe-card .lc-keep.is-on { background:linear-gradient(180deg,#a8442a,#6e2010); }
+  /* 収蔵箱: 収蔵した標本だけを別の箱に並べ直す */
+  .kept-case[hidden] { display:none; }
+  .kept-case { position:fixed; inset:0; z-index:45; overflow:auto;
+    display:flex; align-items:flex-start; justify-content:center; padding:30px 16px 48px; }
+  .kc-back { position:fixed; inset:0; background:rgba(10,7,3,.82); }
+  .kc-panel { position:relative; z-index:1; width:min(900px,96vw); }
+  .kc-bar { display:flex; align-items:center; gap:10px; margin:0 0 12px; }
+  .kc-title { flex:1; font-family:"Hiragino Mincho ProN","Yu Mincho",serif; color:#f0e6d2;
+    font-size:1rem; letter-spacing:.12em; }
+  .kc-x { background:rgba(255,255,255,.12); color:#f0e6d2; border:1px solid rgba(255,255,255,.25);
+    border-radius:4px; cursor:pointer; font-size:.95rem; padding:3px 11px; }
+  .kc-inner { margin:0 !important; }
+  .kc-empty { color:#c9b48f; font-family:"Hiragino Mincho ProN",serif; font-size:.8rem; text-align:center; padding:30px 0; }
 
   /* 収蔵バッジ（右上） */
   .keep-badge[hidden] { display:none; }
@@ -463,21 +475,19 @@ ${bugs}
     opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; }
   .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
 
-  /* 単票の印刷 */
-  #printlabel[hidden] { display:none; }
-  #printlabel { position:fixed; inset:0; z-index:100; background:#fff; }
-  #printlabel .pcard { position:absolute; top:28mm; left:50%; transform:translateX(-50%);
-    width:54mm; border:1px dashed #999; border-radius:2px; padding:6mm 4mm; text-align:center;
-    display:flex; flex-direction:column; gap:1.1mm; font-family:"Hiragino Mincho ProN","Yu Mincho",serif; color:#222; }
-  #printlabel .pl-sp { font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:13pt; margin-bottom:1mm; }
-  #printlabel .pl-genus { font-size:8pt; color:#333; }
-  #printlabel .pl-loc, #printlabel .pl-det { font-size:7pt; color:#555; }
-  #printlabel .pl-det i { color:#7a2d22; }
-  #printlabel .pl-coll { margin-top:2mm; padding-top:1mm; border-top:.3pt solid #ccc; font-size:6pt; color:#888; letter-spacing:.04em; }
+  /* 交配台ランチャー（普段はこの小ボタンだけ。押すと交配台が開く） */
+  .cross-btn[hidden] { display:none; }
+  .cross-btn { position:fixed; right:16px; bottom:16px; z-index:40; font-family:"Hiragino Mincho ProN",serif;
+    font-size:.76rem; color:#f3e9d2; background:linear-gradient(180deg,#6f4d31,#46301f);
+    border:1px solid #2c1c0d; border-radius:16px; padding:7px 14px; cursor:pointer;
+    box-shadow:0 8px 18px -8px rgba(0,0,0,.7); }
+  .cross-btn .cb-n { display:none; font-weight:700; margin-left:4px;
+    background:#9a3a23; color:#fff; border-radius:9px; padding:0 6px; }
+  .cross-btn.has .cb-n { display:inline; }
+
+  /* 印刷: 単票は専用iframeで出すので、本体側は念のためフロート類を隠すだけ */
   @media print {
-    body.printing > *:not(#printlabel) { display:none !important; }
-    body.printing #printlabel { display:block !important; }
-    @page { margin:12mm; }
+    .cross-tray, .cross-btn, .keep-badge, .toast, .loupe, .kept-case, .head-hint { display:none !important; }
   }
 
   @media (max-width:560px) {
@@ -495,7 +505,7 @@ ${bugs}
     <p class="head-hint" hidden>標本をクリックすると<b>観察票</b>がひらきます。二匹を<b>交配</b>させると、詩の問いが立ちます。</p>
   </header>
 
-  <main class="case">
+  <main class="case" id="mainCase">
     <div class="glass">
 ${drawers}
       <span class="grain"></span>
@@ -535,11 +545,12 @@ ${drawers}
   </div>
 
   <!-- 交配台（二種を掛け合わせて、まだ無い詩を想像する） -->
+  <button id="crossBtn" class="cross-btn" hidden>🧪 交配台<span class="cb-n">0</span></button>
   <aside id="cross" class="cross-tray" hidden>
     <div class="ct-head">
       <span class="ct-title">交配台 <span class="ct-count">0</span></span>
       <button class="ct-seed" title="偶然の組を引く">🎲 種をまく</button>
-      <button class="ct-min" title="畳む／開く">—</button>
+      <button class="ct-min" title="閉じる">✕</button>
     </div>
     <div class="ct-chips"></div>
     <div class="ct-prov"></div>
@@ -548,14 +559,24 @@ ${drawers}
   <button id="keepBadge" class="keep-badge" hidden>🔖 収蔵 <span class="kb-n">0</span></button>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <div id="printlabel" hidden>
-    <figure class="pcard">
-      <span class="pl-sp"></span>
-      <span class="pl-genus"></span>
-      <span class="pl-loc"></span>
-      <span class="pl-det"></span>
-      <span class="pl-coll">coll. ＿＿＿＿　HTML&nbsp;Day</span>
-    </figure>
+  <!-- 収蔵箱（収蔵した標本だけを並べ直す） -->
+  <div id="keptCase" class="kept-case" hidden>
+    <div class="kc-back" data-kc-close></div>
+    <div class="kc-panel">
+      <div class="kc-bar">
+        <span class="kc-title">私の収蔵箱</span>
+        <button class="kc-x" data-kc-close title="閉じる">✕ 閉じる</button>
+      </div>
+      <main class="case kc-inner">
+        <div class="glass">
+          <section class="drawer">
+            <h2 class="order"><span class="o-la">Collectio</span><span class="o-ja">収蔵</span></h2>
+            <div class="row kc-row"></div>
+          </section>
+          <span class="grain"></span>
+        </div>
+      </main>
+    </div>
   </div>
 
   <script>window.__DICT__=${dictJson};</script>
@@ -586,20 +607,33 @@ ${drawers}
     function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(toast._t); toast._t=setTimeout(function(){ toastEl.classList.remove('show'); },1800); }
 
     function markKept(){ document.querySelectorAll('.specimen').forEach(function(f){ f.classList.toggle('is-kept', kept.has(f.getAttribute('data-tag'))); }); }
-    function updateKeepBadge(){ var b=document.getElementById('keepBadge'); b.hidden=false; b.querySelector('.kb-n').textContent=kept.size; if(!kept.size){ document.body.classList.remove('dim-unkept'); b.classList.remove('active'); } }
+    function updateKeepBadge(){ var b=document.getElementById('keepBadge'); b.hidden=false; b.querySelector('.kb-n').textContent=kept.size; }
     function keepLabel(tag){ return kept.has(tag)?'◉ 収蔵済み（外す）':'🔖 収蔵する'; }
     function toggleKeep(tag){ if(kept.has(tag)) kept.delete(tag); else kept.add(tag); saveKept(); markKept(); updateKeepBadge(); }
 
     function printLabel(tag){
       var s=byTag[tag]; if(!s) return;
-      var box=document.getElementById('printlabel');
-      box.querySelector('.pl-sp').innerHTML=s.display;
-      box.querySelector('.pl-genus').innerHTML='<i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa);
-      box.querySelector('.pl-loc').textContent='Hab. '+s.habJa;
-      box.querySelector('.pl-det').innerHTML='<i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'');
-      box.hidden=false; document.body.classList.add('printing'); window.print();
+      var css='@page{margin:14mm;}body{margin:0;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:#222;}'
+        +'.pcard{width:54mm;margin:10mm auto;border:1px dashed #999;border-radius:2px;padding:6mm 4mm;text-align:center;display:flex;flex-direction:column;gap:1.2mm;}'
+        +'.sp{font-family:"SFMono-Regular",Consolas,Menlo,monospace;font-size:13pt;margin-bottom:1.2mm;}'
+        +'.genus{font-size:8pt;color:#333;}.loc,.det{font-size:7pt;color:#555;}.det i{color:#7a2d22;}'
+        +'.coll{margin-top:2.5mm;padding-top:1.2mm;border-top:.3pt solid #ccc;font-size:6pt;color:#888;letter-spacing:.04em;}';
+      var body='<div class="pcard"><span class="sp">'+s.display+'</span>'
+        +'<span class="genus"><i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa)+'</span>'
+        +'<span class="loc">Hab. '+esc(s.habJa)+'</span>'
+        +'<span class="det"><i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'')+'</span>'
+        +'<span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span></div>';
+      var doc='<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><title>'+s.tag+' label</title><style>'+css+'</style></head><body>'+body+'</body></html>';
+      var ifr=document.createElement('iframe');
+      ifr.setAttribute('aria-hidden','true');
+      ifr.style.cssText='position:fixed;width:0;height:0;border:0;right:0;bottom:0;opacity:0;';
+      document.body.appendChild(ifr);
+      var w=ifr.contentWindow;
+      w.document.open(); w.document.write(doc); w.document.close();
+      var fired=false;
+      function go(){ if(fired)return; fired=true; try{ w.focus(); w.print(); }catch(e){} setTimeout(function(){ if(ifr.parentNode) ifr.parentNode.removeChild(ifr); },1200); }
+      ifr.onload=go; setTimeout(go,350);
     }
-    window.addEventListener('afterprint', function(){ var b=document.getElementById('printlabel'); if(b) b.hidden=true; document.body.classList.remove('printing'); });
 
     function buildMemo(){
       var L=['— HTML詩語辞典・交配メモ —',''];
@@ -642,11 +676,13 @@ ${drawers}
       loupe.querySelector('.lc-print').onclick=function(){ printLabel(tag); };
       loupe.hidden=false; document.body.classList.add('loupe-open');
     }
-    function closeLoupe(){ loupe.hidden=true; document.body.classList.remove('loupe-open'); }
+    function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); }
     loupe.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeLoupe(); });
-    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&!loupe.hidden) closeLoupe(); });
+    document.addEventListener('keydown', function(e){ if(e.key!=='Escape') return; if(!loupe.hidden) closeLoupe(); else if(!document.getElementById('keptCase').hidden) closeKeptCase(); });
 
-    document.querySelector('.case').addEventListener('click', function(e){
+    // 本体の標本も収蔵箱の複製も、どちらのクリックでも観察票を開く
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.cross-tray')||e.target.closest('.loupe')||e.target.closest('.kc-bar')) return;
       var f=e.target.closest('.specimen'); if(f) openLoupe(f.getAttribute('data-tag'));
     });
 
@@ -659,10 +695,12 @@ ${drawers}
         '<p class="pv-text"><b>'+p.names.join('</b> と <b>')+'</b> を、ひとつの作品の中で出会わせる。<br>'+
         'そのとき——「'+esc(p.strat)+'」<br>題材は、たとえば〈'+esc(p.theme)+'〉。</p></div>';
     }
-    function toggleCross(tag){ var i=cross.indexOf(tag); if(i>=0)cross.splice(i,1); else cross.push(tag); saveCross(); tray.classList.remove('min'); renderTray(); }
+    function openTray(){ document.getElementById('cross').hidden=false; document.getElementById('crossBtn').hidden=true; }
+    function closeTray(){ document.getElementById('cross').hidden=true; document.getElementById('crossBtn').hidden=false; }
+    function toggleCross(tag){ var i=cross.indexOf(tag); if(i>=0)cross.splice(i,1); else cross.push(tag); saveCross(); openTray(); renderTray(); }
     function renderTray(){
-      tray.hidden=false;
       tray.querySelector('.ct-count').textContent=cross.length;
+      var cbn=document.getElementById('crossBtn'); cbn.querySelector('.cb-n').textContent=cross.length; cbn.classList.toggle('has', cross.length>0);
       var chips=tray.querySelector('.ct-chips'); chips.innerHTML='';
       if(!cross.length){
         var em=document.createElement('span'); em.className='ct-empty';
@@ -688,17 +726,30 @@ ${drawers}
     function sowSeed(){
       var n=2+Math.floor(Math.random()*2);
       cross=shuffled(D.specimens.length).slice(0,n).map(function(i){ return D.specimens[i].tag; });
-      saveCross(); lastProv=provFor(cross); tray.classList.remove('min'); renderTray();
+      saveCross(); lastProv=provFor(cross); openTray(); renderTray();
     }
+    document.getElementById('crossBtn').onclick=openTray;
     tray.querySelector('.ct-seed').onclick=sowSeed;
-    tray.querySelector('.ct-min').onclick=function(){ tray.classList.toggle('min'); };
+    tray.querySelector('.ct-min').onclick=closeTray;
 
-    var keepBadge=document.getElementById('keepBadge');
-    keepBadge.onclick=function(){ if(!kept.size){ toast('まだ収蔵した標本がありません'); return; } var on=document.body.classList.toggle('dim-unkept'); keepBadge.classList.toggle('active', on); };
+    // 収蔵箱: 収蔵した標本だけを別の箱に並べ直して表示
+    var keptCase=document.getElementById('keptCase');
+    function openKeptCase(){
+      if(!kept.size){ toast('まだ収蔵した標本がありません'); return; }
+      var row=keptCase.querySelector('.kc-row'); row.innerHTML='';
+      document.querySelectorAll('#mainCase .specimen').forEach(function(f){
+        if(kept.has(f.getAttribute('data-tag'))) row.appendChild(f.cloneNode(true));
+      });
+      keptCase.querySelector('.kc-title').textContent='私の収蔵箱 — '+kept.size+' 標本';
+      keptCase.hidden=false; document.body.classList.add('loupe-open');
+    }
+    function closeKeptCase(){ keptCase.hidden=true; if(loupe.hidden) document.body.classList.remove('loupe-open'); }
+    keptCase.addEventListener('click', function(e){ if(e.target.hasAttribute('data-kc-close')) closeKeptCase(); });
+    document.getElementById('keepBadge').onclick=openKeptCase;
 
     var hint=document.querySelector('.head-hint'); if(hint) hint.hidden=false;
     document.body.classList.add('js-on');
-    if(!cross.length) tray.classList.add('min');
+    document.getElementById('crossBtn').hidden=false;
     markKept(); updateKeepBadge(); renderTray();
   })();
   </script>
