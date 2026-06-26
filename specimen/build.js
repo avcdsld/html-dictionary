@@ -454,9 +454,13 @@ ${bugs}
   .kc-bar { display:flex; align-items:center; gap:10px; margin:0 0 12px; }
   .kc-title { flex:1; font-family:"Hiragino Mincho ProN","Yu Mincho",serif; color:#f0e6d2;
     font-size:1rem; letter-spacing:.12em; }
-  .kc-x { background:rgba(255,255,255,.12); color:#f0e6d2; border:1px solid rgba(255,255,255,.25);
-    border-radius:4px; cursor:pointer; font-size:.95rem; padding:3px 11px; }
+  .kc-x, .kc-print { font-family:"Hiragino Mincho ProN","Yu Mincho",serif;
+    background:rgba(255,255,255,.12); color:#f0e6d2; border:1px solid rgba(255,255,255,.25);
+    border-radius:4px; cursor:pointer; font-size:.78rem; padding:5px 11px; }
+  .kc-print { background:linear-gradient(180deg,#6f4d31,#46301f); }
   .kc-inner { margin:0 !important; }
+  /* 収蔵箱では蔵印は出さない（選定済みなので不要） */
+  #keptCase .bug .seal { display:none !important; }
   .kc-empty { color:#c9b48f; font-family:"Hiragino Mincho ProN",serif; font-size:.8rem; text-align:center; padding:30px 0; }
 
   /* 収蔵バッジ（右上） */
@@ -565,6 +569,7 @@ ${drawers}
     <div class="kc-panel">
       <div class="kc-bar">
         <span class="kc-title">私の収蔵箱</span>
+        <button class="kc-print" title="収蔵したラベルをまとめて印刷">🏷 ラベルをまとめて印刷</button>
         <button class="kc-x" data-kc-close title="閉じる">✕ 閉じる</button>
       </div>
       <main class="case kc-inner">
@@ -611,28 +616,40 @@ ${drawers}
     function keepLabel(tag){ return kept.has(tag)?'◉ 収蔵済み（外す）':'🔖 収蔵する'; }
     function toggleKeep(tag){ if(kept.has(tag)) kept.delete(tag); else kept.add(tag); saveKept(); markKept(); updateKeepBadge(); }
 
-    function printLabel(tag){
-      var s=byTag[tag]; if(!s) return;
-      var css='@page{margin:14mm;}body{margin:0;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:#222;}'
-        +'.pcard{width:54mm;margin:10mm auto;border:1px dashed #999;border-radius:2px;padding:6mm 4mm;text-align:center;display:flex;flex-direction:column;gap:1.2mm;}'
-        +'.sp{font-family:"SFMono-Regular",Consolas,Menlo,monospace;font-size:13pt;margin-bottom:1.2mm;}'
-        +'.genus{font-size:8pt;color:#333;}.loc,.det{font-size:7pt;color:#555;}.det i{color:#7a2d22;}'
-        +'.coll{margin-top:2.5mm;padding-top:1.2mm;border-top:.3pt solid #ccc;font-size:6pt;color:#888;letter-spacing:.04em;}';
-      var body='<div class="pcard"><span class="sp">'+s.display+'</span>'
+    function labelCardHTML(s){
+      return '<div class="pcard"><span class="sp">'+s.display+'</span>'
         +'<span class="genus"><i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa)+'</span>'
         +'<span class="loc">Hab. '+esc(s.habJa)+'</span>'
         +'<span class="det"><i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'')+'</span>'
         +'<span class="coll">coll. ＿＿＿＿　HTML&nbsp;Day</span></div>';
-      var doc='<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><title>'+s.tag+' label</title><style>'+css+'</style></head><body>'+body+'</body></html>';
-      var ifr=document.createElement('iframe');
-      ifr.setAttribute('aria-hidden','true');
+    }
+    var LABEL_BASE='body{margin:0;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:#222;}'
+      +'.pcard{border:1px dashed #999;border-radius:2px;text-align:center;display:flex;flex-direction:column;break-inside:avoid;}'
+      +'.sp{font-family:"SFMono-Regular",Consolas,Menlo,monospace;margin-bottom:1.2mm;}'
+      +'.genus{color:#333;}.loc,.det{color:#555;}.det i{color:#7a2d22;}'
+      +'.coll{border-top:.3pt solid #ccc;color:#888;letter-spacing:.04em;}';
+    var SINGLE_CSS='@page{margin:14mm;}'+LABEL_BASE
+      +'.pcard{width:54mm;margin:10mm auto;padding:6mm 4mm;gap:1.2mm;}'
+      +'.sp{font-size:13pt;}.genus{font-size:8pt;}.loc,.det{font-size:7pt;}.coll{margin-top:2.5mm;padding-top:1.2mm;font-size:6pt;}';
+    var SHEET_CSS='@page{margin:12mm;}'+LABEL_BASE
+      +'.sheet{display:flex;flex-wrap:wrap;gap:5mm;align-content:flex-start;}'
+      +'.pcard{width:40mm;padding:4mm 3mm;gap:1mm;}'
+      +'.sp{font-size:11pt;}.genus{font-size:7.5pt;}.loc,.det{font-size:6.5pt;}.coll{margin-top:2mm;padding-top:1mm;font-size:5.5pt;}';
+    function printDoc(title, css, bodyHTML){
+      var doc='<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><title>'+title+'</title><style>'+css+'</style></head><body>'+bodyHTML+'</body></html>';
+      var ifr=document.createElement('iframe'); ifr.setAttribute('aria-hidden','true');
       ifr.style.cssText='position:fixed;width:0;height:0;border:0;right:0;bottom:0;opacity:0;';
       document.body.appendChild(ifr);
-      var w=ifr.contentWindow;
-      w.document.open(); w.document.write(doc); w.document.close();
-      var fired=false;
-      function go(){ if(fired)return; fired=true; try{ w.focus(); w.print(); }catch(e){} setTimeout(function(){ if(ifr.parentNode) ifr.parentNode.removeChild(ifr); },1200); }
+      var w=ifr.contentWindow; w.document.open(); w.document.write(doc); w.document.close();
+      var fired=false; function go(){ if(fired)return; fired=true; try{ w.focus(); w.print(); }catch(e){} setTimeout(function(){ if(ifr.parentNode) ifr.parentNode.removeChild(ifr); },1200); }
       ifr.onload=go; setTimeout(go,350);
+    }
+    function printLabel(tag){ var s=byTag[tag]; if(!s) return; printDoc(s.tag+' label', SINGLE_CSS, labelCardHTML(s)); }
+    function printKept(){
+      if(!kept.size){ toast('まだ収蔵した標本がありません'); return; }
+      var tags=Array.from(kept).filter(function(t){ return byTag[t]; });
+      var cards=tags.map(function(t){ return labelCardHTML(byTag[t]); }).join('');
+      printDoc('収蔵ラベル '+tags.length+'枚', SHEET_CSS, '<div class="sheet">'+cards+'</div>');
     }
 
     function buildMemo(){
@@ -745,6 +762,7 @@ ${drawers}
     }
     function closeKeptCase(){ keptCase.hidden=true; if(loupe.hidden) document.body.classList.remove('loupe-open'); }
     keptCase.addEventListener('click', function(e){ if(e.target.hasAttribute('data-kc-close')) closeKeptCase(); });
+    keptCase.querySelector('.kc-print').onclick=printKept;
     document.getElementById('keepBadge').onclick=openKeptCase;
 
     var hint=document.querySelector('.head-hint'); if(hint) hint.hidden=false;
