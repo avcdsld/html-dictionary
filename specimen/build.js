@@ -2,7 +2,12 @@
 //
 // 出力:
 //   specimen/labels.html … 印刷用ラベルシート（切ってピン留めする物理標本箱用）
-//   specimen/case.html   … 画面で眺めるデジタル標本ケース（HTML+CSS のみ・JS不要）
+//   specimen/case.html   … 画面で眺めるデジタル標本ケース。
+//                          静的部分は HTML+CSS のみ（JS無効でも完全に成立）。
+//                          JS有効時のみ、辞書としての機能が段階的に乗る:
+//                          ・標本をクリック→観察票（定義/詩/けしかけ/生きた標本）
+//                          ・二匹を交配→組み合わせの問い（STRATEGIES×THEMES）
+//                          ・種をまく→偶然の組を引く
 //
 // 着想: HTMLタグを「分類学的に採集された昆虫」として扱う。
 //   学名   = タグそのもの（<details> など）
@@ -21,10 +26,12 @@ const root = path.resolve(__dirname, "..");
 const ctx = {};
 vm.createContext(ctx);
 vm.runInContext(
-  fs.readFileSync(path.join(root, "data.js"), "utf8") + "\nthis.E=ELEMENTS;this.C=CATEGORIES;",
+  fs.readFileSync(path.join(root, "data.js"), "utf8") + "\nthis.E=ELEMENTS;this.C=CATEGORIES;this.S=STRATEGIES;this.T=THEMES;",
   ctx
 );
 const ELEMENTS = ctx.E;
+const STRATEGIES = ctx.S;
+const THEMES = ctx.T;
 
 // ── 分類（目 Order）: category → ラテン名/和名 ──────────
 const ORDER = {
@@ -95,6 +102,12 @@ for (const e of ELEMENTS) {
       habLa: hab,
       habJa: HAB_JA[hab] || hab,
       status: statusOf(t),
+      // 辞書の中身（観察票・交配で使う）
+      summary: e.summary || "",
+      poetic: e.poetic || "",
+      spark: e.spark || "",
+      demo: e.demo || "",
+      note: e.note || "",
     });
   }
 }
@@ -182,7 +195,7 @@ function buildCase() {
   const wob = s => { const h = hash(s); const r = ((h % 1000) / 1000 * 4.4 - 2.2).toFixed(2); return `--r:${r}deg`; };
   const drawers = orderKeys.map(k => {
     const ord = ORDER[k];
-    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen" style="${wob(tagStr(s.tag))}">
+    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen" data-tag="${s.tag}" style="${wob(tagStr(s.tag))}">
         <span class="pin"></span>
         <span class="bug">${tagStr(s.tag)}</span>
         <span class="card">
@@ -200,6 +213,25 @@ ${bugs}
       </div>
     </section>`;
   }).join("\n");
+
+  // 辞書の中身をページに埋め込む（観察票・交配・種まきで使う）
+  const dictData = {
+    specimens: specimens.map(s => ({
+      tag: s.tag,
+      display: tagStr(s.tag),
+      orderLa: s.order.la, orderJa: s.order.ja,
+      habJa: s.habJa,
+      statusLa: s.status.la, statusJa: s.status.ja, dagger: !!s.status.dagger,
+      summary: s.summary, poetic: s.poetic, spark: s.spark, demo: s.demo, note: s.note,
+    })),
+    strategies: STRATEGIES,
+    themes: THEMES,
+  };
+  // <script> を壊さないよう < を退避してから埋める
+  const dictJson = JSON.stringify(dictData)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -338,6 +370,70 @@ ${bugs}
     font-size:.72rem; color:#9c8b70; line-height:1.9; }
   .foot a { color:#d9b48a; }
 
+  /* ── 辞書としての復活：観察票（拡大鏡）＋交配台 ── */
+  .head-hint[hidden] { display:none; }
+  .head-hint { font-size:.72rem; color:#c9b48f; letter-spacing:.04em; margin:.5rem 0 0; }
+  .js-on .specimen { cursor:zoom-in; }
+
+  body.loupe-open { overflow:hidden; }
+  .loupe[hidden] { display:none; }
+  .loupe { position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; padding:20px; }
+  .loupe-back { position:absolute; inset:0; background:rgba(12,8,4,.74); }
+  .loupe-card { position:relative; z-index:1; width:min(560px,94vw); max-height:88vh; overflow:auto;
+    background:linear-gradient(160deg,#f4e8ca,#e7d5ad); color:#43301c; border-radius:4px;
+    border:1px solid rgba(120,85,40,.5);
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.8), inset 0 0 0 6px rgba(255,255,255,.16), inset 0 0 40px rgba(150,110,60,.18);
+    padding:22px 24px 26px; font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif; }
+  .loupe-x { position:absolute; top:8px; right:12px; border:none; background:none; font-size:1.15rem; color:#7a5226; cursor:pointer; line-height:1; }
+  .lc-head { text-align:center; border-bottom:1px solid rgba(120,85,40,.35); padding-bottom:10px; margin-bottom:6px; }
+  .lc-name { display:block; font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:1.5rem; color:#2a1c10; }
+  .lc-tax { display:block; margin-top:5px; font-size:.72rem; color:#7c5733; }
+  .lc-tax i { color:#5b3c22; }
+  .lc-body { margin:0 0 6px; }
+  .lc-body dt { font-size:.64rem; letter-spacing:.16em; color:#8a6a3c; margin:11px 0 3px; }
+  .lc-body dd { margin:0; font-size:.9rem; line-height:1.75; color:#3f2a17; }
+  .lc-body .lc-spark { color:#8a3320; font-style:italic; }
+  .lc-demo { margin-top:14px; border:1px solid rgba(120,85,40,.4); border-radius:3px; overflow:hidden; }
+  .lc-demo-strip { font-size:.6rem; letter-spacing:.1em; color:#f4ead6; background:linear-gradient(90deg,#6f4d31,#46301f); padding:4px 9px; }
+  .lc-demo-live { padding:14px; background:#fffdf7; color:#1c140a; font-family:system-ui,-apple-system,sans-serif; font-size:.92rem; line-height:1.6; }
+  .lc-demo-live * { max-width:100%; }
+  .lc-demo-src { border-top:1px dashed rgba(120,85,40,.4); background:#fffdf7; }
+  .lc-demo-src summary { cursor:pointer; font-size:.66rem; color:#7a5226; padding:6px 9px; }
+  .lc-demo-code { margin:0; padding:10px 12px; background:#241a0e; color:#e8dcc2;
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.7rem; line-height:1.55;
+    overflow:auto; white-space:pre-wrap; word-break:break-word; }
+  .lc-actions { margin-top:16px; text-align:center; }
+  .lc-cross { font-family:inherit; font-size:.82rem; color:#f3e9d2; background:linear-gradient(180deg,#6f4d31,#46301f);
+    border:1px solid #2c1c0d; border-radius:4px; padding:7px 18px; cursor:pointer; }
+  .lc-cross.is-on { background:linear-gradient(180deg,#8a3320,#5e2114); }
+
+  .cross-tray[hidden] { display:none; }
+  .cross-tray { position:fixed; right:16px; bottom:16px; z-index:40; width:min(332px,92vw);
+    background:linear-gradient(160deg,#efe2c0,#ddc79c); color:#43301c;
+    border:1px solid rgba(90,60,30,.5); border-radius:6px;
+    box-shadow:0 18px 50px -16px rgba(0,0,0,.7), inset 0 0 0 1px rgba(255,255,255,.2);
+    font-family:"Hiragino Mincho ProN","Yu Mincho",serif; overflow:hidden; }
+  .ct-head { display:flex; align-items:center; gap:8px; padding:8px 10px; background:linear-gradient(90deg,#6f4d31,#46301f); color:#f4ead6; }
+  .ct-title { font-size:.78rem; letter-spacing:.1em; flex:1; }
+  .ct-title .ct-count { opacity:.7; font-size:.7rem; }
+  .ct-seed, .ct-min { font-family:inherit; background:rgba(255,255,255,.14); color:#f4ead6;
+    border:1px solid rgba(255,255,255,.25); border-radius:3px; cursor:pointer; font-size:.72rem; padding:3px 8px; }
+  .ct-chips { display:flex; flex-wrap:wrap; gap:6px; padding:10px; }
+  .ct-empty { font-size:.66rem; color:#6a4f30; line-height:1.7; }
+  .ct-chip { display:inline-flex; align-items:center; gap:5px;
+    font-family:"SFMono-Regular",Consolas,Menlo,monospace; font-size:.74rem;
+    background:#2d2214; color:#ecdfc2; border-radius:3px; padding:3px 7px; cursor:zoom-in; }
+  .ct-rm { background:none; border:none; color:#d8b48a; cursor:pointer; font-size:.72rem; padding:0; line-height:1; }
+  .ct-prov { padding:0 10px 12px; }
+  .pv { background:rgba(255,252,244,.55); border:1px solid rgba(120,85,40,.35); border-radius:3px; padding:9px 11px; }
+  .pv-label { display:block; font-size:.6rem; letter-spacing:.16em; color:#8a6a3c; margin-bottom:5px; }
+  .pv-text { margin:0; font-size:.82rem; line-height:1.75; color:#3f2a17; }
+  .pv-text b { color:#2a1c10; }
+  .pv-acts { margin-top:9px; display:flex; gap:8px; }
+  .pv-acts button { font-family:inherit; font-size:.68rem; color:#5a3f25; background:rgba(120,85,40,.14);
+    border:1px solid rgba(120,85,40,.35); border-radius:3px; padding:4px 10px; cursor:pointer; }
+  .cross-tray.min .ct-chips, .cross-tray.min .ct-prov { display:none; }
+
   @media (max-width:560px) {
     .row { grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:26px 10px; }
     .case { padding:13px; }
@@ -350,6 +446,7 @@ ${bugs}
     <h1>ＨＴＭＬ　タグ標本箱</h1>
     <p>HTML5 のタグを一匹ずつ採集し、目(Order)ごとに並べた標本ケース。<br>
     ただ眺めて、愛でるためのものです。${specimens.length} 標本収蔵。</p>
+    <p class="head-hint" hidden>標本をクリックすると<b>観察票</b>がひらきます。二匹を<b>交配</b>させると、詩の問いが立ちます。</p>
   </header>
 
   <main class="case">
@@ -363,6 +460,130 @@ ${drawers}
     <p><i>spec. relicta †</i> は廃止種（&lt;marquee&gt; のように、今も飛んでいる目撃例あり）。<br>
     <a href="labels.html">▸ 印刷用ラベルシート</a> ／ <a href="../index.html">▸ HTML 詩語辞典へ戻る</a></p>
   </footer>
+
+  <!-- 観察票（拡大鏡で標本を覗く＝辞書の中身） -->
+  <div id="loupe" class="loupe" hidden>
+    <div class="loupe-back" data-close></div>
+    <article class="loupe-card">
+      <button class="loupe-x" data-close title="閉じる">✕</button>
+      <div class="lc-head">
+        <span class="lc-name"></span>
+        <span class="lc-tax"></span>
+      </div>
+      <dl class="lc-body">
+        <dt>定義</dt><dd class="lc-summary"></dd>
+        <dt>詩の素材として</dt><dd class="lc-poetic"></dd>
+        <dt>けしかけ</dt><dd class="lc-spark"></dd>
+      </dl>
+      <section class="lc-demo">
+        <div class="lc-demo-strip">生きた標本 — 下は本物のHTMLが描かれています</div>
+        <div class="lc-demo-live"></div>
+        <details class="lc-demo-src"><summary>HTMLのソースを見る</summary><pre class="lc-demo-code"></pre></details>
+      </section>
+      <div class="lc-actions"><button class="lc-cross">＋ 交配に加える</button></div>
+    </article>
+  </div>
+
+  <!-- 交配台（二種を掛け合わせて、まだ無い詩を想像する） -->
+  <aside id="cross" class="cross-tray" hidden>
+    <div class="ct-head">
+      <span class="ct-title">交配台 <span class="ct-count">0</span></span>
+      <button class="ct-seed" title="偶然の組を引く">🎲 種をまく</button>
+      <button class="ct-min" title="畳む／開く">—</button>
+    </div>
+    <div class="ct-chips"></div>
+    <div class="ct-prov"></div>
+  </aside>
+
+  <script>window.__DICT__=${dictJson};</script>
+  <script>
+  (function(){
+    var D = window.__DICT__; if(!D) return;
+    var byTag={}; D.specimens.forEach(function(s){ byTag[s.tag]=s; });
+    function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+    function shuffled(n){ var a=[],i,j,t; for(i=0;i<n;i++)a.push(i); for(i=n-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=a[i];a[i]=a[j];a[j]=t; } return a; }
+    function esc(x){ return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    var cross=[];
+    try{ cross=JSON.parse(localStorage.getItem('htmldict.case.cross')||'[]'); }catch(e){}
+    cross=cross.filter(function(t){ return byTag[t]; });
+    function saveCross(){ try{ localStorage.setItem('htmldict.case.cross',JSON.stringify(cross)); }catch(e){} }
+
+    var loupe=document.getElementById('loupe');
+    var tray=document.getElementById('cross');
+
+    function crossLabel(tag){ return cross.indexOf(tag)>=0 ? '◉ 交配中（外す）' : '＋ 交配に加える'; }
+    function openLoupe(tag){
+      var s=byTag[tag]; if(!s) return;
+      loupe.querySelector('.lc-name').innerHTML=s.display;
+      loupe.querySelector('.lc-tax').innerHTML='<i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa)+' ／ Hab. '+esc(s.habJa)+' ／ <i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'');
+      loupe.querySelector('.lc-summary').textContent=s.summary;
+      loupe.querySelector('.lc-poetic').textContent=s.poetic;
+      loupe.querySelector('.lc-spark').textContent=s.spark;
+      loupe.querySelector('.lc-demo-live').innerHTML=s.demo;
+      loupe.querySelector('.lc-demo-code').textContent=s.demo;
+      var src=loupe.querySelector('.lc-demo-src'); if(src) src.open=false;
+      var cb=loupe.querySelector('.lc-cross');
+      cb.textContent=crossLabel(tag); cb.classList.toggle('is-on', cross.indexOf(tag)>=0);
+      cb.onclick=function(){ toggleCross(tag); cb.textContent=crossLabel(tag); cb.classList.toggle('is-on', cross.indexOf(tag)>=0); };
+      loupe.hidden=false; document.body.classList.add('loupe-open');
+    }
+    function closeLoupe(){ loupe.hidden=true; document.body.classList.remove('loupe-open'); }
+    loupe.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeLoupe(); });
+    document.addEventListener('keydown', function(e){ if(e.key==='Escape'&&!loupe.hidden) closeLoupe(); });
+
+    document.querySelector('.case').addEventListener('click', function(e){
+      var f=e.target.closest('.specimen'); if(f) openLoupe(f.getAttribute('data-tag'));
+    });
+
+    var lastProv=null;
+    function provFor(tags){
+      return { key:tags.join(','), names:tags.map(function(t){ var s=byTag[t]; return s?s.display:esc(t); }), strat:pick(D.strategies), theme:pick(D.themes) };
+    }
+    function provHTML(p){
+      return '<div class="pv"><span class="pv-label">組み合わせの問い</span>'+
+        '<p class="pv-text"><b>'+p.names.join('</b> と <b>')+'</b> を、ひとつの作品の中で出会わせる。<br>'+
+        'そのとき——「'+esc(p.strat)+'」<br>題材は、たとえば〈'+esc(p.theme)+'〉。</p></div>';
+    }
+    function toggleCross(tag){ var i=cross.indexOf(tag); if(i>=0)cross.splice(i,1); else cross.push(tag); saveCross(); tray.classList.remove('min'); renderTray(); }
+    function renderTray(){
+      tray.hidden=false;
+      tray.querySelector('.ct-count').textContent=cross.length;
+      var chips=tray.querySelector('.ct-chips'); chips.innerHTML='';
+      if(!cross.length){
+        var em=document.createElement('span'); em.className='ct-empty';
+        em.innerHTML='標本をクリック→「交配に加える」で、ここに集まります。<br>二匹そろうと、詩の問いが立ちます。🎲で偶然に引くことも。';
+        chips.appendChild(em);
+      }
+      cross.forEach(function(t){
+        var s=byTag[t];
+        var c=document.createElement('span'); c.className='ct-chip';
+        c.innerHTML=(s?s.display:esc(t))+' <button class="ct-rm" title="外す">✕</button>';
+        c.addEventListener('click', function(ev){ if(ev.target.classList.contains('ct-rm')){ toggleCross(t); } else { openLoupe(t); } });
+        chips.appendChild(c);
+      });
+      var prov=tray.querySelector('.ct-prov');
+      if(cross.length>=2){
+        if(!lastProv || lastProv.key!==cross.join(',')) lastProv=provFor(cross);
+        prov.innerHTML=provHTML(lastProv)+'<div class="pv-acts"><button class="pv-redraw">引き直す</button><button class="pv-clear">空にする</button></div>';
+        prov.querySelector('.pv-redraw').onclick=function(){ lastProv=provFor(cross); renderTray(); };
+        prov.querySelector('.pv-clear').onclick=function(){ cross=[]; saveCross(); lastProv=null; renderTray(); };
+      } else { prov.innerHTML=''; }
+    }
+    function sowSeed(){
+      var n=2+Math.floor(Math.random()*2);
+      cross=shuffled(D.specimens.length).slice(0,n).map(function(i){ return D.specimens[i].tag; });
+      saveCross(); lastProv=provFor(cross); tray.classList.remove('min'); renderTray();
+    }
+    tray.querySelector('.ct-seed').onclick=sowSeed;
+    tray.querySelector('.ct-min').onclick=function(){ tray.classList.toggle('min'); };
+
+    var hint=document.querySelector('.head-hint'); if(hint) hint.hidden=false;
+    document.body.classList.add('js-on');
+    if(!cross.length) tray.classList.add('min');
+    renderTray();
+  })();
+  </script>
 </body>
 </html>
 `;
