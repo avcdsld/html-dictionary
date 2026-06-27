@@ -523,6 +523,19 @@ ${bugs}
   .loupe:not([hidden]) .loupe-back, .kept-case:not([hidden]) .kc-back { animation:ov-fade .2s ease both; }
   .loupe:not([hidden]) .loupe-card, .kept-case:not([hidden]) .kc-panel { animation:ov-pop .2s cubic-bezier(.2,.7,.3,1) both; }
   .cross-tray:not([hidden]) { animation:ov-pop .16s ease both; }
+  /* 観察票のめくり（左右）の切替アニメ */
+  @keyframes slide-next { from { opacity:.25; transform:translateX(26px); } to { opacity:1; transform:none; } }
+  @keyframes slide-prev { from { opacity:.25; transform:translateX(-26px); } to { opacity:1; transform:none; } }
+  .lc-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,.22);
+    background:rgba(22,15,8,.5); color:#f0e6d2; font-size:1.5rem; line-height:1; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0 0 3px; transition:background .15s; }
+  .lc-nav:hover { background:rgba(40,28,14,.78); }
+  .lc-nav[hidden] { display:none; }
+  .lc-prev { left:max(12px, calc(50% - 322px)); }
+  .lc-next { right:max(12px, calc(50% - 322px)); }
+  .lc-pos { position:absolute; top:10px; left:14px; z-index:2; font-size:.64rem; letter-spacing:.06em; color:#9a7b46; }
+  .lc-pos[hidden] { display:none; }
   .lc-actions button:focus-visible, .ct-head button:focus-visible, .pv-acts button:focus-visible,
   .ct-chip:focus-visible, .keep-badge:focus-visible, .cross-btn:focus-visible,
   .kc-x:focus-visible, .kc-print:focus-visible, .loupe-x:focus-visible, .lc-demo-src summary:focus-visible {
@@ -539,6 +552,7 @@ ${bugs}
     .head h1 { font-size:1.2rem; }
     .keep-badge { top:10px; right:10px; font-size:.7rem; padding:4px 10px; }
     .cross-btn { right:10px; bottom:10px; font-size:.72rem; padding:6px 12px; }
+    .lc-nav { display:none; }  /* モバイルはスワイプで。矢印は隠す */
   }
 </style>
 </head>
@@ -571,8 +585,11 @@ ${drawers}
   <!-- 観察票（拡大鏡で標本を覗く＝辞書の中身） -->
   <div id="loupe" class="loupe" hidden>
     <div class="loupe-back" data-close></div>
+    <button class="lc-nav lc-prev" type="button" aria-label="前の標本（←）" hidden>‹</button>
+    <button class="lc-nav lc-next" type="button" aria-label="次の標本（→）" hidden>›</button>
     <article class="loupe-card">
       <button class="loupe-x" data-close title="閉じる">✕</button>
+      <span class="lc-pos" hidden></span>
       <div class="lc-head">
         <span class="lc-name"></span>
         <span class="lc-tax"></span>
@@ -721,7 +738,10 @@ ${drawers}
     }
 
     function crossLabel(tag){ return cross.indexOf(tag)>=0 ? '◉ 交配中（外す）' : '＋ 交配に加える'; }
-    function openLoupe(tag){
+    function reducedMotion(){ try{ return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; } }
+    function caseList(){ return Array.prototype.map.call(document.querySelectorAll('#mainCase .specimen'), function(x){ return x.getAttribute('data-tag'); }); }
+    var navList=[], navIndex=0;
+    function fillLoupe(tag){
       var s=byTag[tag]; if(!s) return;
       loupe.querySelector('.lc-name').innerHTML=s.display;
       loupe.querySelector('.lc-tax').innerHTML='<i>'+esc(s.orderLa)+'</i> · '+esc(s.orderJa)+' ／ Hab. '+esc(s.habJa)+' ／ <i>'+esc(s.statusLa)+'</i> · '+esc(s.statusJa)+(s.dagger?' †':'');
@@ -738,16 +758,50 @@ ${drawers}
       kb.textContent=keepLabel(tag); kb.classList.toggle('is-on', kept.has(tag));
       kb.onclick=function(){ toggleKeep(tag); kb.textContent=keepLabel(tag); kb.classList.toggle('is-on', kept.has(tag)); };
       loupe.querySelector('.lc-print').onclick=function(){ printLabel(tag); };
+      var pos=loupe.querySelector('.lc-pos');
+      if(navList.length>1){ pos.textContent=(navIndex+1)+' / '+navList.length; pos.hidden=false; } else pos.hidden=true;
+      var card=loupe.querySelector('.loupe-card'); if(card) card.scrollTop=0;
+    }
+    function openLoupe(tag, list){
+      navList=(list&&list.length)?list:caseList();
+      navIndex=navList.indexOf(tag); if(navIndex<0){ navList=[tag]; navIndex=0; }
+      loupe.querySelector('.loupe-card').style.animation='';
+      fillLoupe(tag);
+      var multi=navList.length>1;
+      loupe.querySelector('.lc-prev').hidden=!multi; loupe.querySelector('.lc-next').hidden=!multi;
       loupe.hidden=false; document.body.classList.add('loupe-open');
     }
+    function navTo(d){
+      if(navList.length<2) return;
+      navIndex=(navIndex+d+navList.length)%navList.length;
+      fillLoupe(navList[navIndex]);
+      if(!reducedMotion()){ var card=loupe.querySelector('.loupe-card'); card.style.animation='none'; void card.offsetWidth; card.style.animation=(d>0?'slide-next':'slide-prev')+' .18s ease'; }
+    }
+    loupe.querySelector('.lc-prev').onclick=function(){ navTo(-1); };
+    loupe.querySelector('.lc-next').onclick=function(){ navTo(1); };
+    var _tx=0,_ty=0,_track=false;
+    loupe.addEventListener('touchstart', function(e){ if(e.touches.length!==1){ _track=false; return; } _tx=e.touches[0].clientX; _ty=e.touches[0].clientY; _track=true; }, {passive:true});
+    loupe.addEventListener('touchend', function(e){ if(!_track) return; _track=false; var t=e.changedTouches[0]; var dx=t.clientX-_tx, dy=t.clientY-_ty; if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.5) navTo(dx<0?1:-1); }, {passive:true});
     function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); }
     loupe.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeLoupe(); });
-    document.addEventListener('keydown', function(e){ if(e.key!=='Escape') return; if(!loupe.hidden) closeLoupe(); else if(!document.getElementById('keptCase').hidden) closeKeptCase(); });
+    document.addEventListener('keydown', function(e){
+      if(!loupe.hidden){
+        if(e.key==='Escape') closeLoupe();
+        else if(e.key==='ArrowLeft') navTo(-1);
+        else if(e.key==='ArrowRight') navTo(1);
+        return;
+      }
+      if(e.key==='Escape' && !document.getElementById('keptCase').hidden) closeKeptCase();
+    });
 
-    // 本体の標本も収蔵箱の複製も、どちらのクリックでも観察票を開く
+    // 本体の標本も収蔵箱の複製も、どちらのクリックでも観察票を開く。
+    // めくりの範囲は「開いた文脈」に合わせる（収蔵箱からは収蔵分、本体からは全体）。
     document.addEventListener('click', function(e){
       if(e.target.closest('.cross-tray')||e.target.closest('.loupe')||e.target.closest('.kc-bar')) return;
-      var f=e.target.closest('.specimen'); if(f) openLoupe(f.getAttribute('data-tag'));
+      var f=e.target.closest('.specimen'); if(!f) return;
+      var listEls=f.closest('#keptCase') ? document.querySelectorAll('#keptCase .kc-row .specimen') : document.querySelectorAll('#mainCase .specimen');
+      var list=Array.prototype.map.call(listEls, function(x){ return x.getAttribute('data-tag'); });
+      openLoupe(f.getAttribute('data-tag'), list);
     });
 
     var lastProv=null;
