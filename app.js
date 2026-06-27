@@ -416,10 +416,10 @@ function renderAbout() {
     </div>
 
     <h2>タグ標本箱</h2>
-    <p>タグそのものを、昆虫標本のように一匹ずつ並べて眺めるための別室です。
-    HTML5 のタグを「採集された種」として、目(Order)ごとに分類してあります。</p>
+    <p>タグそのものを、昆虫標本のように一匹ずつ並べて眺めるための<b>表紙（トップページ）</b>です。
+    HTML5 のタグを「採集された種」として目(Order)ごとに分類し、観察票・交配・収蔵も備えています。</p>
     <div class="examples">
-      <a class="ex-card" href="specimen/case.html"><b>標本ケース（画面）</b><span>木箱にピンで留めた114匹を眺める</span></a>
+      <a class="ex-card" href="index.html"><b>標本箱（表紙）</b><span>木箱に留めた114匹を眺め、観察し、交配させる</span></a>
       <a class="ex-card" href="specimen/labels.html"><b>標本ラベル（印刷用）</b><span>切って箱にピン留めする物理標本箱用</span></a>
     </div>
   ` });

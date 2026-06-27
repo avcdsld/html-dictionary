@@ -8,13 +8,15 @@ CSSもJavaScriptも使わず、**素のHTMLだけ**で詩的な作品をつく�
 ## つかいかた
 
 `index.html` をブラウザで開くだけ。ビルドも、依存も、ネット接続も不要です。
+表紙は**タグ標本箱**（眺める・観察する・交配させる）。じっくり読みたいときは、
+表紙のリンクから**辞書モード**（`dictionary.html` — めくる・一覧・検索）へ。
 
 ```
-open index.html        # macOS
+open index.html        # macOS（表紙＝標本箱）
 xdg-open index.html    # Linux
 ```
 
-## 4つのモード
+## 辞書モード（`dictionary.html`）の4つのモード
 
 | モード | できること |
 |--------|-----------|
@@ -47,26 +49,29 @@ xdg-open index.html    # Linux
 - `ruby-double.html` — `<ruby>` で、表記と読みをずらす二重の声
 - `eternal-morning.html` — `<meta refresh>` で巡る、終わらない朝のループ詩
 
-## タグ標本箱（`specimen/`）
+## タグ標本箱（表紙）
 
-「タグそのものを眺めて愛でたい」から生まれた別室。HTML5 のタグを、昆虫標本のように
-一匹ずつ並べたものです。各タグに〈学名＝タグ／目(Order)＝分類のラテン名／生息地／記載の新旧〉
-を、本物の標本ラベル風に添えています（着想の詳細は [`IDEAS.md`](IDEAS.md)）。
+「タグそのものを眺めて愛でたい」から生まれ、いまはサイトの**表紙**になりました。
+HTML5 のタグを昆虫標本のように一匹ずつ並べ、各タグに〈学名＝タグ／目(Order)＝分類のラテン名／
+生息地／記載の新旧〉を本物の標本ラベル風に添えています（着想は [`IDEAS.md`](IDEAS.md)）。
+静的に眺めるだけなら **HTML+CSSのみ**で成立し、JS有効時のみ観察票・交配・収蔵が乗ります。
 
-- `specimen/case.html` — 画面で眺めるデジタル標本ケース（木箱にピン留め、**HTML+CSSのみ**）
+- `index.html` — 表紙＝デジタル標本ケース（`data.js` から生成）
 - `specimen/labels.html` — 印刷用ラベルシート（A4・切って箱にピン留め→物理標本箱）
+- `specimen/case.html` — 旧URLからの後方互換リダイレクト（→ `index.html`）
 
-どちらも `data.js` から自動生成します： `node specimen/build.js`
+生成： `node specimen/build.js`
 
 ## ファイル構成
 
 ```
-index.html      アプリの骨格
-style.css       辞書の装い（ツール用）
-app.js          めくり・しおり・掛け合わせの仕掛け（ツール用）
+index.html      表紙＝タグ標本箱（観察・交配・収蔵）。specimen/build.js が生成
+dictionary.html 辞書モード（めくる・一覧・しおり・掛け合わせ・読み方）
+style.css       辞書モードの装い
+app.js          辞書モードの仕掛け（めくり・しおり・掛け合わせ）
 data.js         HTML5 タグ/機能の辞書データ + 詩の方位 + 題材
 examples/       純HTMLの作例（作品。CSS/JSなし）
-specimen/       タグ標本箱（build.js で case.html / labels.html を生成）
+specimen/       build.js（生成器）/ labels.html / case.html（→ index へリダイレクト）
 IDEAS.md        HTML Day に向けたアイデア帳
 ```
 

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML 詩語辞典 — 素のHTMLで詩をつくるための辞書</title>
+  <meta name="description" content="HTML5 のタグと機能を、詩の素材として閲覧・発想するためのビューア。めくる・しおる・掛け合わせる。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <p class="tohome" style="margin:0 0 .5rem;font-size:.78rem;letter-spacing:.04em;"><a href="index.html">▸ タグ標本箱（表紙）へ戻る</a></p>
+    <h1 class="logo">HTML&nbsp;詩語辞典</h1>
+    <p class="tagline">素のHTMLだけで、詩をつくるための辞書 — 読むモード（めくる・一覧・検索）</p>
+    <nav class="modes" id="modes">
+      <button data-mode="card"    class="mode-btn is-active">めくる</button>
+      <button data-mode="gallery" class="mode-btn">一覧</button>
+      <button data-mode="marked"  class="mode-btn">しおり <span class="badge" id="markedCount">0</span></button>
+      <button data-mode="combine" class="mode-btn">掛け合わせ <span class="badge" id="combineCount">0</span></button>
+      <button data-mode="about"   class="mode-btn">読み方</button>
+    </nav>
+  </header>
+
+  <main id="stage" class="stage"><!-- 各モードがここに描かれる --></main>
+
+  <footer class="footnote">
+    <p>すべての「作品」は、CSSもJavaScriptも使わない素のHTMLで。<br>
+    このツールだけが、その発想を助けるために、少しだけ仕掛けを持っています。</p>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

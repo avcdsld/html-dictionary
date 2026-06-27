@@ -1,8 +1,12 @@
 // specimen/build.js — data.js から「タグ標本箱」を生成する
 //
 // 出力:
+//   index.html           … サイトの表紙＝デジタル標本ケース（ルートに出力）。
 //   specimen/labels.html … 印刷用ラベルシート（切ってピン留めする物理標本箱用）
-//   specimen/case.html   … 画面で眺めるデジタル標本ケース。
+//   specimen/case.html   … 旧URLからの後方互換リダイレクト（→ /index.html）
+//
+//   ※ 表紙＝標本箱。「辞書として読む（めくる・一覧・検索）」モードは dictionary.html。
+//   かつての画面標本ケースは下記のとおり。
 //                          静的部分は HTML+CSS のみ（JS無効でも完全に成立）。
 //                          JS有効時のみ、辞書としての機能が段階的に乗る:
 //                          ・標本をクリック→観察票（定義/詩/けしかけ/生きた標本）
@@ -179,6 +183,7 @@ function buildLabels() {
     <p>各ラベルには、学名（タグ）・<i>目(Order)</i>・生息地(Hab.)・記載の新旧(<i>det.</i>) を、
     本物の標本ラベル風の極小活字で刷ってあります。<b>coll.</b> の欄には、採集者＝あなたの名前を。</p>
     <p>計 ${specimens.length} 標本 ／ A4・4列。ブラウザの印刷（Ctrl/Cmd+P）から、余白「既定」で。</p>
+    <p><a href="../index.html">▸ 標本箱（表紙）へ戻る</a></p>
   </div>
   <main class="sheet">
 ${labels}
@@ -560,7 +565,7 @@ ${drawers}
 
   <footer class="foot">
     <p><i>spec. relicta †</i> は絶滅危惧種。&lt;marquee&gt; のように、廃止されてなお飛んでいる目撃例あり。<br>
-    <a href="labels.html">▸ 印刷用ラベルシート</a> ／ <a href="../index.html">▸ HTML 詩語辞典へ戻る</a></p>
+    <a href="specimen/labels.html">▸ 印刷用ラベルシート</a> ／ <a href="dictionary.html">▸ 辞書として読む（めくる・一覧・検索）</a></p>
   </footer>
 
   <!-- 観察票（拡大鏡で標本を覗く＝辞書の中身） -->
@@ -818,7 +823,26 @@ ${drawers}
 `;
 }
 
+// ── 旧URL（specimen/case.html）からの後方互換リダイレクト ─
+function buildRedirect() {
+  return `<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0; url=../index.html">
+<link rel="canonical" href="../index.html">
+<title>標本箱は表紙へ移動しました</title>
+</head>
+<body style="margin:0;padding:48px 20px;text-align:center;background:#160f08;color:#eae3d5;font-family:'Hiragino Mincho ProN','Yu Mincho',serif;">
+  <p>「タグ標本箱」はサイトの表紙に移動しました。</p>
+  <p><a href="../index.html" style="color:#d9b48a;">▸ 表紙へ進む</a></p>
+</body>
+</html>
+`;
+}
+
 // ── 出力 ─────────────────────────────────────────────
+fs.writeFileSync(path.join(root, "index.html"), buildCase());          // 表紙＝標本箱
 fs.writeFileSync(path.join(__dirname, "labels.html"), buildLabels());
-fs.writeFileSync(path.join(__dirname, "case.html"), buildCase());
-console.log("生成完了: specimen/labels.html, specimen/case.html");
+fs.writeFileSync(path.join(__dirname, "case.html"), buildRedirect());  // 旧URL→/index.html
+console.log("生成完了: index.html（表紙＝標本箱）, specimen/labels.html, specimen/case.html（→/index.html）");
