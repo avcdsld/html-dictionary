@@ -51,10 +51,10 @@ const HTML5 = new Set("section article aside nav header footer main figure figca
 const MODERN = new Set("dialog template slot search".split(" "));
 const DEPRECATED = new Set(["marquee"]);
 function statusOf(tag) {
-  if (DEPRECATED.has(tag)) return { ja: "絶滅危惧種", la: "spec. relicta", dagger: true };
-  if (MODERN.has(tag))     return { ja: "新参種",     la: "spec. recens",  dagger: false };
-  if (HTML5.has(tag))      return { ja: "新種",       la: "spec. nova",    dagger: false };
-  return                          { ja: "古種",       la: "spec. classica",dagger: false };
+  if (DEPRECATED.has(tag)) return { ja: "絶滅危惧種", la: "spec. relicta", dagger: true,  key: "relicta" };
+  if (MODERN.has(tag))     return { ja: "新参種",     la: "spec. recens",  dagger: false, key: "recens" };
+  if (HTML5.has(tag))      return { ja: "新種",       la: "spec. nova",    dagger: false, key: "nova" };
+  return                          { ja: "古種",       la: "spec. classica",dagger: false, key: "classica" };
 }
 
 // ── 生息地（産地）───────────────────────────────────
@@ -195,7 +195,7 @@ function buildCase() {
   const wob = s => { const h = hash(s); const r = ((h % 1000) / 1000 * 4.4 - 2.2).toFixed(2); return `--r:${r}deg`; };
   const drawers = orderKeys.map(k => {
     const ord = ORDER[k];
-    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen" data-tag="${s.tag}" style="${wob(tagStr(s.tag))}">
+    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen st-${s.status.key}" data-tag="${s.tag}" style="${wob(tagStr(s.tag))}">
         <span class="pin"></span>
         <span class="bug">${tagStr(s.tag)}<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -365,8 +365,24 @@ ${bugs}
   .card .g { display:none; }
   .card .d { display:block; }
   .card .det { display:block; margin-top:3px; padding-top:3px;
-    border-top:.5px solid rgba(150,52,40,.3);
-    color:#8a3320; font-style:italic; }
+    border-top:.5px solid rgba(120,85,40,.28);
+    color:#6a4f30; font-style:italic; }
+  /* 種の新旧を示す同定ドット（採集者が貼る色ラベルの見立て） */
+  .card .det::before { content:""; display:inline-block; width:6px; height:6px; border-radius:50%;
+    margin-right:5px; vertical-align:middle; background:#9c7b4a; box-shadow:inset 0 0 0 1px rgba(0,0,0,.18); }
+  .st-nova    .card .det { color:#4f7a45; }
+  .st-recens  .card .det { color:#3f6f7a; }
+  .st-relicta .card .det { color:#a8442a; }
+  .st-nova    .card .det::before, .legend .k-nova    i { background:#5f8a5a; }
+  .st-recens  .card .det::before, .legend .k-recens  i { background:#4f7d8a; }
+  .st-relicta .card .det::before, .legend .k-relicta i { background:#a8442a; }
+  .legend .k-classica i { background:#9c7b4a; }
+  /* 凡例 */
+  .legend { margin:.6rem 0 0; font-size:.68rem; color:#b6a589; letter-spacing:.04em;
+    display:flex; flex-wrap:wrap; gap:4px 14px; justify-content:center; }
+  .legend span { display:inline-flex; align-items:center; }
+  .legend i { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:5px;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.25); }
 
   .foot { text-align:center; margin:28px auto 0; max-width:760px;
     font-size:.72rem; color:#9c8b70; line-height:1.9; }
@@ -527,6 +543,12 @@ ${bugs}
     <p>HTML5 のタグを一匹ずつ採集し、目(Order)ごとに並べた標本ケース。<br>
     ただ眺めて、愛でるためのもの。これまでに ${specimens.length} 種を収めました。</p>
     <p class="head-hint" hidden>標本をクリックすると<b>観察票</b>がひらきます。二匹を<b>交配</b>させると、詩の問いが立ちます。</p>
+    <p class="legend">
+      <span class="k-classica"><i></i>古種</span>
+      <span class="k-nova"><i></i>新種 (HTML5)</span>
+      <span class="k-recens"><i></i>新参種</span>
+      <span class="k-relicta"><i></i>絶滅危惧種 †</span>
+    </p>
   </header>
 
   <main class="case" id="mainCase">
