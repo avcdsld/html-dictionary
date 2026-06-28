@@ -1718,16 +1718,19 @@
     function shuffled(n){ var a=[],i,j,t; for(i=0;i<n;i++)a.push(i); for(i=n-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=a[i];a[i]=a[j];a[j]=t; } return a; }
     function esc(x){ return String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-    var cross=[];
-    try{ cross=JSON.parse(localStorage.getItem('htmldict.case.cross')||'[]'); }catch(e){}
-    cross=cross.filter(function(t){ return byTag[t]; });
-    function saveCross(){ try{ localStorage.setItem('htmldict.case.cross',JSON.stringify(cross)); }catch(e){} }
+    // 辞書モード(dictionary.html)と共有する保存領域。識別子は分割した正準タグ。
+    var COLL_KEY='htmldict.collection.v1', CROSS_KEY='htmldict.crossing.v1';
+    function _readArr(key){ try{ var v=JSON.parse(localStorage.getItem(key)||'null'); return Array.isArray(v)?v:null; }catch(e){ return null; } }
+    function _migrate(nk, ok){ try{ if(localStorage.getItem(nk)===null){ var o=localStorage.getItem(ok); if(o!==null) localStorage.setItem(nk,o); } }catch(e){} }
+    _migrate(CROSS_KEY,'htmldict.case.cross'); _migrate(COLL_KEY,'htmldict.case.kept');
+    var cross=(_readArr(CROSS_KEY)||[]).filter(function(t){ return byTag[t]; });
+    function saveCross(){ try{ localStorage.setItem(CROSS_KEY,JSON.stringify(cross)); }catch(e){} }
     function deco(x){ return String(x).replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&'); }
 
     // しおり（収蔵）
     var kept=new Set();
-    try{ (JSON.parse(localStorage.getItem('htmldict.case.kept')||'[]')||[]).forEach(function(t){ if(byTag[t]) kept.add(t); }); }catch(e){}
-    function saveKept(){ try{ localStorage.setItem('htmldict.case.kept',JSON.stringify(Array.from(kept))); }catch(e){} }
+    (_readArr(COLL_KEY)||[]).forEach(function(t){ if(byTag[t]) kept.add(t); });
+    function saveKept(){ try{ localStorage.setItem(COLL_KEY,JSON.stringify(Array.from(kept))); }catch(e){} }
 
     var loupe=document.getElementById('loupe');
     var tray=document.getElementById('cross');

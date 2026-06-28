@@ -8,13 +8,46 @@ const LS = {
   marked: "htmldict.marked.v1",
   combine: "htmldict.combine.v1",
 };
+// 標本箱（表紙）と共有する保存領域。識別子は分割した正準タグ（box と同一）。
+// SPA はグループ単位（例: "header / footer"）なので、保存の境界でだけ
+// 「グループ⇄分割タグ」を変換し、内部の状態モデルはこれまで通りに保つ。
+const SHARED = { collection: "htmldict.collection.v1", crossing: "htmldict.crossing.v1" };
+const CANON = new Set("a abbr address area article aside audio b base bdi bdo blockquote body br button canvas caption cite code col colgroup data datalist dd del details dfn dialog div dl dt em embed fieldset figcaption figure footer form h1 h2 h3 h4 h5 h6 head header hgroup hr html i iframe img input ins kbd label legend li link main map mark menu meta meter nav noscript object ol optgroup option output p picture pre progress q rp rt ruby s samp script search section select slot small source span strong style sub summary sup table tbody td template textarea tfoot th thead time title tr track u ul var video wbr svg marquee".split(/\s+/));
+function tokensOf(elTag) {
+  let toks;
+  if (/^h1/.test(elTag)) toks = ["h1","h2","h3","h4","h5","h6"];
+  else toks = String(elTag).split("/").map(s => (s.trim().match(/^[a-zA-Z0-9]+/) || [""])[0].toLowerCase());
+  return toks.filter(t => t && CANON.has(t));
+}
+function elementForToken(tok) { return ELEMENTS.find(e => tokensOf(e.tag).indexOf(tok) >= 0); }
+function loadMarkedFromShared() {
+  const set = loadSet(SHARED.collection); const m = new Set();
+  ELEMENTS.forEach(e => { const ts = tokensOf(e.tag); if (ts.length && ts.some(t => set.has(t))) m.add(e.tag); });
+  return m;
+}
+function loadCombineFromShared() {
+  const arr = loadArr(SHARED.crossing); const seen = new Set(); const out = [];
+  arr.forEach(t => { const e = elementForToken(t); if (e && !seen.has(e.tag)) { seen.add(e.tag); out.push(e.tag); } });
+  return out;
+}
+// 旧キー（SPA 単独保存）から共有領域への一度きりの移行
+(function migrateShared() {
+  if (localStorage.getItem(SHARED.collection) === null) {
+    const old = loadSet(LS.marked);
+    if (old.size) { const s = new Set(); old.forEach(t => tokensOf(t).forEach(x => s.add(x))); saveSet(SHARED.collection, s); }
+  }
+  if (localStorage.getItem(SHARED.crossing) === null) {
+    const old = loadArr(LS.combine);
+    if (old.length) { const a = []; old.forEach(t => tokensOf(t).forEach(x => { if (a.indexOf(x) < 0) a.push(x); })); saveArr(SHARED.crossing, a); }
+  }
+})();
 
 const state = {
   mode: "card",
   order: [],          // カードをめくる順番（index の配列）
   pos: 0,             // order の中の現在位置
-  marked: loadSet(LS.marked),     // しおりを挟んだ tag の集合
-  combine: loadArr(LS.combine),   // 掛け合わせに選んだ tag の配列
+  marked: loadMarkedFromShared(),     // しおり（＝標本箱の「収蔵」と共有）
+  combine: loadCombineFromShared(),   // 掛け合わせ（＝標本箱の「交配」と共有）
   query: "",
   cats: new Set(),    // 一覧の絞り込み（空＝すべて）
   seed: null,         // 直近に蒔いた種
@@ -77,18 +110,28 @@ function refreshBadges() {
 }
 
 // ── マーク／掛け合わせの操作 ───────────────────────────
-function toggleMark(tag) {
-  if (state.marked.has(tag)) state.marked.delete(tag);
-  else state.marked.add(tag);
-  saveSet(LS.marked, state.marked);
+function toggleMark(tag) {  // tag = グループ要素タグ。共有領域（分割タグ）をマージ更新する
+  const ts = tokensOf(tag); if (!ts.length) return;
+  const set = loadSet(SHARED.collection);
+  const anyOn = ts.some(t => set.has(t));
+  ts.forEach(t => { if (anyOn) set.delete(t); else set.add(t); });
+  saveSet(SHARED.collection, set);
+  state.marked = loadMarkedFromShared();
   refreshBadges();
 }
-function inCombine(tag) { return state.combine.includes(tag); }
+function inCombine(tag) {
+  const ts = tokensOf(tag); if (!ts.length) return false;
+  const arr = loadArr(SHARED.crossing);
+  return ts.some(t => arr.indexOf(t) >= 0);
+}
 function toggleCombine(tag) {
-  const i = state.combine.indexOf(tag);
-  if (i >= 0) state.combine.splice(i, 1);
-  else state.combine.push(tag);
-  saveArr(LS.combine, state.combine);
+  const ts = tokensOf(tag); if (!ts.length) return;
+  let arr = loadArr(SHARED.crossing);
+  const anyOn = ts.some(t => arr.indexOf(t) >= 0);
+  if (anyOn) arr = arr.filter(t => ts.indexOf(t) < 0);
+  else ts.forEach(t => { if (arr.indexOf(t) < 0) arr.push(t); });
+  saveArr(SHARED.crossing, arr);
+  state.combine = loadCombineFromShared();
   refreshBadges();
 }
 
@@ -277,7 +320,7 @@ function renderMarked() {
   $stage.appendChild(grid);
 
   const clear = el("button", { class: "act", onclick: () => {
-    state.marked.clear(); saveSet(LS.marked, state.marked); refreshBadges(); renderMarked();
+    saveSet(SHARED.collection, new Set()); state.marked = loadMarkedFromShared(); refreshBadges(); renderMarked();
   }}, "しおりをすべて外す");
   $stage.appendChild(el("div", { class: "card-actions" }, [el("span", { class: "act-spacer" }), clear]));
 }
@@ -325,7 +368,7 @@ function renderCombine() {
   }
 
   const clear = el("button", { class: "act", onclick: () => {
-    state.combine = []; saveArr(LS.combine, state.combine); refreshBadges(); renderCombine();
+    saveArr(SHARED.crossing, []); state.combine = loadCombineFromShared(); refreshBadges(); renderCombine();
   }}, "組み合わせを空にする");
   $stage.appendChild(el("div", { class: "card-actions" }, [el("span", { class: "act-spacer" }), clear]));
 }
