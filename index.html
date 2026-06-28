@@ -324,7 +324,7 @@
     <h1>ＨＴＭＬ　タグ標本箱</h1>
     <p>HTML5 のタグを一匹ずつ採集し、目(Order)ごとに並べた標本ケース。<br>
     ただ眺めて、愛でるためのもの。これまでに 114 種を収めました。</p>
-    <p class="head-hint" hidden>標本をクリックすると<b>観察票</b>がひらきます。二匹を<b>交配</b>させると、詩の問いが立ちます。</p>
+    <p class="head-hint" hidden>標本をクリック（または Enter）で<b>観察票</b>。<b>← →</b>・スワイプでめくり、<b>収蔵</b>で集め、二匹を<b>交配</b>させると詩の問いが立ちます。</p>
     <p class="legend">
       <span class="k-classica"><i></i>古種</span>
       <span class="k-nova"><i></i>新種 (HTML5)</span>
@@ -1839,6 +1839,7 @@
       _lastFocus=document.activeElement;
       loupe.hidden=false; document.body.classList.add('loupe-open');
       var x=loupe.querySelector('.loupe-x'); if(x) x.focus();
+      try{ if(multi && !localStorage.getItem('htmldict.tip.flip')){ localStorage.setItem('htmldict.tip.flip','1'); toast('‹ › ・ ← → ・ スワイプで、隣の標本へめくれます'); } }catch(e){}
     }
     function navTo(d){
       if(navList.length<2) return;
