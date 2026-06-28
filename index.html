@@ -1826,10 +1826,11 @@
       if(navList.length>1){ pos.textContent=(navIndex+1)+' / '+navList.length; pos.hidden=false; } else pos.hidden=true;
       var card=loupe.querySelector('.loupe-card'); if(card) card.scrollTop=0;
     }
-    var _lastFocus=null;
+    var _lastFocus=null, _hashOn=false;
     function focusables(root){ return Array.prototype.filter.call(root.querySelectorAll('a[href],button:not([disabled]),summary,[tabindex]:not([tabindex="-1"]),input,select,textarea'), function(el){ return !el.hidden && el.offsetParent!==null; }); }
     function trapTab(e, root){ var f=focusables(root); if(!f.length) return; var first=f[0], last=f[f.length-1]; if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } } else if(document.activeElement===last){ e.preventDefault(); first.focus(); } }
-    function openLoupe(tag, list){
+    function openLoupe(tag, list, opts){
+      opts=opts||{};
       navList=(list&&list.length)?list:caseList();
       navIndex=navList.indexOf(tag); if(navIndex<0){ navList=[tag]; navIndex=0; }
       loupe.querySelector('.loupe-card').style.animation='';
@@ -1839,12 +1840,14 @@
       _lastFocus=document.activeElement;
       loupe.hidden=false; document.body.classList.add('loupe-open');
       var x=loupe.querySelector('.loupe-x'); if(x) x.focus();
+      if(opts.fromHistory){ _hashOn=true; } else { try{ history.pushState({loupe:tag}, '', '#'+encodeURIComponent(tag)); _hashOn=true; }catch(e){} }
       try{ if(multi && !localStorage.getItem('htmldict.tip.flip')){ localStorage.setItem('htmldict.tip.flip','1'); toast('‹ › ・ ← → ・ スワイプで、隣の標本へめくれます'); } }catch(e){}
     }
     function navTo(d){
       if(navList.length<2) return;
       navIndex=(navIndex+d+navList.length)%navList.length;
       fillLoupe(navList[navIndex]);
+      try{ history.replaceState({loupe:navList[navIndex]}, '', '#'+encodeURIComponent(navList[navIndex])); }catch(e){}
       if(!reducedMotion()){ var card=loupe.querySelector('.loupe-card'); card.style.animation='none'; void card.offsetWidth; card.style.animation=(d>0?'slide-next':'slide-prev')+' .18s ease'; }
     }
     loupe.querySelector('.lc-prev').onclick=function(){ navTo(-1); };
@@ -1852,7 +1855,7 @@
     var _tx=0,_ty=0,_track=false;
     loupe.addEventListener('touchstart', function(e){ if(e.touches.length!==1){ _track=false; return; } _tx=e.touches[0].clientX; _ty=e.touches[0].clientY; _track=true; }, {passive:true});
     loupe.addEventListener('touchend', function(e){ if(!_track) return; _track=false; var t=e.changedTouches[0]; var dx=t.clientX-_tx, dy=t.clientY-_ty; if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.5) navTo(dx<0?1:-1); }, {passive:true});
-    function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); if(_lastFocus&&_lastFocus.focus){ try{ _lastFocus.focus(); }catch(e){} } }
+    function closeLoupe(opts){ opts=opts||{}; loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); if(_lastFocus&&_lastFocus.focus){ try{ _lastFocus.focus(); }catch(e){} } if(_hashOn && !opts.fromHistory){ _hashOn=false; try{ history.back(); }catch(e){} } else { _hashOn=false; } }
     loupe.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeLoupe(); });
     document.addEventListener('keydown', function(e){
       if(!loupe.hidden){
@@ -1950,10 +1953,23 @@
     keptCase.querySelector('.kc-print').onclick=printKept;
     document.getElementById('keepBadge').onclick=openKeptCase;
 
+    // ディープリンクと戻る: #タグ で観察票を開く／戻るで閉じる
+    window.addEventListener('popstate', function(){
+      if(!loupe.hidden){ closeLoupe({fromHistory:true}); return; }
+      var t=decodeURIComponent((location.hash||'').replace(/^#/,''));
+      if(t && byTag[t]) openLoupe(t, caseList(), {fromHistory:true});
+    });
+
     var hint=document.querySelector('.head-hint'); if(hint) hint.hidden=false;
     document.body.classList.add('js-on');
     document.getElementById('crossBtn').hidden=false;
     markKept(); updateKeepBadge(); renderTray();
+
+    // 初期ロード時に #タグ があれば、その観察票を開く（履歴は基底→#タグに整える）
+    (function(){
+      var t=decodeURIComponent((location.hash||'').replace(/^#/,''));
+      if(t && byTag[t]){ try{ history.replaceState(null, '', location.pathname+location.search); }catch(e){} openLoupe(t, caseList()); }
+    })();
   })();
   </script>
 </body>
