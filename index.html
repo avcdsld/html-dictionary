@@ -298,8 +298,11 @@
   .lc-pos[hidden] { display:none; }
   .lc-actions button:focus-visible, .ct-head button:focus-visible, .pv-acts button:focus-visible,
   .ct-chip:focus-visible, .keep-badge:focus-visible, .cross-btn:focus-visible,
-  .kc-x:focus-visible, .kc-print:focus-visible, .loupe-x:focus-visible, .lc-demo-src summary:focus-visible {
+  .kc-x:focus-visible, .kc-print:focus-visible, .loupe-x:focus-visible, .lc-demo-src summary:focus-visible,
+  .lc-nav:focus-visible {
     outline:2px solid #c9a24e; outline-offset:2px; }
+  .js-on .specimen:focus-visible { outline:2px solid #c9a24e; outline-offset:3px; border-radius:5px; }
+  .js-on .specimen:focus { outline:none; }
   @media (prefers-reduced-motion: reduce) {
     .loupe-back, .loupe-card, .kc-back, .kc-panel, .cross-tray { animation:none !important; }
   }
@@ -335,7 +338,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Structuralia</span><span class="o-ja">構造目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="html" style="--r:1.10deg">
+      <figure class="specimen st-classica" data-tag="html" tabindex="0" role="button" aria-label="html を観察する" style="--r:1.10deg">
         <span class="pin"></span>
         <span class="bug">&lt;html&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -346,7 +349,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="header" style="--r:2.10deg">
+      <figure class="specimen st-nova" data-tag="header" tabindex="0" role="button" aria-label="header を観察する" style="--r:2.10deg">
         <span class="pin"></span>
         <span class="bug">&lt;header&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -357,7 +360,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="footer" style="--r:1.07deg">
+      <figure class="specimen st-nova" data-tag="footer" tabindex="0" role="button" aria-label="footer を観察する" style="--r:1.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;footer&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -368,7 +371,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="main" style="--r:-1.67deg">
+      <figure class="specimen st-nova" data-tag="main" tabindex="0" role="button" aria-label="main を観察する" style="--r:-1.67deg">
         <span class="pin"></span>
         <span class="bug">&lt;main&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -379,7 +382,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="section" style="--r:0.19deg">
+      <figure class="specimen st-nova" data-tag="section" tabindex="0" role="button" aria-label="section を観察する" style="--r:0.19deg">
         <span class="pin"></span>
         <span class="bug">&lt;section&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -390,7 +393,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="article" style="--r:1.96deg">
+      <figure class="specimen st-nova" data-tag="article" tabindex="0" role="button" aria-label="article を観察する" style="--r:1.96deg">
         <span class="pin"></span>
         <span class="bug">&lt;article&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -401,7 +404,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="aside" style="--r:-0.16deg">
+      <figure class="specimen st-nova" data-tag="aside" tabindex="0" role="button" aria-label="aside を観察する" style="--r:-0.16deg">
         <span class="pin"></span>
         <span class="bug">&lt;aside&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -412,7 +415,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="nav" style="--r:-0.29deg">
+      <figure class="specimen st-nova" data-tag="nav" tabindex="0" role="button" aria-label="nav を観察する" style="--r:-0.29deg">
         <span class="pin"></span>
         <span class="bug">&lt;nav&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -423,7 +426,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="h1" style="--r:-0.44deg">
+      <figure class="specimen st-classica" data-tag="h1" tabindex="0" role="button" aria-label="h1 を観察する" style="--r:-0.44deg">
         <span class="pin"></span>
         <span class="bug">&lt;h1&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -434,7 +437,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="h2" style="--r:1.77deg">
+      <figure class="specimen st-classica" data-tag="h2" tabindex="0" role="button" aria-label="h2 を観察する" style="--r:1.77deg">
         <span class="pin"></span>
         <span class="bug">&lt;h2&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -445,7 +448,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="h3" style="--r:0.25deg">
+      <figure class="specimen st-classica" data-tag="h3" tabindex="0" role="button" aria-label="h3 を観察する" style="--r:0.25deg">
         <span class="pin"></span>
         <span class="bug">&lt;h3&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -456,7 +459,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="h4" style="--r:-1.94deg">
+      <figure class="specimen st-classica" data-tag="h4" tabindex="0" role="button" aria-label="h4 を観察する" style="--r:-1.94deg">
         <span class="pin"></span>
         <span class="bug">&lt;h4&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -467,7 +470,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="h5" style="--r:0.35deg">
+      <figure class="specimen st-classica" data-tag="h5" tabindex="0" role="button" aria-label="h5 を観察する" style="--r:0.35deg">
         <span class="pin"></span>
         <span class="bug">&lt;h5&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -478,7 +481,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="h6" style="--r:-0.11deg">
+      <figure class="specimen st-classica" data-tag="h6" tabindex="0" role="button" aria-label="h6 を観察する" style="--r:-0.11deg">
         <span class="pin"></span>
         <span class="bug">&lt;h6&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -489,7 +492,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="hgroup" style="--r:-0.95deg">
+      <figure class="specimen st-nova" data-tag="hgroup" tabindex="0" role="button" aria-label="hgroup を観察する" style="--r:-0.95deg">
         <span class="pin"></span>
         <span class="bug">&lt;hgroup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -500,7 +503,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="address" style="--r:0.55deg">
+      <figure class="specimen st-classica" data-tag="address" tabindex="0" role="button" aria-label="address を観察する" style="--r:0.55deg">
         <span class="pin"></span>
         <span class="bug">&lt;address&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -511,7 +514,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="div" style="--r:-1.61deg">
+      <figure class="specimen st-classica" data-tag="div" tabindex="0" role="button" aria-label="div を観察する" style="--r:-1.61deg">
         <span class="pin"></span>
         <span class="bug">&lt;div&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -522,7 +525,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="span" style="--r:-0.72deg">
+      <figure class="specimen st-classica" data-tag="span" tabindex="0" role="button" aria-label="span を観察する" style="--r:-0.72deg">
         <span class="pin"></span>
         <span class="bug">&lt;span&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -538,7 +541,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Textualia</span><span class="o-ja">本文目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="p" style="--r:1.94deg">
+      <figure class="specimen st-classica" data-tag="p" tabindex="0" role="button" aria-label="p を観察する" style="--r:1.94deg">
         <span class="pin"></span>
         <span class="bug">&lt;p&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -549,7 +552,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="br" style="--r:2.11deg">
+      <figure class="specimen st-classica" data-tag="br" tabindex="0" role="button" aria-label="br を観察する" style="--r:2.11deg">
         <span class="pin"></span>
         <span class="bug">&lt;br&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -560,7 +563,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="wbr" style="--r:-0.95deg">
+      <figure class="specimen st-nova" data-tag="wbr" tabindex="0" role="button" aria-label="wbr を観察する" style="--r:-0.95deg">
         <span class="pin"></span>
         <span class="bug">&lt;wbr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -571,7 +574,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="hr" style="--r:-0.87deg">
+      <figure class="specimen st-classica" data-tag="hr" tabindex="0" role="button" aria-label="hr を観察する" style="--r:-0.87deg">
         <span class="pin"></span>
         <span class="bug">&lt;hr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -582,7 +585,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-relicta" data-tag="marquee" style="--r:-1.43deg">
+      <figure class="specimen st-relicta" data-tag="marquee" tabindex="0" role="button" aria-label="marquee を観察する" style="--r:-1.43deg">
         <span class="pin"></span>
         <span class="bug">&lt;marquee&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -593,7 +596,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="pre" style="--r:0.73deg">
+      <figure class="specimen st-classica" data-tag="pre" tabindex="0" role="button" aria-label="pre を観察する" style="--r:0.73deg">
         <span class="pin"></span>
         <span class="bug">&lt;pre&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -604,7 +607,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="blockquote" style="--r:-0.71deg">
+      <figure class="specimen st-classica" data-tag="blockquote" tabindex="0" role="button" aria-label="blockquote を観察する" style="--r:-0.71deg">
         <span class="pin"></span>
         <span class="bug">&lt;blockquote&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -615,7 +618,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="q" style="--r:-1.24deg">
+      <figure class="specimen st-classica" data-tag="q" tabindex="0" role="button" aria-label="q を観察する" style="--r:-1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;q&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -626,7 +629,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="figure" style="--r:-0.28deg">
+      <figure class="specimen st-nova" data-tag="figure" tabindex="0" role="button" aria-label="figure を観察する" style="--r:-0.28deg">
         <span class="pin"></span>
         <span class="bug">&lt;figure&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -637,7 +640,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="figcaption" style="--r:-0.40deg">
+      <figure class="specimen st-nova" data-tag="figcaption" tabindex="0" role="button" aria-label="figcaption を観察する" style="--r:-0.40deg">
         <span class="pin"></span>
         <span class="bug">&lt;figcaption&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -653,7 +656,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Phrasealia</span><span class="o-ja">語句目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="cite" style="--r:1.54deg">
+      <figure class="specimen st-classica" data-tag="cite" tabindex="0" role="button" aria-label="cite を観察する" style="--r:1.54deg">
         <span class="pin"></span>
         <span class="bug">&lt;cite&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -664,7 +667,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="a" style="--r:1.90deg">
+      <figure class="specimen st-classica" data-tag="a" tabindex="0" role="button" aria-label="a を観察する" style="--r:1.90deg">
         <span class="pin"></span>
         <span class="bug">&lt;a&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -675,7 +678,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="em" style="--r:1.33deg">
+      <figure class="specimen st-classica" data-tag="em" tabindex="0" role="button" aria-label="em を観察する" style="--r:1.33deg">
         <span class="pin"></span>
         <span class="bug">&lt;em&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -686,7 +689,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="strong" style="--r:0.29deg">
+      <figure class="specimen st-classica" data-tag="strong" tabindex="0" role="button" aria-label="strong を観察する" style="--r:0.29deg">
         <span class="pin"></span>
         <span class="bug">&lt;strong&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -697,7 +700,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="mark" style="--r:-0.51deg">
+      <figure class="specimen st-nova" data-tag="mark" tabindex="0" role="button" aria-label="mark を観察する" style="--r:-0.51deg">
         <span class="pin"></span>
         <span class="bug">&lt;mark&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -708,7 +711,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="s" style="--r:-0.82deg">
+      <figure class="specimen st-classica" data-tag="s" tabindex="0" role="button" aria-label="s を観察する" style="--r:-0.82deg">
         <span class="pin"></span>
         <span class="bug">&lt;s&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -719,7 +722,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="del" style="--r:0.20deg">
+      <figure class="specimen st-classica" data-tag="del" tabindex="0" role="button" aria-label="del を観察する" style="--r:0.20deg">
         <span class="pin"></span>
         <span class="bug">&lt;del&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -730,7 +733,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="ins" style="--r:2.13deg">
+      <figure class="specimen st-classica" data-tag="ins" tabindex="0" role="button" aria-label="ins を観察する" style="--r:2.13deg">
         <span class="pin"></span>
         <span class="bug">&lt;ins&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -741,7 +744,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="small" style="--r:1.93deg">
+      <figure class="specimen st-classica" data-tag="small" tabindex="0" role="button" aria-label="small を観察する" style="--r:1.93deg">
         <span class="pin"></span>
         <span class="bug">&lt;small&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -752,7 +755,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="abbr" style="--r:-0.15deg">
+      <figure class="specimen st-classica" data-tag="abbr" tabindex="0" role="button" aria-label="abbr を観察する" style="--r:-0.15deg">
         <span class="pin"></span>
         <span class="bug">&lt;abbr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -763,7 +766,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="dfn" style="--r:-1.94deg">
+      <figure class="specimen st-classica" data-tag="dfn" tabindex="0" role="button" aria-label="dfn を観察する" style="--r:-1.94deg">
         <span class="pin"></span>
         <span class="bug">&lt;dfn&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -774,7 +777,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="code" style="--r:-1.30deg">
+      <figure class="specimen st-classica" data-tag="code" tabindex="0" role="button" aria-label="code を観察する" style="--r:-1.30deg">
         <span class="pin"></span>
         <span class="bug">&lt;code&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -785,7 +788,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="kbd" style="--r:1.07deg">
+      <figure class="specimen st-classica" data-tag="kbd" tabindex="0" role="button" aria-label="kbd を観察する" style="--r:1.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;kbd&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -796,7 +799,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="samp" style="--r:-2.09deg">
+      <figure class="specimen st-classica" data-tag="samp" tabindex="0" role="button" aria-label="samp を観察する" style="--r:-2.09deg">
         <span class="pin"></span>
         <span class="bug">&lt;samp&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -807,7 +810,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="var" style="--r:1.24deg">
+      <figure class="specimen st-classica" data-tag="var" tabindex="0" role="button" aria-label="var を観察する" style="--r:1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;var&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -818,7 +821,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="sub" style="--r:-2.09deg">
+      <figure class="specimen st-classica" data-tag="sub" tabindex="0" role="button" aria-label="sub を観察する" style="--r:-2.09deg">
         <span class="pin"></span>
         <span class="bug">&lt;sub&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -829,7 +832,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="sup" style="--r:-0.74deg">
+      <figure class="specimen st-classica" data-tag="sup" tabindex="0" role="button" aria-label="sup を観察する" style="--r:-0.74deg">
         <span class="pin"></span>
         <span class="bug">&lt;sup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -840,7 +843,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="time" style="--r:-0.79deg">
+      <figure class="specimen st-nova" data-tag="time" tabindex="0" role="button" aria-label="time を観察する" style="--r:-0.79deg">
         <span class="pin"></span>
         <span class="bug">&lt;time&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -851,7 +854,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="data" style="--r:1.46deg">
+      <figure class="specimen st-nova" data-tag="data" tabindex="0" role="button" aria-label="data を観察する" style="--r:1.46deg">
         <span class="pin"></span>
         <span class="bug">&lt;data&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -862,7 +865,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="ruby" style="--r:-2.20deg">
+      <figure class="specimen st-nova" data-tag="ruby" tabindex="0" role="button" aria-label="ruby を観察する" style="--r:-2.20deg">
         <span class="pin"></span>
         <span class="bug">&lt;ruby&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -873,7 +876,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="rt" style="--r:-1.05deg">
+      <figure class="specimen st-nova" data-tag="rt" tabindex="0" role="button" aria-label="rt を観察する" style="--r:-1.05deg">
         <span class="pin"></span>
         <span class="bug">&lt;rt&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -884,7 +887,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="rp" style="--r:0.17deg">
+      <figure class="specimen st-nova" data-tag="rp" tabindex="0" role="button" aria-label="rp を観察する" style="--r:0.17deg">
         <span class="pin"></span>
         <span class="bug">&lt;rp&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -895,7 +898,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="bdo" style="--r:-0.85deg">
+      <figure class="specimen st-classica" data-tag="bdo" tabindex="0" role="button" aria-label="bdo を観察する" style="--r:-0.85deg">
         <span class="pin"></span>
         <span class="bug">&lt;bdo&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -906,7 +909,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="bdi" style="--r:-1.97deg">
+      <figure class="specimen st-nova" data-tag="bdi" tabindex="0" role="button" aria-label="bdi を観察する" style="--r:-1.97deg">
         <span class="pin"></span>
         <span class="bug">&lt;bdi&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -917,7 +920,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="u" style="--r:1.95deg">
+      <figure class="specimen st-classica" data-tag="u" tabindex="0" role="button" aria-label="u を観察する" style="--r:1.95deg">
         <span class="pin"></span>
         <span class="bug">&lt;u&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -928,7 +931,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="i" style="--r:-0.36deg">
+      <figure class="specimen st-classica" data-tag="i" tabindex="0" role="button" aria-label="i を観察する" style="--r:-0.36deg">
         <span class="pin"></span>
         <span class="bug">&lt;i&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -939,7 +942,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="b" style="--r:-0.99deg">
+      <figure class="specimen st-classica" data-tag="b" tabindex="0" role="button" aria-label="b を観察する" style="--r:-0.99deg">
         <span class="pin"></span>
         <span class="bug">&lt;b&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -955,7 +958,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Enumeralia</span><span class="o-ja">列挙目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="ul" style="--r:-2.02deg">
+      <figure class="specimen st-classica" data-tag="ul" tabindex="0" role="button" aria-label="ul を観察する" style="--r:-2.02deg">
         <span class="pin"></span>
         <span class="bug">&lt;ul&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -966,7 +969,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="li" style="--r:-1.76deg">
+      <figure class="specimen st-classica" data-tag="li" tabindex="0" role="button" aria-label="li を観察する" style="--r:-1.76deg">
         <span class="pin"></span>
         <span class="bug">&lt;li&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -977,7 +980,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="ol" style="--r:0.49deg">
+      <figure class="specimen st-classica" data-tag="ol" tabindex="0" role="button" aria-label="ol を観察する" style="--r:0.49deg">
         <span class="pin"></span>
         <span class="bug">&lt;ol&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -988,7 +991,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="dl" style="--r:0.02deg">
+      <figure class="specimen st-classica" data-tag="dl" tabindex="0" role="button" aria-label="dl を観察する" style="--r:0.02deg">
         <span class="pin"></span>
         <span class="bug">&lt;dl&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -999,7 +1002,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="dt" style="--r:-1.50deg">
+      <figure class="specimen st-classica" data-tag="dt" tabindex="0" role="button" aria-label="dt を観察する" style="--r:-1.50deg">
         <span class="pin"></span>
         <span class="bug">&lt;dt&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1010,7 +1013,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="dd" style="--r:1.36deg">
+      <figure class="specimen st-classica" data-tag="dd" tabindex="0" role="button" aria-label="dd を観察する" style="--r:1.36deg">
         <span class="pin"></span>
         <span class="bug">&lt;dd&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1021,7 +1024,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="menu" style="--r:-1.43deg">
+      <figure class="specimen st-classica" data-tag="menu" tabindex="0" role="button" aria-label="menu を観察する" style="--r:-1.43deg">
         <span class="pin"></span>
         <span class="bug">&lt;menu&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1037,7 +1040,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Tabularia</span><span class="o-ja">格子目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="table" style="--r:1.41deg">
+      <figure class="specimen st-classica" data-tag="table" tabindex="0" role="button" aria-label="table を観察する" style="--r:1.41deg">
         <span class="pin"></span>
         <span class="bug">&lt;table&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1048,7 +1051,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="caption" style="--r:1.98deg">
+      <figure class="specimen st-classica" data-tag="caption" tabindex="0" role="button" aria-label="caption を観察する" style="--r:1.98deg">
         <span class="pin"></span>
         <span class="bug">&lt;caption&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1059,7 +1062,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="tr" style="--r:-1.21deg">
+      <figure class="specimen st-classica" data-tag="tr" tabindex="0" role="button" aria-label="tr を観察する" style="--r:-1.21deg">
         <span class="pin"></span>
         <span class="bug">&lt;tr&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1070,7 +1073,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="td" style="--r:-0.48deg">
+      <figure class="specimen st-classica" data-tag="td" tabindex="0" role="button" aria-label="td を観察する" style="--r:-0.48deg">
         <span class="pin"></span>
         <span class="bug">&lt;td&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1081,7 +1084,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="th" style="--r:-0.35deg">
+      <figure class="specimen st-classica" data-tag="th" tabindex="0" role="button" aria-label="th を観察する" style="--r:-0.35deg">
         <span class="pin"></span>
         <span class="bug">&lt;th&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1092,7 +1095,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="thead" style="--r:-1.22deg">
+      <figure class="specimen st-classica" data-tag="thead" tabindex="0" role="button" aria-label="thead を観察する" style="--r:-1.22deg">
         <span class="pin"></span>
         <span class="bug">&lt;thead&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1103,7 +1106,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="tbody" style="--r:-0.28deg">
+      <figure class="specimen st-classica" data-tag="tbody" tabindex="0" role="button" aria-label="tbody を観察する" style="--r:-0.28deg">
         <span class="pin"></span>
         <span class="bug">&lt;tbody&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1114,7 +1117,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="tfoot" style="--r:0.72deg">
+      <figure class="specimen st-classica" data-tag="tfoot" tabindex="0" role="button" aria-label="tfoot を観察する" style="--r:0.72deg">
         <span class="pin"></span>
         <span class="bug">&lt;tfoot&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1125,7 +1128,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="colgroup" style="--r:1.57deg">
+      <figure class="specimen st-classica" data-tag="colgroup" tabindex="0" role="button" aria-label="colgroup を観察する" style="--r:1.57deg">
         <span class="pin"></span>
         <span class="bug">&lt;colgroup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1136,7 +1139,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="col" style="--r:1.26deg">
+      <figure class="specimen st-classica" data-tag="col" tabindex="0" role="button" aria-label="col を観察する" style="--r:1.26deg">
         <span class="pin"></span>
         <span class="bug">&lt;col&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1152,7 +1155,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Formularia</span><span class="o-ja">入力目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="form" style="--r:0.29deg">
+      <figure class="specimen st-classica" data-tag="form" tabindex="0" role="button" aria-label="form を観察する" style="--r:0.29deg">
         <span class="pin"></span>
         <span class="bug">&lt;form&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1163,7 +1166,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="input" style="--r:2.08deg">
+      <figure class="specimen st-classica" data-tag="input" tabindex="0" role="button" aria-label="input を観察する" style="--r:2.08deg">
         <span class="pin"></span>
         <span class="bug">&lt;input&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1174,7 +1177,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="textarea" style="--r:-0.33deg">
+      <figure class="specimen st-classica" data-tag="textarea" tabindex="0" role="button" aria-label="textarea を観察する" style="--r:-0.33deg">
         <span class="pin"></span>
         <span class="bug">&lt;textarea&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1185,7 +1188,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="button" style="--r:1.07deg">
+      <figure class="specimen st-classica" data-tag="button" tabindex="0" role="button" aria-label="button を観察する" style="--r:1.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;button&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1196,7 +1199,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="select" style="--r:-1.71deg">
+      <figure class="specimen st-classica" data-tag="select" tabindex="0" role="button" aria-label="select を観察する" style="--r:-1.71deg">
         <span class="pin"></span>
         <span class="bug">&lt;select&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1207,7 +1210,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="option" style="--r:-0.07deg">
+      <figure class="specimen st-classica" data-tag="option" tabindex="0" role="button" aria-label="option を観察する" style="--r:-0.07deg">
         <span class="pin"></span>
         <span class="bug">&lt;option&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1218,7 +1221,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="datalist" style="--r:1.97deg">
+      <figure class="specimen st-nova" data-tag="datalist" tabindex="0" role="button" aria-label="datalist を観察する" style="--r:1.97deg">
         <span class="pin"></span>
         <span class="bug">&lt;datalist&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1229,7 +1232,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="progress" style="--r:-0.69deg">
+      <figure class="specimen st-nova" data-tag="progress" tabindex="0" role="button" aria-label="progress を観察する" style="--r:-0.69deg">
         <span class="pin"></span>
         <span class="bug">&lt;progress&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1240,7 +1243,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="meter" style="--r:0.23deg">
+      <figure class="specimen st-nova" data-tag="meter" tabindex="0" role="button" aria-label="meter を観察する" style="--r:0.23deg">
         <span class="pin"></span>
         <span class="bug">&lt;meter&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1251,7 +1254,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="output" style="--r:-1.91deg">
+      <figure class="specimen st-nova" data-tag="output" tabindex="0" role="button" aria-label="output を観察する" style="--r:-1.91deg">
         <span class="pin"></span>
         <span class="bug">&lt;output&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1262,7 +1265,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="fieldset" style="--r:0.32deg">
+      <figure class="specimen st-classica" data-tag="fieldset" tabindex="0" role="button" aria-label="fieldset を観察する" style="--r:0.32deg">
         <span class="pin"></span>
         <span class="bug">&lt;fieldset&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1273,7 +1276,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="legend" style="--r:1.15deg">
+      <figure class="specimen st-classica" data-tag="legend" tabindex="0" role="button" aria-label="legend を観察する" style="--r:1.15deg">
         <span class="pin"></span>
         <span class="bug">&lt;legend&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1284,7 +1287,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="label" style="--r:-1.49deg">
+      <figure class="specimen st-classica" data-tag="label" tabindex="0" role="button" aria-label="label を観察する" style="--r:-1.49deg">
         <span class="pin"></span>
         <span class="bug">&lt;label&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1295,7 +1298,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="optgroup" style="--r:-0.83deg">
+      <figure class="specimen st-classica" data-tag="optgroup" tabindex="0" role="button" aria-label="optgroup を観察する" style="--r:-0.83deg">
         <span class="pin"></span>
         <span class="bug">&lt;optgroup&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1306,7 +1309,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-recens" data-tag="search" style="--r:-1.85deg">
+      <figure class="specimen st-recens" data-tag="search" tabindex="0" role="button" aria-label="search を観察する" style="--r:-1.85deg">
         <span class="pin"></span>
         <span class="bug">&lt;search&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1322,7 +1325,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Medialia</span><span class="o-ja">埋込目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="img" style="--r:-0.99deg">
+      <figure class="specimen st-classica" data-tag="img" tabindex="0" role="button" aria-label="img を観察する" style="--r:-0.99deg">
         <span class="pin"></span>
         <span class="bug">&lt;img&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1333,7 +1336,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="picture" style="--r:1.96deg">
+      <figure class="specimen st-nova" data-tag="picture" tabindex="0" role="button" aria-label="picture を観察する" style="--r:1.96deg">
         <span class="pin"></span>
         <span class="bug">&lt;picture&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1344,7 +1347,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="source" style="--r:-2.18deg">
+      <figure class="specimen st-nova" data-tag="source" tabindex="0" role="button" aria-label="source を観察する" style="--r:-2.18deg">
         <span class="pin"></span>
         <span class="bug">&lt;source&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1355,7 +1358,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="audio" style="--r:0.82deg">
+      <figure class="specimen st-nova" data-tag="audio" tabindex="0" role="button" aria-label="audio を観察する" style="--r:0.82deg">
         <span class="pin"></span>
         <span class="bug">&lt;audio&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1366,7 +1369,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="video" style="--r:0.77deg">
+      <figure class="specimen st-nova" data-tag="video" tabindex="0" role="button" aria-label="video を観察する" style="--r:0.77deg">
         <span class="pin"></span>
         <span class="bug">&lt;video&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1377,7 +1380,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="track" style="--r:0.03deg">
+      <figure class="specimen st-nova" data-tag="track" tabindex="0" role="button" aria-label="track を観察する" style="--r:0.03deg">
         <span class="pin"></span>
         <span class="bug">&lt;track&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1388,7 +1391,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="iframe" style="--r:-1.85deg">
+      <figure class="specimen st-classica" data-tag="iframe" tabindex="0" role="button" aria-label="iframe を観察する" style="--r:-1.85deg">
         <span class="pin"></span>
         <span class="bug">&lt;iframe&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1399,7 +1402,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="svg" style="--r:-0.47deg">
+      <figure class="specimen st-nova" data-tag="svg" tabindex="0" role="button" aria-label="svg を観察する" style="--r:-0.47deg">
         <span class="pin"></span>
         <span class="bug">&lt;svg&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1410,7 +1413,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="map" style="--r:0.54deg">
+      <figure class="specimen st-classica" data-tag="map" tabindex="0" role="button" aria-label="map を観察する" style="--r:0.54deg">
         <span class="pin"></span>
         <span class="bug">&lt;map&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1421,7 +1424,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="area" style="--r:1.66deg">
+      <figure class="specimen st-classica" data-tag="area" tabindex="0" role="button" aria-label="area を観察する" style="--r:1.66deg">
         <span class="pin"></span>
         <span class="bug">&lt;area&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1432,7 +1435,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="object" style="--r:-1.24deg">
+      <figure class="specimen st-classica" data-tag="object" tabindex="0" role="button" aria-label="object を観察する" style="--r:-1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;object&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1443,7 +1446,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="embed" style="--r:1.13deg">
+      <figure class="specimen st-classica" data-tag="embed" tabindex="0" role="button" aria-label="embed を観察する" style="--r:1.13deg">
         <span class="pin"></span>
         <span class="bug">&lt;embed&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1454,7 +1457,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="canvas" style="--r:1.37deg">
+      <figure class="specimen st-nova" data-tag="canvas" tabindex="0" role="button" aria-label="canvas を観察する" style="--r:1.37deg">
         <span class="pin"></span>
         <span class="bug">&lt;canvas&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1470,7 +1473,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Interactiva</span><span class="o-ja">対話目</span></h2>
       <div class="row">
-      <figure class="specimen st-nova" data-tag="details" style="--r:-0.33deg">
+      <figure class="specimen st-nova" data-tag="details" tabindex="0" role="button" aria-label="details を観察する" style="--r:-0.33deg">
         <span class="pin"></span>
         <span class="bug">&lt;details&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1481,7 +1484,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-nova" data-tag="summary" style="--r:-0.70deg">
+      <figure class="specimen st-nova" data-tag="summary" tabindex="0" role="button" aria-label="summary を観察する" style="--r:-0.70deg">
         <span class="pin"></span>
         <span class="bug">&lt;summary&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1492,7 +1495,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-recens" data-tag="dialog" style="--r:0.93deg">
+      <figure class="specimen st-recens" data-tag="dialog" tabindex="0" role="button" aria-label="dialog を観察する" style="--r:0.93deg">
         <span class="pin"></span>
         <span class="bug">&lt;dialog&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1508,7 +1511,7 @@
     <section class="drawer">
       <h2 class="order"><span class="o-la">Invisibilia</span><span class="o-ja">不可視目</span></h2>
       <div class="row">
-      <figure class="specimen st-classica" data-tag="title" style="--r:1.45deg">
+      <figure class="specimen st-classica" data-tag="title" tabindex="0" role="button" aria-label="title を観察する" style="--r:1.45deg">
         <span class="pin"></span>
         <span class="bug">&lt;title&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1519,7 +1522,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="meta" style="--r:-1.69deg">
+      <figure class="specimen st-classica" data-tag="meta" tabindex="0" role="button" aria-label="meta を観察する" style="--r:-1.69deg">
         <span class="pin"></span>
         <span class="bug">&lt;meta&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1530,7 +1533,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="noscript" style="--r:1.09deg">
+      <figure class="specimen st-classica" data-tag="noscript" tabindex="0" role="button" aria-label="noscript を観察する" style="--r:1.09deg">
         <span class="pin"></span>
         <span class="bug">&lt;noscript&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1541,7 +1544,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-recens" data-tag="template" style="--r:1.24deg">
+      <figure class="specimen st-recens" data-tag="template" tabindex="0" role="button" aria-label="template を観察する" style="--r:1.24deg">
         <span class="pin"></span>
         <span class="bug">&lt;template&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1552,7 +1555,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="base" style="--r:0.88deg">
+      <figure class="specimen st-classica" data-tag="base" tabindex="0" role="button" aria-label="base を観察する" style="--r:0.88deg">
         <span class="pin"></span>
         <span class="bug">&lt;base&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1563,7 +1566,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="head" style="--r:0.22deg">
+      <figure class="specimen st-classica" data-tag="head" tabindex="0" role="button" aria-label="head を観察する" style="--r:0.22deg">
         <span class="pin"></span>
         <span class="bug">&lt;head&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1574,7 +1577,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="body" style="--r:1.16deg">
+      <figure class="specimen st-classica" data-tag="body" tabindex="0" role="button" aria-label="body を観察する" style="--r:1.16deg">
         <span class="pin"></span>
         <span class="bug">&lt;body&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1585,7 +1588,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="link" style="--r:0.48deg">
+      <figure class="specimen st-classica" data-tag="link" tabindex="0" role="button" aria-label="link を観察する" style="--r:0.48deg">
         <span class="pin"></span>
         <span class="bug">&lt;link&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1596,7 +1599,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="style" style="--r:0.50deg">
+      <figure class="specimen st-classica" data-tag="style" tabindex="0" role="button" aria-label="style を観察する" style="--r:0.50deg">
         <span class="pin"></span>
         <span class="bug">&lt;style&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1607,7 +1610,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-classica" data-tag="script" style="--r:-0.88deg">
+      <figure class="specimen st-classica" data-tag="script" tabindex="0" role="button" aria-label="script を観察する" style="--r:-0.88deg">
         <span class="pin"></span>
         <span class="bug">&lt;script&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1618,7 +1621,7 @@
           </span>
         </span>
       </figure>
-      <figure class="specimen st-recens" data-tag="slot" style="--r:1.90deg">
+      <figure class="specimen st-recens" data-tag="slot" tabindex="0" role="button" aria-label="slot を観察する" style="--r:1.90deg">
         <span class="pin"></span>
         <span class="bug">&lt;slot&gt;<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -1631,7 +1634,7 @@
       </figure>
       </div>
     </section>
-      <span class="grain"></span>
+      <span class="grain" aria-hidden="true"></span>
     </div>
   </main>
 
@@ -1645,11 +1648,11 @@
     <div class="loupe-back" data-close></div>
     <button class="lc-nav lc-prev" type="button" aria-label="前の標本（←）" hidden>‹</button>
     <button class="lc-nav lc-next" type="button" aria-label="次の標本（→）" hidden>›</button>
-    <article class="loupe-card">
-      <button class="loupe-x" data-close title="閉じる">✕</button>
+    <article class="loupe-card" role="dialog" aria-modal="true" aria-labelledby="lcName">
+      <button class="loupe-x" data-close title="閉じる" aria-label="閉じる">✕</button>
       <span class="lc-pos" hidden></span>
       <div class="lc-head">
-        <span class="lc-name"></span>
+        <span class="lc-name" id="lcName"></span>
         <span class="lc-tax"></span>
       </div>
       <dl class="lc-body">
@@ -1688,9 +1691,9 @@
   <!-- 収蔵箱（収蔵した標本だけを並べ直す） -->
   <div id="keptCase" class="kept-case" hidden>
     <div class="kc-back" data-kc-close></div>
-    <div class="kc-panel">
+    <div class="kc-panel" role="dialog" aria-modal="true" aria-labelledby="kcTitle">
       <div class="kc-bar">
-        <span class="kc-title">私の収蔵箱</span>
+        <span class="kc-title" id="kcTitle">私の収蔵箱</span>
         <button class="kc-print" title="収蔵したラベルをまとめて印刷">ラベルをまとめて印刷</button>
         <button class="kc-x" data-kc-close title="閉じる">✕ 閉じる</button>
       </div>
@@ -1700,7 +1703,7 @@
             <h2 class="order"><span class="o-la">Collectio</span><span class="o-ja">収蔵</span></h2>
             <div class="row kc-row"></div>
           </section>
-          <span class="grain"></span>
+          <span class="grain" aria-hidden="true"></span>
         </div>
       </main>
     </div>
@@ -1820,6 +1823,9 @@
       if(navList.length>1){ pos.textContent=(navIndex+1)+' / '+navList.length; pos.hidden=false; } else pos.hidden=true;
       var card=loupe.querySelector('.loupe-card'); if(card) card.scrollTop=0;
     }
+    var _lastFocus=null;
+    function focusables(root){ return Array.prototype.filter.call(root.querySelectorAll('a[href],button:not([disabled]),summary,[tabindex]:not([tabindex="-1"]),input,select,textarea'), function(el){ return !el.hidden && el.offsetParent!==null; }); }
+    function trapTab(e, root){ var f=focusables(root); if(!f.length) return; var first=f[0], last=f[f.length-1]; if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } } else if(document.activeElement===last){ e.preventDefault(); first.focus(); } }
     function openLoupe(tag, list){
       navList=(list&&list.length)?list:caseList();
       navIndex=navList.indexOf(tag); if(navIndex<0){ navList=[tag]; navIndex=0; }
@@ -1827,7 +1833,9 @@
       fillLoupe(tag);
       var multi=navList.length>1;
       loupe.querySelector('.lc-prev').hidden=!multi; loupe.querySelector('.lc-next').hidden=!multi;
+      _lastFocus=document.activeElement;
       loupe.hidden=false; document.body.classList.add('loupe-open');
+      var x=loupe.querySelector('.loupe-x'); if(x) x.focus();
     }
     function navTo(d){
       if(navList.length<2) return;
@@ -1840,26 +1848,37 @@
     var _tx=0,_ty=0,_track=false;
     loupe.addEventListener('touchstart', function(e){ if(e.touches.length!==1){ _track=false; return; } _tx=e.touches[0].clientX; _ty=e.touches[0].clientY; _track=true; }, {passive:true});
     loupe.addEventListener('touchend', function(e){ if(!_track) return; _track=false; var t=e.changedTouches[0]; var dx=t.clientX-_tx, dy=t.clientY-_ty; if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.5) navTo(dx<0?1:-1); }, {passive:true});
-    function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); }
+    function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); if(_lastFocus&&_lastFocus.focus){ try{ _lastFocus.focus(); }catch(e){} } }
     loupe.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeLoupe(); });
     document.addEventListener('keydown', function(e){
       if(!loupe.hidden){
         if(e.key==='Escape') closeLoupe();
         else if(e.key==='ArrowLeft') navTo(-1);
         else if(e.key==='ArrowRight') navTo(1);
+        else if(e.key==='Tab') trapTab(e, document.getElementById('loupe'));
         return;
       }
-      if(e.key==='Escape' && !document.getElementById('keptCase').hidden) closeKeptCase();
+      if(!document.getElementById('keptCase').hidden){
+        if(e.key==='Escape') closeKeptCase();
+        else if(e.key==='Tab') trapTab(e, document.getElementById('keptCase'));
+        return;
+      }
+      if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){
+        var ae=document.activeElement, f=(ae&&ae.closest)?ae.closest('.specimen'):null;
+        if(f){ e.preventDefault(); openFromEl(f); }
+      }
     });
 
-    // 本体の標本も収蔵箱の複製も、どちらのクリックでも観察票を開く。
+    // 本体の標本も収蔵箱の複製も、クリック／Enter・Space で観察票を開く。
     // めくりの範囲は「開いた文脈」に合わせる（収蔵箱からは収蔵分、本体からは全体）。
-    document.addEventListener('click', function(e){
-      if(e.target.closest('.cross-tray')||e.target.closest('.loupe')||e.target.closest('.kc-bar')) return;
-      var f=e.target.closest('.specimen'); if(!f) return;
+    function openFromEl(f){
       var listEls=f.closest('#keptCase') ? document.querySelectorAll('#keptCase .kc-row .specimen') : document.querySelectorAll('#mainCase .specimen');
       var list=Array.prototype.map.call(listEls, function(x){ return x.getAttribute('data-tag'); });
       openLoupe(f.getAttribute('data-tag'), list);
+    }
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.cross-tray')||e.target.closest('.loupe')||e.target.closest('.kc-bar')) return;
+      var f=e.target.closest('.specimen'); if(f) openFromEl(f);
     });
 
     var lastProv=null;
@@ -1910,6 +1929,7 @@
 
     // 収蔵箱: 収蔵した標本だけを別の箱に並べ直して表示
     var keptCase=document.getElementById('keptCase');
+    var _lastFocusKC=null;
     function openKeptCase(){
       if(!kept.size){ toast('まだ収蔵した標本がありません'); return; }
       var row=keptCase.querySelector('.kc-row'); row.innerHTML='';
@@ -1917,9 +1937,11 @@
         if(kept.has(f.getAttribute('data-tag'))) row.appendChild(f.cloneNode(true));
       });
       keptCase.querySelector('.kc-title').textContent='私の収蔵箱 — '+kept.size+' 標本';
+      _lastFocusKC=document.activeElement;
       keptCase.hidden=false; document.body.classList.add('loupe-open');
+      var x=keptCase.querySelector('.kc-x'); if(x) x.focus();
     }
-    function closeKeptCase(){ keptCase.hidden=true; if(loupe.hidden) document.body.classList.remove('loupe-open'); }
+    function closeKeptCase(){ keptCase.hidden=true; if(loupe.hidden) document.body.classList.remove('loupe-open'); if(_lastFocusKC&&_lastFocusKC.focus){ try{ _lastFocusKC.focus(); }catch(e){} } }
     keptCase.addEventListener('click', function(e){ if(e.target.hasAttribute('data-kc-close')) closeKeptCase(); });
     keptCase.querySelector('.kc-print').onclick=printKept;
     document.getElementById('keepBadge').onclick=openKeptCase;

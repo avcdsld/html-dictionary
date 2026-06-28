@@ -200,7 +200,7 @@ function buildCase() {
   const wob = s => { const h = hash(s); const r = ((h % 1000) / 1000 * 4.4 - 2.2).toFixed(2); return `--r:${r}deg`; };
   const drawers = orderKeys.map(k => {
     const ord = ORDER[k];
-    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen st-${s.status.key}" data-tag="${s.tag}" style="${wob(tagStr(s.tag))}">
+    const bugs = specimens.filter(s => s.category === k).map(s => `      <figure class="specimen st-${s.status.key}" data-tag="${s.tag}" tabindex="0" role="button" aria-label="${s.tag} を観察する" style="${wob(tagStr(s.tag))}">
         <span class="pin"></span>
         <span class="bug">${tagStr(s.tag)}<i class="seal" aria-hidden="true">蔵</i></span>
         <span class="card">
@@ -538,8 +538,11 @@ ${bugs}
   .lc-pos[hidden] { display:none; }
   .lc-actions button:focus-visible, .ct-head button:focus-visible, .pv-acts button:focus-visible,
   .ct-chip:focus-visible, .keep-badge:focus-visible, .cross-btn:focus-visible,
-  .kc-x:focus-visible, .kc-print:focus-visible, .loupe-x:focus-visible, .lc-demo-src summary:focus-visible {
+  .kc-x:focus-visible, .kc-print:focus-visible, .loupe-x:focus-visible, .lc-demo-src summary:focus-visible,
+  .lc-nav:focus-visible {
     outline:2px solid #c9a24e; outline-offset:2px; }
+  .js-on .specimen:focus-visible { outline:2px solid #c9a24e; outline-offset:3px; border-radius:5px; }
+  .js-on .specimen:focus { outline:none; }
   @media (prefers-reduced-motion: reduce) {
     .loupe-back, .loupe-card, .kc-back, .kc-panel, .cross-tray { animation:none !important; }
   }
@@ -573,7 +576,7 @@ ${bugs}
   <main class="case" id="mainCase">
     <div class="glass">
 ${drawers}
-      <span class="grain"></span>
+      <span class="grain" aria-hidden="true"></span>
     </div>
   </main>
 
@@ -587,11 +590,11 @@ ${drawers}
     <div class="loupe-back" data-close></div>
     <button class="lc-nav lc-prev" type="button" aria-label="前の標本（←）" hidden>‹</button>
     <button class="lc-nav lc-next" type="button" aria-label="次の標本（→）" hidden>›</button>
-    <article class="loupe-card">
-      <button class="loupe-x" data-close title="閉じる">✕</button>
+    <article class="loupe-card" role="dialog" aria-modal="true" aria-labelledby="lcName">
+      <button class="loupe-x" data-close title="閉じる" aria-label="閉じる">✕</button>
       <span class="lc-pos" hidden></span>
       <div class="lc-head">
-        <span class="lc-name"></span>
+        <span class="lc-name" id="lcName"></span>
         <span class="lc-tax"></span>
       </div>
       <dl class="lc-body">
@@ -630,9 +633,9 @@ ${drawers}
   <!-- 収蔵箱（収蔵した標本だけを並べ直す） -->
   <div id="keptCase" class="kept-case" hidden>
     <div class="kc-back" data-kc-close></div>
-    <div class="kc-panel">
+    <div class="kc-panel" role="dialog" aria-modal="true" aria-labelledby="kcTitle">
       <div class="kc-bar">
-        <span class="kc-title">私の収蔵箱</span>
+        <span class="kc-title" id="kcTitle">私の収蔵箱</span>
         <button class="kc-print" title="収蔵したラベルをまとめて印刷">ラベルをまとめて印刷</button>
         <button class="kc-x" data-kc-close title="閉じる">✕ 閉じる</button>
       </div>
@@ -642,7 +645,7 @@ ${drawers}
             <h2 class="order"><span class="o-la">Collectio</span><span class="o-ja">収蔵</span></h2>
             <div class="row kc-row"></div>
           </section>
-          <span class="grain"></span>
+          <span class="grain" aria-hidden="true"></span>
         </div>
       </main>
     </div>
@@ -762,6 +765,9 @@ ${drawers}
       if(navList.length>1){ pos.textContent=(navIndex+1)+' / '+navList.length; pos.hidden=false; } else pos.hidden=true;
       var card=loupe.querySelector('.loupe-card'); if(card) card.scrollTop=0;
     }
+    var _lastFocus=null;
+    function focusables(root){ return Array.prototype.filter.call(root.querySelectorAll('a[href],button:not([disabled]),summary,[tabindex]:not([tabindex="-1"]),input,select,textarea'), function(el){ return !el.hidden && el.offsetParent!==null; }); }
+    function trapTab(e, root){ var f=focusables(root); if(!f.length) return; var first=f[0], last=f[f.length-1]; if(e.shiftKey){ if(document.activeElement===first){ e.preventDefault(); last.focus(); } } else if(document.activeElement===last){ e.preventDefault(); first.focus(); } }
     function openLoupe(tag, list){
       navList=(list&&list.length)?list:caseList();
       navIndex=navList.indexOf(tag); if(navIndex<0){ navList=[tag]; navIndex=0; }
@@ -769,7 +775,9 @@ ${drawers}
       fillLoupe(tag);
       var multi=navList.length>1;
       loupe.querySelector('.lc-prev').hidden=!multi; loupe.querySelector('.lc-next').hidden=!multi;
+      _lastFocus=document.activeElement;
       loupe.hidden=false; document.body.classList.add('loupe-open');
+      var x=loupe.querySelector('.loupe-x'); if(x) x.focus();
     }
     function navTo(d){
       if(navList.length<2) return;
@@ -782,26 +790,37 @@ ${drawers}
     var _tx=0,_ty=0,_track=false;
     loupe.addEventListener('touchstart', function(e){ if(e.touches.length!==1){ _track=false; return; } _tx=e.touches[0].clientX; _ty=e.touches[0].clientY; _track=true; }, {passive:true});
     loupe.addEventListener('touchend', function(e){ if(!_track) return; _track=false; var t=e.changedTouches[0]; var dx=t.clientX-_tx, dy=t.clientY-_ty; if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)*1.5) navTo(dx<0?1:-1); }, {passive:true});
-    function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); }
+    function closeLoupe(){ loupe.hidden=true; if(document.getElementById('keptCase').hidden) document.body.classList.remove('loupe-open'); if(_lastFocus&&_lastFocus.focus){ try{ _lastFocus.focus(); }catch(e){} } }
     loupe.addEventListener('click', function(e){ if(e.target.hasAttribute('data-close')) closeLoupe(); });
     document.addEventListener('keydown', function(e){
       if(!loupe.hidden){
         if(e.key==='Escape') closeLoupe();
         else if(e.key==='ArrowLeft') navTo(-1);
         else if(e.key==='ArrowRight') navTo(1);
+        else if(e.key==='Tab') trapTab(e, document.getElementById('loupe'));
         return;
       }
-      if(e.key==='Escape' && !document.getElementById('keptCase').hidden) closeKeptCase();
+      if(!document.getElementById('keptCase').hidden){
+        if(e.key==='Escape') closeKeptCase();
+        else if(e.key==='Tab') trapTab(e, document.getElementById('keptCase'));
+        return;
+      }
+      if(e.key==='Enter' || e.key===' ' || e.key==='Spacebar'){
+        var ae=document.activeElement, f=(ae&&ae.closest)?ae.closest('.specimen'):null;
+        if(f){ e.preventDefault(); openFromEl(f); }
+      }
     });
 
-    // 本体の標本も収蔵箱の複製も、どちらのクリックでも観察票を開く。
+    // 本体の標本も収蔵箱の複製も、クリック／Enter・Space で観察票を開く。
     // めくりの範囲は「開いた文脈」に合わせる（収蔵箱からは収蔵分、本体からは全体）。
-    document.addEventListener('click', function(e){
-      if(e.target.closest('.cross-tray')||e.target.closest('.loupe')||e.target.closest('.kc-bar')) return;
-      var f=e.target.closest('.specimen'); if(!f) return;
+    function openFromEl(f){
       var listEls=f.closest('#keptCase') ? document.querySelectorAll('#keptCase .kc-row .specimen') : document.querySelectorAll('#mainCase .specimen');
       var list=Array.prototype.map.call(listEls, function(x){ return x.getAttribute('data-tag'); });
       openLoupe(f.getAttribute('data-tag'), list);
+    }
+    document.addEventListener('click', function(e){
+      if(e.target.closest('.cross-tray')||e.target.closest('.loupe')||e.target.closest('.kc-bar')) return;
+      var f=e.target.closest('.specimen'); if(f) openFromEl(f);
     });
 
     var lastProv=null;
@@ -852,6 +871,7 @@ ${drawers}
 
     // 収蔵箱: 収蔵した標本だけを別の箱に並べ直して表示
     var keptCase=document.getElementById('keptCase');
+    var _lastFocusKC=null;
     function openKeptCase(){
       if(!kept.size){ toast('まだ収蔵した標本がありません'); return; }
       var row=keptCase.querySelector('.kc-row'); row.innerHTML='';
@@ -859,9 +879,11 @@ ${drawers}
         if(kept.has(f.getAttribute('data-tag'))) row.appendChild(f.cloneNode(true));
       });
       keptCase.querySelector('.kc-title').textContent='私の収蔵箱 — '+kept.size+' 標本';
+      _lastFocusKC=document.activeElement;
       keptCase.hidden=false; document.body.classList.add('loupe-open');
+      var x=keptCase.querySelector('.kc-x'); if(x) x.focus();
     }
-    function closeKeptCase(){ keptCase.hidden=true; if(loupe.hidden) document.body.classList.remove('loupe-open'); }
+    function closeKeptCase(){ keptCase.hidden=true; if(loupe.hidden) document.body.classList.remove('loupe-open'); if(_lastFocusKC&&_lastFocusKC.focus){ try{ _lastFocusKC.focus(); }catch(e){} } }
     keptCase.addEventListener('click', function(e){ if(e.target.hasAttribute('data-kc-close')) closeKeptCase(); });
     keptCase.querySelector('.kc-print').onclick=printKept;
     document.getElementById('keepBadge').onclick=openKeptCase;
