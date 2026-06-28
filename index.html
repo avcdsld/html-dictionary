@@ -3,7 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HTMLタグ標本箱 — 眺めて、愛でる</title>
+<title>HTML詩語辞典 — タグ標本箱</title>
+<meta name="description" content="HTML5 のタグを昆虫標本のように一匹ずつ並べた標本箱。眺め、観察し、二匹を交配させて詩の種を得る——素のHTMLで詩をつくるための辞書、その表紙。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HTML詩語辞典">
+<meta property="og:title" content="HTML詩語辞典 — タグ標本箱">
+<meta property="og:description" content="HTML5 のタグを標本のように並べ、眺め・観察し・交配させる。素のHTMLで詩をつくるための辞書。">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
 <style>
   * { box-sizing:border-box; }
   body { margin:0; padding:28px 16px 60px; color:#eae3d5;
@@ -11,7 +18,8 @@
     background-image:radial-gradient(circle at 50% -10%, #2c2114, #110b06 70%);
     font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif; }
   .head { text-align:center; margin:0 auto 26px; max-width:900px; }
-  .head h1 { font-size:1.5rem; letter-spacing:.2em; margin:.2rem 0; color:#f2ead9; }
+  .head .kicker { margin:0 0 .2rem; font-size:.72rem; letter-spacing:.34em; color:#b6a589; }
+  .head h1 { font-size:1.5rem; letter-spacing:.2em; margin:.1rem 0 .2rem; color:#f2ead9; }
   .head p { font-size:.8rem; color:#b6a589; letter-spacing:.06em; line-height:1.8; margin:.3rem 0; }
   .head a { color:#d9b48a; }
 
@@ -55,7 +63,7 @@
       radial-gradient(80% 120% at -5% 110%, rgba(120,150,125,.09), transparent 55%); }
   /* フィルムの粒状感: 全体に微細なノイズを乗せ「ベクター塗り」感を消す */
   .grain { position:absolute; inset:0; pointer-events:none; z-index:8;
-    mix-blend-mode:overlay; opacity:.5;
+    mix-blend-mode:overlay; opacity:.4;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E"); }
   .drawer { margin:0 0 26px; }
   .drawer:last-child { margin-bottom:0; }
@@ -107,7 +115,7 @@
   /* データラベル: 同じ真鍮ピンに串刺しの古紙2枚（採集地ラベル＋同定ラベル） */
   .card { position:relative; z-index:2; display:flex; flex-direction:column; align-items:center;
     gap:6px; margin-top:9px; line-height:1.5; letter-spacing:.02em; }
-  .lbl { position:relative; text-align:center; font-size:.56rem; color:#5a3f25;
+  .lbl { position:relative; text-align:center; font-size:.56rem; color:#45301a;
     background:
       radial-gradient(circle at 24% 68%, rgba(125,75,32,.17) 0 1.2px, transparent 1.7px) 4px 3px/19px 16px,
       radial-gradient(circle at 76% 30%, rgba(120,68,28,.13) 0 1px, transparent 1.5px) 11px 8px/23px 21px,
@@ -131,15 +139,15 @@
   .card .d { display:block; }
   .card .det { display:block; margin-top:3px; padding-top:3px;
     border-top:.5px solid rgba(120,85,40,.28);
-    color:#6a4f30; font-style:italic; }
+    color:#5a4124; font-style:italic; }
   /* 種の新旧を示す同定ドット（採集者が貼る色ラベルの見立て） */
   .card .det::before { content:""; display:inline-block; width:6px; height:6px; border-radius:50%;
     margin-right:5px; vertical-align:middle; background:#9c7b4a; box-shadow:inset 0 0 0 1px rgba(0,0,0,.18); }
   .st-nova    .card .det { color:#4f7a45; }
-  .st-recens  .card .det { color:#3f6f7a; }
+  .st-recens  .card .det { color:#3a6a93; }
   .st-relicta .card .det { color:#a8442a; }
   .st-nova    .card .det::before, .legend .k-nova    i { background:#5f8a5a; }
-  .st-recens  .card .det::before, .legend .k-recens  i { background:#4f7d8a; }
+  .st-recens  .card .det::before, .legend .k-recens  i { background:#4a78a4; }
   .st-relicta .card .det::before, .legend .k-relicta i { background:#a8442a; }
   .legend .k-classica i { background:#9c7b4a; }
   /* 凡例 */
@@ -321,7 +329,8 @@
 </head>
 <body>
   <header class="head">
-    <h1>ＨＴＭＬ　タグ標本箱</h1>
+    <p class="kicker">ＨＴＭＬ　詩語辞典</p>
+    <h1>タグ標本箱</h1>
     <p>HTML5 のタグを一匹ずつ採集し、目(Order)ごとに並べた標本ケース。<br>
     ただ眺めて、愛でるためのもの。これまでに 114 種を収めました。</p>
     <p class="head-hint" hidden>標本をクリック（または Enter）で<b>観察票</b>。<b>← →</b>・スワイプでめくり、<b>収蔵</b>で集め、二匹を<b>交配</b>させると詩の問いが立ちます。</p>
